@@ -1,1 +1,1 @@
-export const baseURL = '^_^'
+export const baseURL = 'https://inctagram-api.vercel.app/api/'
