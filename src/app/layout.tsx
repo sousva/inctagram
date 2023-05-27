@@ -1,6 +1,7 @@
 import React from 'react'
 import {Provider} from 'redux/Provider'
 import {Footer, Header} from 'common/components'
+import StyledComponentsRegistry from 'lib'
 
 export const metadata = {
     title: 'Home page title',
@@ -13,7 +14,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
             <body>
                 <Header />
                 <main>
-                    <Provider>{children}</Provider>
+                    <StyledComponentsRegistry>
+                        <Provider>{children}</Provider>
+                    </StyledComponentsRegistry>
                 </main>
                 <Footer />
             </body>
