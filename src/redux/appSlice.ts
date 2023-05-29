@@ -1,9 +1,20 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
-const slice = createSlice({
+export type ThemeAppType = 'light' | 'dark'
+
+const initialState = {
+    theme: 'light' as ThemeAppType,
+}
+
+export const appSlice = createSlice({
     name: 'app',
-    initialState: {},
-    reducers: {},
+    initialState,
+    reducers: {
+        setThemeAppAC: (state, action: PayloadAction<{theme: ThemeAppType}>) => {
+            state.theme = action.payload.theme
+        },
+    },
 })
 
-export const appReducer = slice.reducer
+export const appReducer = appSlice.reducer
+export const {setThemeAppAC} = appSlice.actions

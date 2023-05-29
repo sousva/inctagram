@@ -1,6 +1,5 @@
 import React from 'react'
-import {Provider} from 'redux/Provider'
-import {Footer, Header} from 'common/components'
+import {Providers} from 'redux/Provider'
 import StyledComponentsRegistry from 'lib'
 
 export const metadata = {
@@ -10,16 +9,10 @@ export const metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
     return (
-        <html lang='ru'>
-            <body>
-                <Header />
-                <main>
-                    <StyledComponentsRegistry>
-                        <Provider>{children}</Provider>
-                    </StyledComponentsRegistry>
-                </main>
-                <Footer />
-            </body>
+        <html>
+            <StyledComponentsRegistry>
+                <Providers>{children}</Providers>
+            </StyledComponentsRegistry>
         </html>
     )
 }

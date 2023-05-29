@@ -1,9 +1,9 @@
 'use client'
 
-import {Provider as NativeProvider} from 'react-redux'
-import React from 'react'
-import {store} from 'redux/store'
+import {store} from './store'
+import {Provider} from 'react-redux'
+import {ReactNode} from 'react'
 
-export function Provider({children}: {children: React.ReactNode}) {
-    return <NativeProvider store={store}>{children}</NativeProvider>
+export function Providers({children}: {children: ReactNode}) {
+    return <Provider store={store}>{children}</Provider>
 }

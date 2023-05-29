@@ -6,9 +6,13 @@ import {appReducer} from 'redux/appSlice'
 
 export const store = configureStore({
     reducer: {
-        app: appReducer,
+        appReducer,
     },
-    middleware: gDM => gDM(),
+    devTools: true,
+    // middleware: gDM => gDM(),
 })
 
-setupListeners(store.dispatch)
+// setupListeners(store.dispatch)
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
