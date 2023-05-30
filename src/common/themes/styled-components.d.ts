@@ -1,7 +1,10 @@
 import 'styled-components'
 interface IPalette {
-    main: string
-    contrastText: string
+    100: string
+    300: string
+    500: string
+    700: string
+    900: string
 }
 
 declare module 'styled-components' {
@@ -15,8 +18,12 @@ declare module 'styled-components' {
                 black: string
                 white: string
             }
-            primary: IPalette
-            secondary: IPalette
+            accent: IPalette
+            success: IPalette
+            danger: IPalette
+            warning: IPalette
+            dark: IPalette
+            light: IPalette
         }
     }
 }
