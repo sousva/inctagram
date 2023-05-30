@@ -3,7 +3,7 @@ import {DefaultTheme} from 'styled-components'
 export const darkTheme: DefaultTheme = {
     name: 'dark',
     borderRadius: '4px',
-    bodyColor: '#121212',
+    bodyColor: '#3D3D3D',
     textColor: '#ffffff',
     palette: {
         common: {
@@ -50,7 +50,7 @@ export const darkTheme: DefaultTheme = {
             300: '#F7FBFF',
             500: '#EDF3FA',
             700: '#D5DAE0',
-            900: '#BDC1C7 ',
+            900: '#BDC1C7',
         },
     },
 }

@@ -18,7 +18,7 @@ export default function Page() {
                 <body>
                     <Header />
                     <main>
-                        <InputText />
+                        <InputText label={'some label'} />
                     </main>
                     <Footer />
                 </body>

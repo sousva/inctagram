@@ -3,7 +3,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 export type ThemeAppType = 'light' | 'dark'
 
 const initialState = {
-    theme: 'light' as ThemeAppType,
+    theme: 'dark' as ThemeAppType,
 }
 
 export const appSlice = createSlice({

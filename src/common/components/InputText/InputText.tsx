@@ -1,13 +1,15 @@
 'use client'
-import React from 'react'
+import React, {InputHTMLAttributes} from 'react'
 
 import {Wrapper} from './InputText.styled'
 
-
-export const InputText = () => {
+export const InputText = (props: InputHTMLAttributes<HTMLInputElement>) => {
     return (
         <Wrapper>
-            <input type='text' />
+            <input id={props.name} type='text' {...props} />
+            <span className='highlight'></span>
+            <span className='bar'></span>
+            <label id={props.name}>{props.name}fgfgfg</label>
         </Wrapper>
     )
 }
