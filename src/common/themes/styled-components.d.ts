@@ -18,7 +18,7 @@ declare module 'styled-components' {
                 black: string
                 white: string
             }
-            accent: IPalette
+            primary: IPalette
             success: IPalette
             danger: IPalette
             warning: IPalette

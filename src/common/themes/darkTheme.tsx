@@ -10,7 +10,7 @@ export const darkTheme: DefaultTheme = {
             black: '#121212',
             white: '#ffffff',
         },
-        accent: {
+        primary: {
             100: '#73A5FF',
             300: '#4C8DFF',
             500: '#397DF6',

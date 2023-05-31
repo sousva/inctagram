@@ -3,6 +3,7 @@ import React, {FC} from 'react'
 import {useAppDispatch} from '../hooks'
 import {setThemeAppAC} from '../../redux/appSlice'
 import {useAppSelector} from '../hooks/useAppDispatch'
+import {Button} from './Button/Button'
 
 type PropsType = {}
 
@@ -18,6 +19,10 @@ export const Header: FC<PropsType> = props => {
     return (
         <header>
             header <button onClick={handleThemeChange}>theme</button>
+            <Button>Button</Button>
+            <Button variant={'outlined'}>Button</Button>
+            <Button variant={'contained'}>Button</Button>
+            <Button variant={'text'}>Button</Button>
         </header>
     )
 }
