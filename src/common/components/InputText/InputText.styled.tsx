@@ -14,6 +14,7 @@ const inputHighlighter = keyframes`
 export const Wrapper = styled.div`
     position: relative;
 
+    width: 300px;
     input {
         font-size: 18px;
         padding: 10px 10px 10px 5px;

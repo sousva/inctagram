@@ -2,8 +2,27 @@
 
 import {store} from './store'
 import {Provider} from 'react-redux'
-import {ReactNode} from 'react'
+import React, {ReactNode} from 'react'
+import {lightTheme} from '../common/themes/lightTheme'
+import {darkTheme} from '../common/themes/darkTheme'
+import {GlobalStyle} from '../common/themes/GlobalStyle'
+import {ThemeProvider} from 'styled-components'
+import {useAppSelector} from '../common/hooks/useAppDispatch'
 
 export function Providers({children}: {children: ReactNode}) {
-    return <Provider store={store}>{children}</Provider>
+    return (
+        <Provider store={store}>
+            <ThemeStyled>{children}</ThemeStyled>
+        </Provider>
+    )
+}
+
+export function ThemeStyled({children}: {children: ReactNode}) {
+    const theme = useAppSelector(state => state.appReducer.theme)
+    return (
+        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+            <GlobalStyle />
+            {children}
+        </ThemeProvider>
+    )
 }

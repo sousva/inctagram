@@ -9,7 +9,7 @@ export const InputText = (props: InputHTMLAttributes<HTMLInputElement>) => {
             <input id={props.name} type='text' {...props} />
             <span className='highlight'></span>
             <span className='bar'></span>
-            <label id={props.name}>{props.name}fgfgfg</label>
+            <label id={props.name}>{props.name}</label>
         </Wrapper>
     )
 }
