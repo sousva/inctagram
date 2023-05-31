@@ -2,6 +2,7 @@
 
 import React, {FC} from 'react'
 import {SubmitHandler, useForm} from 'react-hook-form'
+import {useAddNewUserMutation} from '../../redux/authAPI'
 
 type PropsType = {}
 
@@ -18,7 +19,12 @@ const SignUp: FC<PropsType> = props => {
         handleSubmit,
         formState: {errors},
     } = useForm<SignUpFormType>()
-    const onSubmit: SubmitHandler<SignUpFormType> = data => console.log(data)
+    const [addNewUser] = useAddNewUserMutation()
+    const onSubmit: SubmitHandler<SignUpFormType> = async data => {
+        if (data.password === data.passwordConfirm) {
+            await addNewUser({email: data.email, userName: data.username, password: data.password})
+        }
+    }
 
     return (
         <form style={{display: 'flex', flexDirection: 'column', maxWidth: '200px'}} onSubmit={handleSubmit(onSubmit)}>
