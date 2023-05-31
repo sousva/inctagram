@@ -2,6 +2,7 @@ import React from 'react'
 import {Providers} from 'redux/Provider'
 import StyledComponentsRegistry from 'lib'
 import {Header} from '../common/components'
+import {TemporalyNavigation} from '../common/TemporalyNavigation/TemporalyNavigation'
 
 export const metadata = {
     title: 'Home page title',
@@ -15,6 +16,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
                 <Providers>
                     <body>
                         <Header />
+                        <TemporalyNavigation />
                         <main>{children}</main>
                     </body>
                 </Providers>

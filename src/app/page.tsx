@@ -1,11 +1,11 @@
 'use client'
-import {InputText} from '../common/components/InputText/InputText'
 import React from 'react'
+import {HomePageStyled} from './HomePage.styled'
 
 export default function Page() {
     return (
-        <>
-            <InputText />
-        </>
+        <HomePageStyled>
+            <h1>Home Page</h1>
+        </HomePageStyled>
     )
 }
