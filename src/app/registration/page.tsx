@@ -3,12 +3,14 @@ import React from 'react'
 import {InputText} from '../../common/components/InputText/InputText'
 import {SubmitHandler, useForm} from 'react-hook-form'
 import {Button} from '../../common/components/Button/Button'
+import {Textarea} from '../../common/components/Textarea/Textarea'
 
 type Inputs = {
     Username: string
     Email: string
     Password: string
     PasswordConfirmation: string
+    textarea: string
 }
 
 export default function Page() {
@@ -32,6 +34,7 @@ export default function Page() {
                     {...register('PasswordConfirmation')}
                     error={errors.Username}
                 />
+                <Textarea label={'textarea'} {...register('textarea')} error={errors.textarea} />
                 <Button type={'submit'}>Submit</Button>
             </form>
         </div>
