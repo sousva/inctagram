@@ -10,10 +10,9 @@ type InputTextProps = DefaultInputPropsType & {
     error?: FieldError | undefined
 }
 export const InputText = forwardRef<HTMLInputElement, InputTextProps>((props, ref) => {
-    console.log(props.error)
     return (
         <Wrapper>
-            <input ref={ref} {...props} />
+            <input ref={ref} {...props} required />
             <span className='highlight'></span>
             <span className='bar'></span>
             <label>{props.label}</label>
