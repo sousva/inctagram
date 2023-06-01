@@ -12,6 +12,8 @@ export const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.textColor};
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
+    
+    font-family: Inter sans-serif;
   }
 
   input:-webkit-autofill,
@@ -24,7 +26,7 @@ export const GlobalStyle = createGlobalStyle`
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
     -webkit-text-fill-color: ${props => props.theme.textColor};
-    -webkit-box-shadow: 0 0 0 40rem ${props => props.theme.bodyColor} inset;
+    -webkit-box-shadow: 0 0 0 40rem ${props => props.theme.palette.dark['500']} inset;
   }
   //https://css-tricks.com/almanac/selectors/a/autofill/
 `
