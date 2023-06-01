@@ -1,13 +1,15 @@
 'use client'
 import React from 'react'
-import {InputText} from '../../common/components/InputText/InputText'
+import {InputText} from 'common/components/InputText/InputText'
 import {SubmitHandler, useForm} from 'react-hook-form'
-import {Button} from '../../common/components/Button/Button'
-import {InputPassword} from '../../common/components/InputPassword/InputPassword'
+import {Button} from 'common/components/Button/Button'
+import {InputPassword} from 'common/components/InputPassword/InputPassword'
 import {RegistrationPageStyled} from './registrationPage.styled'
-import {IconButton} from '../../common/components/IconButton/IconButton'
+import {IconButton} from 'common/components/IconButton/IconButton'
 import GoogleIcon from './../../common/assets/icons/google.svg'
-import GithubIcon from './../../common/assets/icons/github.svg'
+import GithubWhite from '../../common/assets/icons/githubWhite.svg'
+import GithubBlack from '../../common/assets/icons/githubBlack.svg'
+import {useAppSelector} from 'common/hooks/useAppDispatch'
 
 type Inputs = {
     Username: string
@@ -18,6 +20,7 @@ type Inputs = {
 }
 
 export default function Page() {
+    const theme = useAppSelector(state => state.appReducer.theme)
     const {
         register,
         handleSubmit,
@@ -33,9 +36,7 @@ export default function Page() {
                     <IconButton>
                         <GoogleIcon />
                     </IconButton>
-                    <IconButton>
-                        <GithubIcon />
-                    </IconButton>
+                    <IconButton>{theme === 'light' ? <GithubBlack /> : <GithubWhite />}</IconButton>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <InputText label={'Username'} type={'text'} {...register('Username')} error={errors.Username} />
