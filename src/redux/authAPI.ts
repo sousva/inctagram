@@ -6,11 +6,21 @@ type SignUpRequestType = {
     email: string
     password: string
 }
+type SignUpResponseType = {
+    statusCode: number
+    messages: [
+        {
+            message: string
+            field: string
+        }
+    ]
+    error: string
+}
 export const authAPI = createApi({
     reducerPath: 'authAPI',
     baseQuery: fetchBaseQuery({baseUrl: baseURL}),
     endpoints: build => ({
-        addNewUser: build.mutation<SignUpRequestType, SignUpRequestType>({
+        addNewUser: build.mutation<SignUpResponseType, SignUpRequestType>({
             query: body => ({
                 url: `auth/registration`,
                 method: 'POST',

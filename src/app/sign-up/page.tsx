@@ -19,7 +19,7 @@ const SignUp: FC<PropsType> = props => {
         handleSubmit,
         formState: {errors},
     } = useForm<SignUpFormType>()
-    const [addNewUser] = useAddNewUserMutation()
+    const [addNewUser, {isSuccess}] = useAddNewUserMutation()
     const onSubmit: SubmitHandler<SignUpFormType> = async data => {
         if (data.password === data.passwordConfirm) {
             await addNewUser({email: data.email, userName: data.username, password: data.password})
