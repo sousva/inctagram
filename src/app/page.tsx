@@ -1,11 +1,11 @@
-import SignUp from './sign-up/page'
+'use client'
 import React from 'react'
+import {HomePageStyled} from './HomePage.styled'
 
-export default function Home() {
+export default function Page() {
     return (
-        <div>
-            <h1>Home page</h1>
-            <SignUp />
-        </div>
+        <HomePageStyled>
+            <h1>Home Page</h1>
+        </HomePageStyled>
     )
 }

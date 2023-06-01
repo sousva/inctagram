@@ -1,7 +1,8 @@
 import React from 'react'
-import {Provider} from 'redux/Provider'
-import {Footer, Header} from 'common/components'
+import {Providers} from 'redux/Provider'
 import StyledComponentsRegistry from 'lib'
+import {Header} from '../common/components'
+import {TemporalyNavigation} from '../common/TemporalyNavigation/TemporalyNavigation'
 
 export const metadata = {
     title: 'Home page title',
@@ -10,16 +11,16 @@ export const metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
     return (
-        <html lang='ru'>
-            <body>
-                <Header />
-                <main>
-                    <StyledComponentsRegistry>
-                        <Provider>{children}</Provider>
-                    </StyledComponentsRegistry>
-                </main>
-                <Footer />
-            </body>
+        <html>
+            <StyledComponentsRegistry>
+                <Providers>
+                    <body>
+                        <Header />
+                        <TemporalyNavigation />
+                        <main>{children}</main>
+                    </body>
+                </Providers>
+            </StyledComponentsRegistry>
         </html>
     )
 }
