@@ -39,18 +39,18 @@ export const lightTheme: DefaultTheme = {
             900: '#664400',
         },
         dark: {
+            100: '#FFFFFF',
+            300: '#F7FBFF',
+            500: '#EDF3FA',
+            700: '#D5DAE0',
+            900: '#BDC1C7',
+        },
+        light: {
             100: '#747D86',
             300: '#46515E',
             500: '#182636',
             700: '#131E2B',
             900: '#0E1720',
-        },
-        light: {
-            100: '#FFFFFF',
-            300: '#F7FBFF',
-            500: '#EDF3FA',
-            700: '#D5DAE0',
-            900: '#BDC1C7 ',
         },
     },
 }

@@ -57,6 +57,7 @@ export const Wrapper = styled.div`
         position: relative;
         display: block;
         width: 100%;
+        border-bottom: 1px solid ${props => props.theme.palette.dark['300']};
 
         &:before {
             content: '';
