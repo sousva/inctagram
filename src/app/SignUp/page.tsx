@@ -2,7 +2,7 @@
 
 import React, {FC} from 'react'
 import {SubmitHandler, useForm} from 'react-hook-form'
-import {useAddNewUserMutation} from '../../redux/authAPI'
+import {useAddNewUserMutation} from 'redux/authAPI'
 
 type PropsType = {}
 

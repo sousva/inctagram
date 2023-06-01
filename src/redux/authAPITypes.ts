@@ -9,3 +9,7 @@ export type ForgotPasswordArgType = {
     recaptcha: string
 }
 
+export type NewPasswordArgType = {
+    newPassword: string
+    recoveryCode: string
+}

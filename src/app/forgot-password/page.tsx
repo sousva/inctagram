@@ -10,11 +10,7 @@ type ForgotPasswordFormType = {
 }
 
 const ForgotPassword = () => {
-    const {
-        register,
-        handleSubmit,
-        formState: {errors},
-    } = useForm({
+    const {register, handleSubmit} = useForm({
         defaultValues: {
             email: '',
         },
@@ -23,10 +19,10 @@ const ForgotPassword = () => {
     const [token, setToken] = useState<string | null>(null)
     const [forgotPassword] = useForgotPasswordMutation()
 
-    const onSubmit: SubmitHandler<ForgotPasswordFormType> = data => {
+    const onSubmit: SubmitHandler<ForgotPasswordFormType> = ({email}) => {
         console.log(token)
         if (token) {
-            forgotPassword({email: data.email, recaptcha: token})
+            forgotPassword({email, recaptcha: token})
         }
     }
 
