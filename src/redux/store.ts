@@ -10,11 +10,10 @@ export const store = configureStore({
         appReducer,
         [authAPI.reducerPath]: authAPI.reducer,
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(authAPI.middleware),
     devTools: true,
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(authAPI.middleware),
 })
-
-setupListeners(store.dispatch)
+ setupListeners(store.dispatch)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
