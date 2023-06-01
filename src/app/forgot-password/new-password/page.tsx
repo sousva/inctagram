@@ -31,7 +31,7 @@ export default function NewPassword() {
         }
     }
 
-    const registerParams = {
+    const passwordParams = {
         minLength: {
             value: 6,
             message: 'Your password must be at least 6 characters',
@@ -41,10 +41,13 @@ export default function NewPassword() {
             message: 'Your password must be 20 or less characters',
         },
     }
+    const passwordConfirmParams = {
+        validate: (value: string, formValues: NewPasswordFormType) => value === formValues.password,
+    }
 
     const newPasswordError = errors.password && <span style={{color: 'hotpink'}}>{errors.password.message}</span>
     const passwordConfirmError = errors.passwordConfirm && (
-        <span style={{color: 'hotpink'}}>{errors.passwordConfirm.message}</span>
+        <span style={{color: 'hotpink'}}>The password must match the new password</span>
     )
 
     return (
@@ -53,14 +56,14 @@ export default function NewPassword() {
                 <div>
                     <label>
                         New password
-                        <input type='password' {...register('password', registerParams)} />
+                        <input type='password' {...register('password', passwordParams)} />
                         {newPasswordError}
                     </label>
                 </div>
                 <div>
                     <label>
                         Password confirmation
-                        <input type='password' {...register('passwordConfirm', registerParams)} />
+                        <input type='password' {...register('passwordConfirm', passwordConfirmParams)} />
                         {passwordConfirmError}
                     </label>
                 </div>
