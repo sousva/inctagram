@@ -1,9 +1,28 @@
 'use client'
 
-import {Provider as NativeProvider} from 'react-redux'
-import React from 'react'
-import {store} from 'redux/store'
+import {store} from './store'
+import {Provider} from 'react-redux'
+import React, {ReactNode} from 'react'
+import {lightTheme} from '../common/themes/lightTheme'
+import {darkTheme} from '../common/themes/darkTheme'
+import {GlobalStyle} from '../common/themes/GlobalStyle'
+import {ThemeProvider} from 'styled-components'
+import {useAppSelector} from '../common/hooks/useAppDispatch'
 
-export function Provider({children}: {children: React.ReactNode}) {
-    return <NativeProvider store={store}>{children}</NativeProvider>
+export function Providers({children}: {children: ReactNode}) {
+    return (
+        <Provider store={store}>
+            <ThemeStyled>{children}</ThemeStyled>
+        </Provider>
+    )
+}
+
+export function ThemeStyled({children}: {children: ReactNode}) {
+    const theme = useAppSelector(state => state.appReducer.theme)
+    return (
+        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+            <GlobalStyle />
+            {children}
+        </ThemeProvider>
+    )
 }
