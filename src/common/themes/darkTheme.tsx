@@ -1,10 +1,12 @@
 'use client'
 import {DefaultTheme} from 'styled-components'
+
 export const darkTheme: DefaultTheme = {
     name: 'dark',
     borderRadius: '4px',
-    bodyColor: '#3D3D3D',
+    bodyColor: '#0D0D0D',
     textColor: '#ffffff',
+    //typography: {Large: {'font-family': Inter, 'font-weight': 600, 'font-size': '25px', 'line-height': '36px'}},
     palette: {
         common: {
             black: '#121212',
@@ -39,11 +41,11 @@ export const darkTheme: DefaultTheme = {
             900: '#664400',
         },
         dark: {
-            100: '#747D86',
-            300: '#46515E',
-            500: '#182636',
-            700: '#131E2B',
-            900: '#0E1720',
+            100: '#4C4C4C',
+            300: '#333333',
+            500: '#171717',
+            700: '#0D0D0D',
+            900: '#0D0D0D',
         },
         light: {
             100: '#FFFFFF',

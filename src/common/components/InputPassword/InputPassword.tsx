@@ -3,10 +3,10 @@ import React, {ComponentProps, forwardRef, useState} from 'react'
 
 import {FieldError} from 'react-hook-form'
 import {Wrapper} from '../InputText/InputText.styled'
-import Eye from './../../assets/icons/eye.svg'
+import EyeWhite from './../../assets/icons/eyeWhite.svg'
 import EyeBlack from './../../assets/icons/eyeBlack.svg'
 import EyeOffBlack from './../../assets/icons/eyeOffBlack.svg'
-import EyeOff from './../../assets/icons/eye-off.svg'
+import EyeOffWhite from './../../assets/icons/eyeOffWhite.svg'
 import {IconButton} from '../IconButton/IconButton'
 import {useAppSelector} from '../../hooks/useAppDispatch'
 
@@ -30,11 +30,11 @@ export const InputPassword = forwardRef<HTMLInputElement, InputProps>((props, re
             <span className='bar'></span>
             {see ? (
                 <IconButton className='eye' onClick={handleShowPassword}>
-                    {theme === 'dark' ? <Eye /> : <EyeBlack />}
+                    {theme === 'dark' ? <EyeOffWhite /> : <EyeOffBlack />}
                 </IconButton>
             ) : (
                 <IconButton className='eye' onClick={handleShowPassword}>
-                    {theme === 'dark' ? <EyeOff /> : <EyeOffBlack />}
+                    {theme === 'dark' ? <EyeWhite /> : <EyeBlack />}
                 </IconButton>
             )}
             <label>{props.label}</label>
