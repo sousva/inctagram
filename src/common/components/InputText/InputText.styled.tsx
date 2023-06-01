@@ -42,9 +42,9 @@ export const Wrapper = styled.div`
     }
 
     /* active state */
-    input:focus ~ label,
-    input:valid ~ label {
-        top: -20px;
+    //input:valid ~ label,
+    input:focus ~ label {
+        top: -3px;
         font-size: 14px;
         color: #5264ae;
     }

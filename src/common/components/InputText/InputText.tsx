@@ -1,15 +1,23 @@
 'use client'
-import React, {InputHTMLAttributes} from 'react'
-
+import React, {ComponentProps, forwardRef} from 'react'
 import {Wrapper} from './InputText.styled'
+import {FieldError} from 'react-hook-form'
 
-export const InputText = (props: InputHTMLAttributes<HTMLInputElement>) => {
+type DefaultInputPropsType = ComponentProps<'input'>
+
+type InputTextProps = DefaultInputPropsType & {
+    label?: string
+    error?: FieldError | undefined
+}
+export const InputText = forwardRef<HTMLInputElement, InputTextProps>((props, ref) => {
+    console.log(props.error)
     return (
         <Wrapper>
-            <input id={props.name} type='text' {...props} />
+            <input ref={ref} {...props} />
             <span className='highlight'></span>
             <span className='bar'></span>
-            <label id={props.name}>{props.name}</label>
+            <label>{props.label}</label>
         </Wrapper>
     )
-}
+})
+InputText.displayName = 'InputText' //https://bobbyhadz.com/blog/react-component-is-missing-display-name
