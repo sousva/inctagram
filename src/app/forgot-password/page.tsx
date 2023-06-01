@@ -1,31 +1,47 @@
 'use client'
 
-import {useForm} from 'react-hook-form'
+import {SubmitHandler, useForm} from 'react-hook-form'
 import ReCAPTCHA from 'react-google-recaptcha'
-import React from 'react'
+import React, {useState} from 'react'
+import {useForgotPasswordMutation} from 'redux/authAPI'
+
+type ForgotPasswordFormType = {
+    email: string
+}
 
 const ForgotPassword = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm({
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm({
         defaultValues: {
-            email: ''
-        }
+            email: '',
+        },
     })
 
-    console.log(errors)
+    const [token, setToken] = useState<string | null>(null)
+    const [forgotPassword] = useForgotPasswordMutation()
 
-    return <div>
-        <form onSubmit={handleSubmit((data) => {
-            console.log(data)
-        })}>
-            <label>
-                email
-                <input {...register('email')} />
-            </label>
-            <ReCAPTCHA sitekey={'6LdEe1gmAAAAAI7O13oex31iSVHR8eV1zutI9nLA'} />
-            <button type='submit'>submit</button>
-        </form>
-    </div>
+    const onSubmit: SubmitHandler<ForgotPasswordFormType> = data => {
+        console.log(token)
+        if (token) {
+            forgotPassword({email: data.email, recaptcha: token})
+        }
+    }
+
+    return (
+        <div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <label>
+                    email
+                    <input {...register('email')} />
+                </label>
+                <ReCAPTCHA sitekey={'6LdEe1gmAAAAAI7O13oex31iSVHR8eV1zutI9nLA'} onChange={token => setToken(token)} />
+                <button type='submit'>submit</button>
+            </form>
+        </div>
+    )
 }
 
 export default ForgotPassword
-

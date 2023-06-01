@@ -1,18 +1,21 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import {baseURL} from '../common/api'
+import {baseURL} from 'common/api'
+import {ForgotPasswordArgType, SignUpArgType} from './authAPITypes'
 
-type SignUpRequestType = {
-    userName: string
-    email: string
-    password: string
-}
 export const authAPI = createApi({
     reducerPath: 'authAPI',
-    baseQuery: fetchBaseQuery({baseUrl: baseURL}),
+    baseQuery: fetchBaseQuery({baseUrl: baseURL, credentials: 'include'}),
     endpoints: build => ({
-        addNewUser: build.mutation<SignUpRequestType, SignUpRequestType>({
+        addNewUser: build.mutation<SignUpArgType, SignUpArgType>({
             query: body => ({
                 url: `auth/registration`,
+                method: 'POST',
+                body,
+            }),
+        }),
+        forgotPassword: build.mutation<any, ForgotPasswordArgType>({
+            query: body => ({
+                url: 'auth/password-recovery',
                 method: 'POST',
                 body,
             }),
@@ -20,4 +23,4 @@ export const authAPI = createApi({
     }),
 })
 
-export const {useAddNewUserMutation} = authAPI
+export const {useAddNewUserMutation, useForgotPasswordMutation} = authAPI
