@@ -26,4 +26,5 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-text-fill-color: ${props => props.theme.textColor};
     -webkit-box-shadow: 0 0 0 40rem ${props => props.theme.bodyColor} inset;
   }
+  //https://css-tricks.com/almanac/selectors/a/autofill/
 `

@@ -4,6 +4,7 @@ import {InputText} from '../../common/components/InputText/InputText'
 import {SubmitHandler, useForm} from 'react-hook-form'
 import {Button} from '../../common/components/Button/Button'
 import {Textarea} from '../../common/components/Textarea/Textarea'
+import {InputPassword} from '../../common/components/InputPassword/InputPassword'
 
 type Inputs = {
     Username: string
@@ -27,7 +28,7 @@ export default function Page() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <InputText label={'Username'} type={'text'} {...register('Username')} error={errors.Username} />
                 <InputText label={'Email'} type={'email'} {...register('Email')} error={errors.Username} />
-                <InputText label={'Password'} type={'password'} {...register('Password')} error={errors.Username} />
+                <InputPassword label={'Password'} {...register('Password')} error={errors.Username} />
                 <InputText
                     label={'Password confirmation'}
                     type={'password'}

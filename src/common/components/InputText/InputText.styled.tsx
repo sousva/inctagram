@@ -39,7 +39,7 @@ export const Wrapper = styled.div`
     }
 
     input[type='password'] {
-        letter-spacing: 0.3em;
+        letter-spacing: 1px;
     }
 
     label {
@@ -68,5 +68,11 @@ export const Wrapper = styled.div`
             transition: 300ms ease all;
             left: 0;
         }
+    }
+
+    .eye {
+        position: absolute;
+        right: 10px;
+        top: 4px;
     }
 `

@@ -4,9 +4,9 @@ import React, {ComponentProps, forwardRef} from 'react'
 import {FieldError} from 'react-hook-form'
 import {Wrapper} from '../InputText/InputText.styled'
 
-type DefaultInputPropsType = ComponentProps<'textarea'>
+type DefaultTextareaPropsType = ComponentProps<'textarea'>
 
-type TextareaProps = DefaultInputPropsType & {
+type TextareaProps = DefaultTextareaPropsType & {
     label?: string
     error?: FieldError | undefined
 }
