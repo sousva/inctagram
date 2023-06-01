@@ -1,4 +1,4 @@
-import SignUp from './SignUp/page'
+import SignUp from './sign-up/page'
 import React from 'react'
 
 export default function Home() {
