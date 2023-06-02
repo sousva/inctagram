@@ -10,6 +10,7 @@ import GoogleIcon from './../../common/assets/icons/google.svg'
 import GithubWhite from '../../common/assets/icons/githubWhite.svg'
 import GithubBlack from '../../common/assets/icons/githubBlack.svg'
 import {useAppSelector} from 'common/hooks/useAppDispatch'
+import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 
 type Inputs = {
     Username: string
@@ -29,8 +30,8 @@ export default function Page() {
     const onSubmit: SubmitHandler<Inputs> = data => alert(JSON.stringify(data, null, 2))
 
     return (
-        <RegistrationPageStyled>
-            <div className={'content'}>
+        <AuthContainer>
+            <RegistrationPageStyled>
                 <h1>Sign Up</h1>
                 <div>
                     <IconButton>
@@ -53,7 +54,7 @@ export default function Page() {
                         Sign In
                     </Button>
                 </form>
-            </div>
-        </RegistrationPageStyled>
+            </RegistrationPageStyled>
+        </AuthContainer>
     )
 }
