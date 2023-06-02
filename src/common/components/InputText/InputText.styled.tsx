@@ -1,96 +1,79 @@
-import styled, {keyframes} from 'styled-components'
-
-const inputHighlighter = keyframes`
-  from {
-    background:#5264AE;
-  }
-
-  to {
-    width:0; 
-    background:transparent;
-  }
-`
+import styled from 'styled-components'
 
 export const Wrapper = styled.div`
     position: relative;
+    width: 100%;
+    max-width: 400px;
 
-    width: 300px;
-    input {
+    textarea {
+        resize: none;
+    }
+
+    input,
+    textarea {
+        background: none;
+        color: ${props => props.theme.textColor};
         font-size: 18px;
         padding: 10px 10px 10px 5px;
         display: block;
         width: 100%;
-        background-color: inherit;
-        color: ${({theme}) => theme.textColor};
         border: none;
-        border-bottom: 1px solid #757575;
-    }
-    input:focus {
-        outline: none;
+        border-radius: 0;
+        border-bottom: 1px solid mix(white, #424242, 70%);
+
+        &:focus {
+            outline: none;
+        }
+
+        &:focus ~ label,
+        &:valid ~ label {
+            top: -3px;
+            font-size: 12px;
+            color: ${props => props.theme.palette.primary['100']};
+            letter-spacing: 1px;
+        }
+
+        &:focus ~ .bar:before {
+            width: 100%;
+        }
     }
 
-    /* LABEL ======================================= */
+    input[type='password'] {
+        letter-spacing: 1px;
+    }
+
     label {
-        color: #999;
-        font-size: 18px;
+        color: ${props => props.theme.textColor};
+        font-size: 16px;
         font-weight: normal;
         position: absolute;
         pointer-events: none;
         left: 5px;
         top: 10px;
-        transition: 0.2s ease all;
+        transition: 300ms ease all;
     }
 
-    /* active state */
-    //input:valid ~ label,
-    input:focus ~ label {
-        top: -3px;
-        font-size: 14px;
-        color: #5264ae;
-    }
-
-    /* BOTTOM BARS ================================= */
     .bar {
         position: relative;
         display: block;
         width: 100%;
+        border-bottom: 1px solid ${props => props.theme.palette.dark['300']};
+
+        &:before {
+            content: '';
+            height: 2px;
+            width: 0;
+            bottom: 0;
+            position: absolute;
+            background: ${props => props.theme.palette.primary['300']};
+            transition: 300ms ease all;
+            left: 0;
+        }
     }
-    .bar:before,
-    .bar:after {
-        content: '';
-        height: 2px;
-        width: 0;
-        bottom: 1px;
+
+    .eye {
         position: absolute;
-        background: #5264ae;
-        transition: 0.2s ease all;
-    }
-    .bar:before {
-        left: 50%;
-    }
-    .bar:after {
-        right: 50%;
-    }
-
-    /* active state */
-    input:focus ~ .bar:before,
-    input:focus ~ .bar:after {
-        width: 50%;
-    }
-
-    /* HIGHLIGHTER ================================== */
-    .highlight {
-        position: absolute;
-        height: 60%;
-        width: 100px;
-        top: 25%;
-        left: 0;
-        pointer-events: none;
-        opacity: 0.5;
-    }
-
-    /* active state */
-    input:focus ~ .highlight {
-        animation: ${inputHighlighter} 0.3s ease;
+        right: 10px;
+        top: 4px;
     }
 `

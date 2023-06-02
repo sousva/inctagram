@@ -1,47 +1,59 @@
 'use client'
-import React, {FC} from 'react'
+import React from 'react'
+import {InputText} from 'common/components/InputText/InputText'
 import {SubmitHandler, useForm} from 'react-hook-form'
-import {useAddNewUserMutation} from 'redux/authAPI'
-import {InputText} from '../../common/components/InputText/InputText'
-import {Button} from '../../common/components/Button/Button'
+import {Button} from 'common/components/Button/Button'
+import {InputPassword} from 'common/components/InputPassword/InputPassword'
+import {RegistrationPageStyled} from './registrationPage.styled'
+import {IconButton} from 'common/components/IconButton/IconButton'
+import GoogleIcon from './../../common/assets/icons/google.svg'
+import GithubWhite from '../../common/assets/icons/githubWhite.svg'
+import GithubBlack from '../../common/assets/icons/githubBlack.svg'
+import {useAppSelector} from 'common/hooks/useAppDispatch'
 
-type PropsType = {}
-
-type SignUpFormType = {
-    username: string
-    email: string
-    password: string
-    passwordConfirm: string
+type Inputs = {
+    Username: string
+    Email: string
+    Password: string
+    PasswordConfirmation: string
+    textarea: string
 }
 
 export default function Page() {
+    const theme = useAppSelector(state => state.appReducer.theme)
     const {
         register,
         handleSubmit,
         formState: {errors},
-    } = useForm<SignUpFormType>()
-    const [addNewUser, {isSuccess}] = useAddNewUserMutation()
-    const onSubmit: SubmitHandler<SignUpFormType> = async data => {
-        if (data.password === data.passwordConfirm) {
-            await addNewUser({email: data.email, userName: data.username, password: data.password})
-        }
-    }
+    } = useForm<Inputs>()
+    const onSubmit: SubmitHandler<Inputs> = data => alert(JSON.stringify(data, null, 2))
 
     return (
-        <div>
-            <h1>registration page</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <InputText label={'Username'} type={'text'} {...register('username')} error={errors.username} />
-                <InputText label={'Email'} type={'email'} {...register('email')} error={errors.username} />
-                <InputText label={'Password'} type={'password'} {...register('password')} error={errors.username} />
-                <InputText
-                    label={'Password confirmation'}
-                    type={'password'}
-                    {...register('passwordConfirm')}
-                    error={errors.username}
-                />
-                <Button type={'submit'}>Submit</Button>
-            </form>
-        </div>
+        <RegistrationPageStyled>
+            <div className={'content'}>
+                <h1>Sign Up</h1>
+                <div>
+                    <IconButton>
+                        <GoogleIcon />
+                    </IconButton>
+                    <IconButton>{theme === 'light' ? <GithubBlack /> : <GithubWhite />}</IconButton>
+                </div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <InputText label={'Username'} type={'text'} {...register('Username')} error={errors.Username} />
+                    <InputText label={'Email'} type={'email'} {...register('Email')} error={errors.Username} />
+                    <InputPassword label={'Password'} {...register('Password')} error={errors.Username} />
+                    <InputPassword
+                        label={'Password confirmation'}
+                        {...register('PasswordConfirmation')}
+                        error={errors.Username}
+                    />
+                    <Button type={'submit'}>Submit</Button>
+                    <p>Do you have an account?</p>
+                    <Button type={'button'} variant={'text'}>
+                        Sign In
+                    </Button>
+                </form>
+            </div>
+        </RegistrationPageStyled>
     )
 }
