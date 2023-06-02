@@ -2,18 +2,20 @@
 import React, {useEffect} from 'react'
 import {useSearchParams} from 'next/navigation'
 import {useSignUpConfirmationMutation} from '../../../redux/authAPI'
+import {useRouter} from 'next/router'
 
-export default function Page() {
-    const searchParams = useSearchParams()
+export default function Page({params}: {params: {code: string}}) {
+    // const searchParams = useSearchParams()
 
-    const [signUpConfirmation] = useSignUpConfirmationMutation()
+    const code = params.code
+    console.log(code)
+    //const [signUpConfirmation] = useSignUpConfirmationMutation()
 
-    useEffect(() => {
-        const token = searchParams.get('code')
-        // @ts-ignore
-        signUpConfirmation(token)
-        console.log(token)
-    }, [])
+    // useEffect(() => {
+    //     if (code) {
+    //         signUpConfirmation({confirmationCode: code})
+    //     }
+    // }, [])
 
     return <>registration confirmation</>
 }
