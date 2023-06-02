@@ -1,10 +1,14 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import {baseURL} from '../common/api'
+import {ForgotPasswordArgType, NewPasswordArgType} from './authAPITypes'
 
 type SignUpRequestType = {
     userName: string
     email: string
     password: string
+}
+type SignUpConfirmationRequestType = {
+    confirmationCode: string
 }
 type SignUpResponseType = {
     statusCode: number
@@ -27,6 +31,13 @@ export const authAPI = createApi({
                 body,
             }),
         }),
+        signUpConfirmation: build.mutation<SignUpResponseType, SignUpConfirmationRequestType>({
+            query: body => ({
+                url: `auth/registration-confirmation`,
+                method: 'POST',
+                body,
+            }),
+        }),
         forgotPassword: build.mutation<void, ForgotPasswordArgType>({
             query: body => ({
                 url: 'auth/password-recovery',
@@ -44,4 +55,5 @@ export const authAPI = createApi({
     }),
 })
 
-export const {useAddNewUserMutation} = authAPI
+export const {useAddNewUserMutation, useForgotPasswordMutation, useNewPasswordMutation, useSignUpConfirmationMutation} =
+    authAPI

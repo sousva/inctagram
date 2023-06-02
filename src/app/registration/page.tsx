@@ -1,14 +1,17 @@
 'use client'
-import React from 'react'
-import {InputText} from '../../common/components/InputText/InputText'
+import React, {FC} from 'react'
 import {SubmitHandler, useForm} from 'react-hook-form'
+import {useAddNewUserMutation} from 'redux/authAPI'
+import {InputText} from '../../common/components/InputText/InputText'
 import {Button} from '../../common/components/Button/Button'
 
-type Inputs = {
-    Username: string
-    Email: string
-    Password: string
-    PasswordConfirmation: string
+type PropsType = {}
+
+type SignUpFormType = {
+    username: string
+    email: string
+    password: string
+    passwordConfirm: string
 }
 
 export default function Page() {
@@ -16,21 +19,26 @@ export default function Page() {
         register,
         handleSubmit,
         formState: {errors},
-    } = useForm<Inputs>()
-    const onSubmit: SubmitHandler<Inputs> = data => alert(JSON.stringify(data, null, 2))
+    } = useForm<SignUpFormType>()
+    const [addNewUser, {isSuccess}] = useAddNewUserMutation()
+    const onSubmit: SubmitHandler<SignUpFormType> = async data => {
+        if (data.password === data.passwordConfirm) {
+            await addNewUser({email: data.email, userName: data.username, password: data.password})
+        }
+    }
 
     return (
         <div>
             <h1>registration page</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <InputText label={'Username'} type={'text'} {...register('Username')} error={errors.Username} />
-                <InputText label={'Email'} type={'email'} {...register('Email')} error={errors.Username} />
-                <InputText label={'Password'} type={'password'} {...register('Password')} error={errors.Username} />
+                <InputText label={'Username'} type={'text'} {...register('username')} error={errors.username} />
+                <InputText label={'Email'} type={'email'} {...register('email')} error={errors.username} />
+                <InputText label={'Password'} type={'password'} {...register('password')} error={errors.username} />
                 <InputText
                     label={'Password confirmation'}
                     type={'password'}
-                    {...register('PasswordConfirmation')}
-                    error={errors.Username}
+                    {...register('passwordConfirm')}
+                    error={errors.username}
                 />
                 <Button type={'submit'}>Submit</Button>
             </form>
