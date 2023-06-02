@@ -1,17 +1,17 @@
 'use client'
 import React from 'react'
-import {InputText} from '../../../common/components/InputText/InputText'
+import {InputText} from 'common/components/InputText/InputText'
 import {SubmitHandler, useForm} from 'react-hook-form'
-import {Button} from '../../../common/components/Button/Button'
-import {InputPassword} from '../../../common/components/InputPassword/InputPassword'
+import {Button} from 'common/components/Button/Button'
+import {InputPassword} from 'common/components/InputPassword/InputPassword'
 import {RegistrationPageStyled} from './registrationPage.styled'
-import {IconButton} from '../../../common/components/IconButton/IconButton'
-import GoogleIcon from '../../../common/assets/icons/google.svg'
-import GithubWhite from '../../../common/assets/icons/githubWhite.svg'
-import GithubBlack from '../../../common/assets/icons/githubBlack.svg'
-import {useAppSelector} from '../../../common/hooks/useAppDispatch'
+import {IconButton} from 'common/components/IconButton/IconButton'
+import GoogleIcon from './../../common/assets/icons/google.svg'
+import GithubWhite from '../../common/assets/icons/githubWhite.svg'
+import GithubBlack from '../../common/assets/icons/githubBlack.svg'
+import {useAppSelector} from 'common/hooks/useAppDispatch'
+import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 import {useAddNewUserMutation} from '../../../redux/authAPI'
-
 type Inputs = {
     username: string
     email: string
@@ -36,8 +36,8 @@ export default function Page() {
     }
 
     return (
-        <RegistrationPageStyled>
-            <div className={'content'}>
+        <AuthContainer>
+            <RegistrationPageStyled>
                 <h1>Sign Up</h1>
                 <div>
                     <IconButton>
@@ -60,7 +60,7 @@ export default function Page() {
                         Sign In
                     </Button>
                 </form>
-            </div>
-        </RegistrationPageStyled>
+            </RegistrationPageStyled>
+        </AuthContainer>
     )
 }

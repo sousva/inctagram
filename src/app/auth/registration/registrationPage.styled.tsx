@@ -1,17 +1,6 @@
 import styled from 'styled-components'
 
 export const RegistrationPageStyled = styled.section`
-    display: flex;
-    justify-content: center;
-    text-align: center;
-
-    .content {
-        width: 100%;
-        max-width: 378px;
-        padding: 23px;
-        border: 1px solid ${props => props.theme.palette.dark['300']};
-        background-color: ${props => props.theme.palette.dark['500']};
-
         h1 {
             font-family: Inter, sans-serif;
             font-weight: 700;
@@ -35,8 +24,7 @@ export const RegistrationPageStyled = styled.section`
             display: flex;
             flex-direction: column;
             gap: 18px;
-
-            //https://wp-kama.ru/id_5875/30-css-selektorov.html
+          
             input[type='password'] > button {
                 width: 100%;
             }

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Providers} from 'redux/Provider'
 import StyledComponentsRegistry from 'lib'
-import {Header} from '../common/components'
+import {Header} from 'common/components'
 
 export const metadata = {
     title: 'Home page title',
