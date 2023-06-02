@@ -9,7 +9,6 @@ export const Button = styled.button<{variant?: 'contained' | 'outlined' | 'text'
     font-weight: 600;
     font-family: Inter, sans-serif;
     letter-spacing: 0.7px;
-    width: 182px;
 
     ${props => {
         switch (props.variant) {
