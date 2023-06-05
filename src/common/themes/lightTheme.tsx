@@ -1,5 +1,6 @@
 'use client'
 import {DefaultTheme} from 'styled-components'
+
 export const lightTheme: DefaultTheme = {
     name: 'default',
     borderRadius: '4px',

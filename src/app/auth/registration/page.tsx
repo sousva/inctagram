@@ -17,8 +17,12 @@ import * as yup from 'yup'
 
 const schema = yup
     .object({
-        userName: yup.string().min(6, 'Your userName is too short, min 6 characters').required('User name is required'),
-        email: yup.string().email('sdsdsd').required('Email is required'),
+        userName: yup
+            .string()
+            .min(6, 'Your userName is too short, min 6 characters')
+            .max(30, 'Your userName is too long, max 30 characters')
+            .required('User name is required'),
+        email: yup.string().email().required('Email is required'),
         password: yup
             .string()
             .min(6, 'Your password is too short, min 6 characters')
