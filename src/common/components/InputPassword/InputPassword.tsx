@@ -37,6 +37,7 @@ export const InputPassword = forwardRef<HTMLInputElement, InputProps>((props, re
                     {theme === 'dark' ? <EyeWhite /> : <EyeBlack />}
                 </IconButton>
             )}
+            <span className='error'>{props.error?.message}</span>
             <label>{props.label}</label>
         </Wrapper>
     )

@@ -76,4 +76,12 @@ export const Wrapper = styled.div`
         right: 10px;
         top: 4px;
     }
+    .error {
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        color: red;
+    }
 `

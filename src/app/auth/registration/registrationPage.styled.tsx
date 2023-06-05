@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const RegistrationPageStyled = styled.section`
+export const RegistrationPageStyled = styled.div`
         h1 {
             font-family: Inter, sans-serif;
             font-weight: 700;
