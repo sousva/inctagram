@@ -1,18 +1,13 @@
 'use client'
-import React, {useState} from 'react'
+import React from 'react'
 import {HomePageStyled} from './HomePage.styled'
-import {Modal} from 'common/components/Modal/BaseModal'
+import process from 'process'
 
 export default function Page() {
-    const [isOpen, setIsOpen] = useState(false)
-
+    console.log('process.env.BASE_URL', process.env.NEXT_PUBLIC_BASE_URL)
     return (
         <HomePageStyled>
             <h1>Home Page</h1>
-            <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen} title={'Email sent'}>
-                This is Modal Content!
-            </Modal>
-            <button onClick={() => setIsOpen(true)}>Click to Open Modal</button>
         </HomePageStyled>
     )
 }

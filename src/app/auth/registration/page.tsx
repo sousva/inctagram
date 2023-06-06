@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, {useState} from 'react'
 import {InputText} from 'common/components/InputText/InputText'
 import {useForm} from 'react-hook-form'
 import {Button} from 'common/components/Button/Button'
@@ -7,13 +7,13 @@ import {InputPassword} from 'common/components/InputPassword/InputPassword'
 import GoogleIcon from './../../../common/assets/icons/google.svg'
 import GithubWhite from './../../../common/assets/icons/githubWhite.svg'
 import GithubBlack from './../../../common/assets/icons/githubBlack.svg'
-import {useAppSelector} from 'common/hooks/useAppDispatch'
+import {useAppSelector} from 'common/hooks/reduxHooks'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
-import {useAddNewUserMutation} from 'redux/authAPI'
-import {RegistrationPageStyled} from 'app/auth/registration/registrationPage.styled'
+import {RegistrationModalContent, RegistrationPageStyled} from 'app/auth/registration/registrationPage.styled'
 import {IconButton} from 'common/components/IconButton/IconButton'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import {Modal} from 'common/components/Modal/BaseModal'
 
 const schema = yup
     .object({
@@ -35,19 +35,28 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>
 
 export default function Page() {
-    const theme = useAppSelector(state => state.appReducer.theme)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const theme = useAppSelector(state => state.app.theme)
+
     const {
         register,
         handleSubmit,
         formState: {errors},
+        getValues,
     } = useForm<FormData>({resolver: yupResolver(schema)})
 
-    const [addNewUser] = useAddNewUserMutation()
+    // const [addNewUser, {isLoading, isSuccess}] = useAddNewUserMutation()
 
     const onSubmit = async (data: FormData) => {
-        await addNewUser({email: data.email, userName: data.userName, password: data.password})
+        // await addNewUser({email: data.email, userName: data.userName, password: data.password})
+        // {
+        //     isSuccess && setIsModalOpen(true)
+        // }
     }
-
+    const emailValue = getValues('email')
+    const handleModalClose = () => {
+        setIsModalOpen(false)
+    }
     return (
         <AuthContainer>
             <RegistrationPageStyled>
@@ -74,6 +83,14 @@ export default function Page() {
                     </Button>
                 </form>
             </RegistrationPageStyled>
+            <Modal handleClose={handleModalClose} isOpen={isModalOpen} title={'Email sent'}>
+                <RegistrationModalContent>
+                    <div>
+                        We have sent a link to confirm your email to <span>{emailValue}</span>
+                    </div>
+                    <Button onClick={handleModalClose}>OK</Button>
+                </RegistrationModalContent>
+            </Modal>
         </AuthContainer>
     )
 }

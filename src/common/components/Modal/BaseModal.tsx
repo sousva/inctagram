@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {IconButton} from 'common/components/IconButton/IconButton'
 import CloseIconWhite from './../../assets/icons/closeWhite.svg'
 import CloseIconDark from './../../assets/icons/closeBlack.svg'
-import {useAppSelector} from 'common/hooks/useAppDispatch'
+import {useAppSelector} from 'common/hooks/reduxHooks'
 
 const ModalWrapper = styled.div`
     display: none;
@@ -57,7 +57,7 @@ type Props = {
     title: string
 }
 export const Modal = ({children, isOpen, handleClose, title}: Props) => {
-    const theme = useAppSelector(state => state.appReducer.theme)
+    const theme = useAppSelector(state => state.app.theme)
     const handleCloseModal = () => {
         document.body.classList.remove('isModalOpen')
         handleClose()
