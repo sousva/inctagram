@@ -8,15 +8,11 @@ import {darkTheme} from 'common/themes/darkTheme'
 import {GlobalStyle} from 'common/themes/GlobalStyle'
 import {ThemeProvider} from 'styled-components'
 import {useAppSelector} from 'common/hooks/reduxHooks'
-import {ApiProvider} from '@reduxjs/toolkit/dist/query/react'
-import {api} from 'redux/api/api'
 
 export function Providers({children}: {children: ReactNode}) {
     return (
         <Provider store={store}>
-            <ApiProvider api={api}>
-                <ThemeStyled>{children}</ThemeStyled>
-            </ApiProvider>
+            <ThemeStyled>{children}</ThemeStyled>
         </Provider>
     )
 }

@@ -15,7 +15,6 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
                 <Providers>
                     <body>
                         <Header />
-                        {/*<TemporalyNavigation />*/}
                         <main>{children}</main>
                     </body>
                 </Providers>

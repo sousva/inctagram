@@ -51,7 +51,8 @@ export const authAPI = api.injectEndpoints({
             }),
         }),
     }),
-    // overrideExisting: false,
+    overrideExisting: false,
 })
 
-export const {} = authAPI
+export const {useAddNewUserMutation, useForgotPasswordMutation, useNewPasswordMutation, useSignUpConfirmationMutation} =
+    authAPI

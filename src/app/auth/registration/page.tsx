@@ -14,6 +14,7 @@ import {IconButton} from 'common/components/IconButton/IconButton'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import {Modal} from 'common/components/Modal/BaseModal'
+import {useAddNewUserMutation} from 'redux/api/authAPI'
 
 const schema = yup
     .object({
@@ -45,13 +46,13 @@ export default function Page() {
         getValues,
     } = useForm<FormData>({resolver: yupResolver(schema)})
 
-    // const [addNewUser, {isLoading, isSuccess}] = useAddNewUserMutation()
+    const [addNewUser, {isLoading, error}] = useAddNewUserMutation()
 
     const onSubmit = async (data: FormData) => {
-        // await addNewUser({email: data.email, userName: data.userName, password: data.password})
-        // {
-        //     isSuccess && setIsModalOpen(true)
-        // }
+        await addNewUser({email: data.email, userName: data.userName, password: data.password})
+        {
+            !error && setIsModalOpen(true)
+        }
     }
     const emailValue = getValues('email')
     const handleModalClose = () => {
@@ -76,7 +77,9 @@ export default function Page() {
                         {...register('passwordConfirmation')}
                         error={errors.passwordConfirmation}
                     />
-                    <Button type={'submit'}>Submit</Button>
+                    <Button type={'submit'} disabled={isLoading}>
+                        Submit
+                    </Button>
                     <p>Do you have an account?</p>
                     <Button type={'button'} variant={'text'}>
                         Sign In

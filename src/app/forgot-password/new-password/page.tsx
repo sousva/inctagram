@@ -2,6 +2,7 @@
 
 import {SubmitHandler, useForm} from 'react-hook-form'
 import React from 'react'
+import {useNewPasswordMutation} from 'redux/api/authAPI'
 
 type NewPasswordFormType = {
     password: string
@@ -21,12 +22,12 @@ export default function NewPassword() {
         mode: 'onTouched',
     })
 
-    // const [newPassword] = useNewPasswordMutation()
+    const [newPassword] = useNewPasswordMutation()
 
     const onSubmit: SubmitHandler<NewPasswordFormType> = ({password, passwordConfirm}) => {
         if (password === passwordConfirm) {
             // TODO fix hz
-            // newPassword({newPassword: password, recoveryCode: 'hz'})
+            newPassword({newPassword: password, recoveryCode: 'hz'})
         }
     }
 

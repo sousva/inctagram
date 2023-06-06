@@ -1,5 +1,5 @@
 import * as process from 'process'
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query'
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -8,7 +8,5 @@ export const api = createApi({
     baseQuery: fetchBaseQuery({baseUrl}),
     endpoints: () => ({}),
 })
-
-// export const {useAddNewUserMutation, useForgotPasswordMutation, useNewPasswordMutation, useSignUpConfirmationMutation} = api
 
 //https://redux-toolkit.js.org/rtk-query/usage/code-splitting
