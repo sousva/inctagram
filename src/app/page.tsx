@@ -9,7 +9,7 @@ export default function Page() {
     return (
         <HomePageStyled>
             <h1>Home Page</h1>
-            <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+            <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen} title={'Email sent'}>
                 This is Modal Content!
             </Modal>
             <button onClick={() => setIsOpen(true)}>Click to Open Modal</button>

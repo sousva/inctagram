@@ -1,6 +1,7 @@
 import 'styled-components'
 import {NextFont} from 'next/dist/compiled/@next/font'
 import {Interpolation} from 'styled-components/dist/types'
+import {ThemeAppType} from 'redux/appSlice'
 interface IPalette {
     100: string
     300: string
@@ -33,7 +34,7 @@ interface ITypographyType {
 
 declare module 'styled-components' {
     export interface DefaultTheme {
-        name: string
+        name: ThemeAppType
         borderRadius: string
         bodyColor: string
         textColor: string
