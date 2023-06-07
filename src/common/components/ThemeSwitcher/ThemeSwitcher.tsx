@@ -1,15 +1,14 @@
 'use client'
 import React from 'react'
-import {reduxHooks, useAppSelector} from 'common/hooks/reduxHooks'
+import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
 import {setThemeAppAC} from 'redux/appSlice'
 import {IconButton} from '../IconButton/IconButton'
 import MoonIcon from './../../assets/icons/moon.svg'
 import SunIcon from './../../assets/icons/sun.svg'
 
 export const ThemeSwitcher = () => {
-    const dispatch = reduxHooks()
+    const dispatch = useAppDispatch()
     const themeApp = useAppSelector(state => state.app.theme)
-    // const themeApp = 'dark'
 
     const theme = themeApp === 'light' ? 'dark' : 'light'
 
