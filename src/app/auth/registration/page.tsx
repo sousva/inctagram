@@ -7,14 +7,15 @@ import {InputPassword} from 'common/components/InputPassword/InputPassword'
 import GoogleIcon from './../../../common/assets/icons/google.svg'
 import GithubWhite from './../../../common/assets/icons/githubWhite.svg'
 import GithubBlack from './../../../common/assets/icons/githubBlack.svg'
-import {useAppSelector} from 'common/hooks/reduxHooks'
+import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
-import {RegistrationModalContent, RegistrationPageStyled} from 'app/auth/registration/registrationPage.styled'
+import {RegistrationModalContent, RegistrationPageStyled} from 'app/auth/registration/styled'
 import {IconButton} from 'common/components/IconButton/IconButton'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import {Modal} from 'common/components/Modal/BaseModal'
 import {useAddNewUserMutation} from 'redux/api/authAPI'
+import {SetAppNotificationAC} from 'redux/appSlice'
 
 const schema = yup
     .object({
@@ -36,6 +37,7 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>
 
 export default function Page() {
+    const dispatch = useAppDispatch()
     const [isModalOpen, setIsModalOpen] = useState(false)
     const theme = useAppSelector(state => state.app.theme)
 
@@ -46,18 +48,24 @@ export default function Page() {
         getValues,
     } = useForm<FormData>({resolver: yupResolver(schema)})
 
-    const [addNewUser, {isLoading, error}] = useAddNewUserMutation()
+    const [addNewUser, {isLoading}] = useAddNewUserMutation()
 
     const onSubmit = async (data: FormData) => {
         await addNewUser({email: data.email, userName: data.userName, password: data.password})
-        {
-            !error && setIsModalOpen(true)
-        }
+            .unwrap()
+            .then(() => setIsModalOpen(true))
+            .catch(error =>
+                dispatch(
+                    SetAppNotificationAC({notifications: {type: 'error', message: error.data.messages[0].message}})
+                )
+            )
     }
+
     const emailValue = getValues('email')
     const handleModalClose = () => {
         setIsModalOpen(false)
     }
+
     return (
         <AuthContainer>
             <RegistrationPageStyled>
