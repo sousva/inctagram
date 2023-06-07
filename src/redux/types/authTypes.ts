@@ -3,9 +3,7 @@ export type SignUpRequestType = {
     email: string
     password: string
 }
-export type SignUpConfirmationRequestType = {
-    confirmationCode: string
-}
+
 export type SignUpResponseType = {
     statusCode: number
     messages: [
