@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import {HomePageStyled} from './HomePage.styled'
+import {HomePageStyled} from 'app/styled'
 
 export default function Page() {
     return (

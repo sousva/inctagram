@@ -12,8 +12,12 @@ export const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.textColor};
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
-    
+    height: 100vh;
     font-family: Inter sans-serif;
+    
+    &.isModalOpen {
+      overflow: hidden;
+    }
   }
 
   input:-webkit-autofill,

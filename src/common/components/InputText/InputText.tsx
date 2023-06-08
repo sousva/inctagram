@@ -15,6 +15,7 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>((props, re
             <input ref={ref} {...props} required />
             <span className='highlight'></span>
             <span className='bar'></span>
+            <span className='error'>{props.error?.message}</span>
             <label>{props.label}</label>
         </Wrapper>
     )

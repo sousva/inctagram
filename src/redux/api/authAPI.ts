@@ -1,28 +1,8 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import {baseURL} from '../common/api'
-import {ForgotPasswordArgType, NewPasswordArgType} from './authAPITypes'
+import {ForgotPasswordArgType, NewPasswordArgType} from 'redux/authAPITypes'
+import {api} from 'redux/api/api'
+import {SignUpRequestType, SignUpResponseType} from 'redux/types/authTypes'
 
-type SignUpRequestType = {
-    userName: string
-    email: string
-    password: string
-}
-type SignUpConfirmationRequestType = {
-    confirmationCode: string
-}
-type SignUpResponseType = {
-    statusCode: number
-    messages: [
-        {
-            message: string
-            field: string
-        }
-    ]
-    error: string
-}
-export const authAPI = createApi({
-    reducerPath: 'authAPI',
-    baseQuery: fetchBaseQuery({baseUrl: baseURL}),
+export const authAPI = api.injectEndpoints({
     endpoints: build => ({
         addNewUser: build.mutation<SignUpResponseType, SignUpRequestType>({
             query: body => ({
@@ -31,9 +11,16 @@ export const authAPI = createApi({
                 body,
             }),
         }),
-        signUpConfirmation: build.mutation<SignUpResponseType, SignUpConfirmationRequestType>({
+        signUpConfirmation: build.mutation<SignUpResponseType, {confirmationCode: string}>({
             query: body => ({
                 url: `auth/registration-confirmation`,
+                method: 'POST',
+                body,
+            }),
+        }),
+        resendConfirmationLink: build.mutation<SignUpResponseType, {email: string}>({
+            query: body => ({
+                url: `auth/registration-email-resending`,
                 method: 'POST',
                 body,
             }),
@@ -53,7 +40,13 @@ export const authAPI = createApi({
             }),
         }),
     }),
+    overrideExisting: false,
 })
 
-export const {useAddNewUserMutation, useForgotPasswordMutation, useNewPasswordMutation, useSignUpConfirmationMutation} =
-    authAPI
+export const {
+    useAddNewUserMutation,
+    useForgotPasswordMutation,
+    useNewPasswordMutation,
+    useSignUpConfirmationMutation,
+    useResendConfirmationLinkMutation,
+} = authAPI

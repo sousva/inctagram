@@ -3,7 +3,7 @@
 import {SubmitHandler, useForm} from 'react-hook-form'
 import ReCAPTCHA from 'react-google-recaptcha'
 import React, {useState} from 'react'
-import {useForgotPasswordMutation} from 'redux/authAPI'
+import {useForgotPasswordMutation} from 'redux/api/authAPI'
 
 type ForgotPasswordFormType = {
     email: string

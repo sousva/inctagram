@@ -1,38 +1,69 @@
 'use client'
-import React from 'react'
+import React, {useState} from 'react'
 import {InputText} from 'common/components/InputText/InputText'
-import {SubmitHandler, useForm} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 import {Button} from 'common/components/Button/Button'
 import {InputPassword} from 'common/components/InputPassword/InputPassword'
-import {RegistrationPageStyled} from './registrationPage.styled'
-import {IconButton} from 'common/components/IconButton/IconButton'
-import GoogleIcon from './../../common/assets/icons/google.svg'
-import GithubWhite from '../../common/assets/icons/githubWhite.svg'
-import GithubBlack from '../../common/assets/icons/githubBlack.svg'
-import {useAppSelector} from 'common/hooks/useAppDispatch'
+import GoogleIcon from './../../../common/assets/icons/google.svg'
+import GithubWhite from './../../../common/assets/icons/githubWhite.svg'
+import GithubBlack from './../../../common/assets/icons/githubBlack.svg'
+import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
-import {useAddNewUserMutation} from '../../../redux/authAPI'
-type Inputs = {
-    username: string
-    email: string
-    password: string
-    passwordConfirmation: string
-    textarea: string
-}
+import {RegistrationModalContent, RegistrationPageStyled} from 'app/auth/registration/styled'
+import {IconButton} from 'common/components/IconButton/IconButton'
+import {yupResolver} from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import {Modal} from 'common/components/Modal/BaseModal'
+import {useAddNewUserMutation} from 'redux/api/authAPI'
+import {SetAppNotificationAC} from 'redux/appSlice'
+
+const schema = yup
+    .object({
+        userName: yup
+            .string()
+            .min(6, 'Your userName is too short, min 6 characters')
+            .max(30, 'Your userName is too long, max 30 characters')
+            .required('User name is required'),
+        email: yup.string().email().required('Email is required'),
+        password: yup
+            .string()
+            .min(6, 'Your password is too short, min 6 characters')
+            .max(20, 'Your password is too long, max 20 characters')
+            .required('Password is required'),
+        passwordConfirmation: yup.string().oneOf([yup.ref('password')], 'Your passwords do not match.'),
+    })
+    .required('You have to confirm password.')
+
+type FormData = yup.InferType<typeof schema>
 
 export default function Page() {
-    const theme = useAppSelector(state => state.appReducer.theme)
+    const dispatch = useAppDispatch()
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const theme = useAppSelector(state => state.app.theme)
+
     const {
         register,
         handleSubmit,
         formState: {errors},
-    } = useForm<Inputs>()
+        getValues,
+    } = useForm<FormData>({resolver: yupResolver(schema)})
 
-    const [addNewUser] = useAddNewUserMutation()
-    const onSubmit: SubmitHandler<Inputs> = async data => {
-        if (data.password === data.passwordConfirmation) {
-            await addNewUser({email: data.email, userName: data.username, password: data.password})
-        }
+    const [addNewUser, {isLoading}] = useAddNewUserMutation()
+
+    const onSubmit = async (data: FormData) => {
+        await addNewUser({email: data.email, userName: data.userName, password: data.password})
+            .unwrap()
+            .then(() => setIsModalOpen(true))
+            .catch(error =>
+                dispatch(
+                    SetAppNotificationAC({notifications: {type: 'error', message: error.data.messages[0].message}})
+                )
+            )
+    }
+
+    const emailValue = getValues('email')
+    const handleModalClose = () => {
+        setIsModalOpen(false)
     }
 
     return (
@@ -46,21 +77,31 @@ export default function Page() {
                     <IconButton>{theme === 'light' ? <GithubBlack /> : <GithubWhite />}</IconButton>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <InputText label={'Username'} type={'text'} {...register('username')} error={errors.username} />
-                    <InputText label={'Email'} type={'email'} {...register('email')} error={errors.username} />
-                    <InputPassword label={'Password'} {...register('password')} error={errors.username} />
+                    <InputText label={'UserName'} type={'text'} {...register('userName')} error={errors.userName} />
+                    <InputText label={'Email'} type={'email'} {...register('email')} error={errors.email} />
+                    <InputPassword label={'Password'} {...register('password')} error={errors.password} />
                     <InputPassword
                         label={'Password confirmation'}
                         {...register('passwordConfirmation')}
-                        error={errors.username}
+                        error={errors.passwordConfirmation}
                     />
-                    <Button type={'submit'}>Submit</Button>
+                    <Button type={'submit'} disabled={isLoading}>
+                        Submit
+                    </Button>
                     <p>Do you have an account?</p>
                     <Button type={'button'} variant={'text'}>
                         Sign In
                     </Button>
                 </form>
             </RegistrationPageStyled>
+            <Modal handleClose={handleModalClose} isOpen={isModalOpen} title={'Email sent'}>
+                <RegistrationModalContent>
+                    <div>
+                        We have sent a link to confirm your email to <span>{emailValue}</span>
+                    </div>
+                    <Button onClick={handleModalClose}>OK</Button>
+                </RegistrationModalContent>
+            </Modal>
         </AuthContainer>
     )
 }

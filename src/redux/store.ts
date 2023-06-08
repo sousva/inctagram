@@ -1,19 +1,16 @@
-'use client'
-
 import {configureStore} from '@reduxjs/toolkit'
 import {setupListeners} from '@reduxjs/toolkit/query'
 import {appReducer} from 'redux/appSlice'
-import {authAPI} from './authAPI'
+import {api} from 'redux/api/api'
 
 export const store = configureStore({
     reducer: {
-        appReducer,
-        [authAPI.reducerPath]: authAPI.reducer,
+        app: appReducer,
+        [api.reducerPath]: api.reducer,
     },
-    devTools: true,
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(authAPI.middleware),
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware),
 })
- setupListeners(store.dispatch)
+setupListeners(store.dispatch)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
