@@ -42,7 +42,7 @@ export default function Login() {
     const onSubmit = async (data: FormData) => {
         await login({email: data.email, password: data.password})
             .unwrap()
-            .then(() => router.replace('/'))
+            .then(() => router.replace(PATH.HOME))
             .catch(error =>
                 dispatch(
                     SetAppNotificationAC({notifications: {type: 'error', message: error.data.messages[0].message}})

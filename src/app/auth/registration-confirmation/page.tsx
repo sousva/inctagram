@@ -8,18 +8,18 @@ import {ConfirmationPageWrapper} from 'app/auth/registration-confirmation/confir
 import {useSignUpConfirmationMutation} from 'redux/api/authAPI'
 import {useRouter, useSearchParams} from 'next/navigation'
 import {Loader} from 'common/components/Loader/Loader'
+import {PATH} from 'app/path'
 
 export default function Page() {
     const code = useSearchParams().get('code') as string
     const router = useRouter()
 
-    console.log(code)
-    const [signUpConfirmation, {isLoading, isSuccess}] = useSignUpConfirmationMutation()
+    const [signUpConfirmation] = useSignUpConfirmationMutation()
 
     const foo = async () => {
         await signUpConfirmation({confirmationCode: code})
             .unwrap()
-            .then(payload => {
+            .then(() => {
                 return (
                     <AuthContainer>
                         <ConfirmationPageWrapper>
@@ -33,7 +33,7 @@ export default function Page() {
                     </AuthContainer>
                 )
             })
-            .catch(error => router.push('/auth/email-resending'))
+            .catch(() => router.push(PATH.EXPIRED_LINK))
     }
     useEffect(() => {
         foo()
