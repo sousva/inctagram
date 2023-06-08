@@ -9,7 +9,7 @@ import GithubWhite from './../../../common/assets/icons/githubWhite.svg'
 import GithubBlack from './../../../common/assets/icons/githubBlack.svg'
 import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
-import {RegistrationModalContent, RegistrationPageStyled} from 'app/auth/registration/styled'
+import {RegistrationModalContent, AuthPageStyled} from 'app/auth/registration/styled'
 import {IconButton} from 'common/components/IconButton/IconButton'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -68,7 +68,7 @@ export default function Page() {
 
     return (
         <AuthContainer>
-            <RegistrationPageStyled>
+            <AuthPageStyled>
                 <h1>Sign Up</h1>
                 <div>
                     <IconButton>
@@ -93,7 +93,7 @@ export default function Page() {
                         Sign In
                     </Button>
                 </form>
-            </RegistrationPageStyled>
+            </AuthPageStyled>
             <Modal handleClose={handleModalClose} isOpen={isModalOpen} title={'Email sent'}>
                 <RegistrationModalContent>
                     <div>

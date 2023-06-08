@@ -18,6 +18,13 @@ export const authAPI = api.injectEndpoints({
                 body,
             }),
         }),
+        login: build.mutation<{accessToken: 'string'}, {email: string; password: string}>({
+            query: body => ({
+                url: `auth/login`,
+                method: 'POST',
+                body,
+            }),
+        }),
         resendConfirmationLink: build.mutation<SignUpResponseType, {email: string}>({
             query: body => ({
                 url: `auth/registration-email-resending`,
@@ -49,4 +56,5 @@ export const {
     useNewPasswordMutation,
     useSignUpConfirmationMutation,
     useResendConfirmationLinkMutation,
+    useLoginMutation,
 } = authAPI

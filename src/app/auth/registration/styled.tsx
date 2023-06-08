@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const RegistrationPageStyled = styled.div`
+export const AuthPageStyled = styled.div`
         h1 {
             font-family: Inter, sans-serif;
             font-weight: 700;
@@ -28,7 +28,13 @@ export const RegistrationPageStyled = styled.div`
             input[type='password'] > button {
                 width: 100%;
             }
-
+          
+            a {
+              text-align: right;
+              margin-bottom: 10px;
+              color: inherit;
+            }
+          
             p {
                 margin: 0;
             }
