@@ -6,7 +6,7 @@ import {InputText} from 'common/components/InputText/InputText';
 import React, {useState} from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import {SubmitHandler, useForm} from 'react-hook-form'
-import {useForgotPasswordMutation} from 'redux/authAPI'
+import {useForgotPasswordMutation} from 'redux/api/authAPI';
 import styled from 'styled-components';
 
 const Title = styled.p`
@@ -19,7 +19,6 @@ const Title = styled.p`
 `
 
 const Typography = styled.p`
-  padding: 0;
   text-align: start;
   font-size: 14px;
   line-height: 24px;
