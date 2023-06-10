@@ -65,7 +65,7 @@ const ForgotPassword = () => {
             <AuthContainer>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Title>Forgot Password</Title>
-                    <InputText {...register('email')} label={'Email'} placeholder={'Epam@epam.com'}/>
+                    <InputText {...register('email')} label={'Email'}/>
                     <Wrapper>
                         <Typography>Enter your email address and we will send you further instructions</Typography>
                         <ButtonWrapper type="submit">Send Link</ButtonWrapper>
