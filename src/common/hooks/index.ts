@@ -1,1 +1,1 @@
-export {useAppDispatch} from './useAppDispatch'
+export {reduxHooks} from 'common/hooks/reduxHooks'

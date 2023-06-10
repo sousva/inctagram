@@ -1,21 +1,26 @@
 'use client'
 import React, {useEffect} from 'react'
-import {useSearchParams} from 'next/navigation'
-import {useSignUpConfirmationMutation} from '../../../redux/authAPI'
-import {useRouter} from 'next/router'
+import {useSignUpConfirmationMutation} from 'redux/api/authAPI'
+import {useRouter, useSearchParams} from 'next/navigation'
+import {Loader} from 'common/components/Loader/Loader'
+import {PATH} from 'app/path'
 
-export default function Page({params}: {params: {code: string}}) {
-    // const searchParams = useSearchParams()
+export default function Page() {
+    const router = useRouter()
+    const code = useSearchParams().get('code') as string
+    const email = useSearchParams().get('email') as string
 
-    const code = params.code
-    console.log(code)
-    //const [signUpConfirmation] = useSignUpConfirmationMutation()
+    const [signUpConfirmation] = useSignUpConfirmationMutation()
 
-    // useEffect(() => {
-    //     if (code) {
-    //         signUpConfirmation({confirmationCode: code})
-    //     }
-    // }, [])
+    const handleConfirm = async () => {
+        await signUpConfirmation({confirmationCode: code})
+            .unwrap()
+            .then(() => router.replace(PATH.REGISTRATION_CONFIRMED))
+            .catch(() => router.replace(`${PATH.EXPIRED_LINK}?email=${email}`))
+    }
+    useEffect(() => {
+        handleConfirm()
+    }, [])
 
-    return <>registration confirmation</>
+    return <Loader />
 }

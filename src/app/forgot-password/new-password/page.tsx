@@ -2,7 +2,7 @@
 
 import {SubmitHandler, useForm} from 'react-hook-form'
 import React from 'react'
-import {useNewPasswordMutation} from 'redux/authAPI'
+import {useNewPasswordMutation} from 'redux/api/authAPI'
 
 type NewPasswordFormType = {
     password: string

@@ -8,7 +8,7 @@ import EyeBlack from './../../assets/icons/eyeBlack.svg'
 import EyeOffBlack from './../../assets/icons/eyeOffBlack.svg'
 import EyeOffWhite from './../../assets/icons/eyeOffWhite.svg'
 import {IconButton} from '../IconButton/IconButton'
-import {useAppSelector} from '../../hooks/useAppDispatch'
+import {useAppSelector} from 'common/hooks/reduxHooks'
 
 type DefaultInputPropsType = ComponentProps<'input'>
 
@@ -17,7 +17,7 @@ type InputProps = DefaultInputPropsType & {
     error?: FieldError | undefined
 }
 export const InputPassword = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-    const theme = useAppSelector(state => state.appReducer.theme)
+    const theme = useAppSelector(state => state.app.theme)
     const [see, setSee] = useState(false)
 
     const handleShowPassword = () => {
@@ -37,6 +37,7 @@ export const InputPassword = forwardRef<HTMLInputElement, InputProps>((props, re
                     {theme === 'dark' ? <EyeWhite /> : <EyeBlack />}
                 </IconButton>
             )}
+            <span className='error'>{props.error?.message}</span>
             <label>{props.label}</label>
         </Wrapper>
     )

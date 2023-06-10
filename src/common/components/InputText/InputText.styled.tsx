@@ -4,6 +4,8 @@ export const Wrapper = styled.div`
     position: relative;
     width: 100%;
     max-width: 400px;
+    padding: 10px 0;
+    margin-bottom: 5px;
 
     textarea {
         resize: none;
@@ -75,5 +77,13 @@ export const Wrapper = styled.div`
         position: absolute;
         right: 10px;
         top: 4px;
+    }
+    .error {
+        position: absolute;
+        top: 90%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        color: red;
     }
 `

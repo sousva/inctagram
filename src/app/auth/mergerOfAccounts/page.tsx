@@ -3,24 +3,19 @@ import React from 'react'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 import styled from 'styled-components'
 import {Button} from 'common/components/Button/Button'
+import re from 'common/assets/pictures/congratulation.png'
 import Image from 'next/image'
-import congratulation from './../../common/assets/pictures/congratulation.png'
 
 const Wrapper = styled.div`
-    h1 {
-        font-size: 20px;
-        font-weight: 700;
-        color: ${props => props.theme.textColor};
-    }
-    p {
-        font-size: 16px;
-        font-weight: 400;
-        color: ${props => props.theme.textColor};
-    }
-    button {
-        margin-bottom: 20px;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 
+    button {
+        width: 100%;
+        max-width: 180px;
+    }
     span {
         width: 100%;
         max-width: 400px;
@@ -35,11 +30,12 @@ export default function Page() {
     return (
         <AuthContainer>
             <Wrapper>
-                <h1>Congratulations!</h1>
-                <p>Your email has been confirmed</p>
-                <Button>Sing In</Button>
+                <h1>Merger of Accounts</h1>
+                <p>The user with email Epam@epam.com is already in the system. Could we merge this accounts?</p>
+                <Button variant={'outlined'}>Yes, merge</Button>
+                <Button variant={'outlined'}>No</Button>
                 <span>
-                    <Image src={congratulation} alt={'congratulation'} />
+                    <Image src={re} alt={'re'} />
                 </span>
             </Wrapper>
         </AuthContainer>

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const RegistrationPageStyled = styled.section`
+export const AuthPageStyled = styled.div`
         h1 {
             font-family: Inter, sans-serif;
             font-weight: 700;
@@ -28,10 +28,32 @@ export const RegistrationPageStyled = styled.section`
             input[type='password'] > button {
                 width: 100%;
             }
-
+          
+            a {
+              text-align: right;
+              margin-bottom: 10px;
+              color: inherit;
+            }
+          
             p {
                 margin: 0;
             }
         }
+    }
+`
+export const RegistrationModalContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 25px;
+
+    span {
+        color: ${props => props.theme.palette.success['100']};
+        font-weight: bold;
+        font-size: 20px;
     }
 `
