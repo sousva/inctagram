@@ -9,7 +9,7 @@ import {RegistrationModalContent} from 'app/auth/registration/styled'
 import {Modal} from 'common/components/Modal/BaseModal'
 import {SetAppNotificationAC} from 'redux/appSlice'
 import {useAppDispatch} from 'common/hooks/reduxHooks'
-import {useRouter} from 'next/navigation'
+import {useRouter, useSearchParams} from 'next/navigation'
 import {Loader} from 'common/components/Loader/Loader'
 import {EmailResendWrapper} from 'app/auth/email-resending/styled'
 import {PATH} from 'app/path'
@@ -19,16 +19,15 @@ export default function Page() {
     const router = useRouter()
     const [resend, {isLoading}] = useResendConfirmationLinkMutation()
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const email = useSearchParams().get('email') as string
 
     const handleModalClose = () => {
         setIsModalOpen(false)
         router.replace(PATH.LOGIN)
     }
 
-    const emailValue = 'galinakvi@libero.it' //TODO  fix hardcore email
-
     const handleResend = () => {
-        resend({email: emailValue})
+        resend({email})
             .unwrap()
             .then(() => setIsModalOpen(true))
             .catch(error =>
@@ -37,6 +36,7 @@ export default function Page() {
                 )
             )
     }
+
     return (
         <AuthContainer>
             {isLoading && <Loader />}
@@ -53,7 +53,7 @@ export default function Page() {
             <Modal handleClose={handleModalClose} isOpen={isModalOpen} title={'Email sent'}>
                 <RegistrationModalContent>
                     <div>
-                        We have sent a link to confirm your email to <span>{emailValue}</span>
+                        We have sent a link to confirm your email to <span>{email}</span>
                     </div>
                     <Button onClick={handleModalClose}>OK</Button>
                 </RegistrationModalContent>

@@ -9,13 +9,14 @@ import GithubWhite from './../../../common/assets/icons/githubWhite.svg'
 import GithubBlack from './../../../common/assets/icons/githubBlack.svg'
 import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
-import {RegistrationModalContent, AuthPageStyled} from 'app/auth/registration/styled'
+import {AuthPageStyled, RegistrationModalContent} from 'app/auth/registration/styled'
 import {IconButton} from 'common/components/IconButton/IconButton'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import {Modal} from 'common/components/Modal/BaseModal'
 import {useAddNewUserMutation} from 'redux/api/authAPI'
 import {SetAppNotificationAC} from 'redux/appSlice'
+import {Loader} from 'common/components/Loader/Loader'
 
 const schema = yup
     .object({
@@ -61,13 +62,13 @@ export default function Page() {
             )
     }
 
-    const emailValue = getValues('email')
     const handleModalClose = () => {
         setIsModalOpen(false)
     }
 
     return (
         <AuthContainer>
+            {isLoading && <Loader />}
             <AuthPageStyled>
                 <h1>Sign Up</h1>
                 <div>
@@ -97,7 +98,7 @@ export default function Page() {
             <Modal handleClose={handleModalClose} isOpen={isModalOpen} title={'Email sent'}>
                 <RegistrationModalContent>
                     <div>
-                        We have sent a link to confirm your email to <span>{emailValue}</span>
+                        We have sent a link to confirm your email to <span>{getValues('email')}</span>
                     </div>
                     <Button onClick={handleModalClose}>OK</Button>
                 </RegistrationModalContent>
