@@ -46,6 +46,12 @@ export const authAPI = api.injectEndpoints({
                 body,
             }),
         }),
+        logOut: build.mutation<void, void>({
+            query: () => ({
+                url: `auth/logout`,
+                method: 'POST',
+            }),
+        }),
     }),
     overrideExisting: false,
 })
@@ -57,4 +63,5 @@ export const {
     useSignUpConfirmationMutation,
     useResendConfirmationLinkMutation,
     useLoginMutation,
+    useLogOutMutation,
 } = authAPI
