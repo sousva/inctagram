@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {GenerateId} from 'common/utils/generateID'
 
 export type ThemeAppType = 'light' | 'dark'
+export type TabsSettingsType = 'generalInformation' | 'devices' | 'accountManagement' | 'myPayments'
 
 export type NotificationType = {
     message: string
@@ -9,14 +10,15 @@ export type NotificationType = {
     id: string
 }
 const initialState = {
+    profileSettingsTabs: 'generalInformation' as TabsSettingsType,
     theme: 'dark' as ThemeAppType,
     notifications: [] as NotificationType[],
 }
-const testMessage = {
-    id: '23',
-    type: 'error',
-    message: 'some mess ag fff fff ddd ddddd ddddddd ddddddd dddddddd dddd ddddddd dddddd ddddd ddddd ddde',
-}
+// const testMessage = {
+//     id: '23',
+//     type: 'error',
+//     message: 'some mess ag fff fff ddd ddddd ddddddd ddddddd dddddddd dddd ddddddd dddddd ddddd ddddd ddde',
+// }
 
 export const appSlice = createSlice({
     name: 'app',
@@ -37,8 +39,11 @@ export const appSlice = createSlice({
                 state.notifications.splice(index, 1)
             }
         },
+        setProfileSettingsTabsAC: (state, action: PayloadAction<{tab: TabsSettingsType}>) => {
+            state.profileSettingsTabs = action.payload.tab
+        },
     },
 })
 
 export const appReducer = appSlice.reducer
-export const {setThemeAppAC, RemoveAppNotificationAC, SetAppNotificationAC} = appSlice.actions
+export const {setThemeAppAC, RemoveAppNotificationAC, SetAppNotificationAC, setProfileSettingsTabsAC} = appSlice.actions
