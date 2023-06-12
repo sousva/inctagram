@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const ProfileSettingsWrapper = styled.div`
-    position: relative;
-    height: 300px;
+    display: flex;
+    justify-content: center;
 
     h1 {
         position: absolute;
