@@ -6,4 +6,5 @@ export const PATH = {
     EXPIRED_LINK: '/auth/email-resending',
     REGISTRATION_CONFIRMED: '/auth/registrationConfirmed',
     CREATE_NEW_PASSWORD: '/create-new-password/:token',
+    PROFILE_SETTINGS: 'profile/profile-settings',
 } as const
