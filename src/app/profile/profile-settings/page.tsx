@@ -11,14 +11,14 @@ import {MyPayments} from 'app/profile/profile-settings/MyPayments/MyPayments'
 export default function Page() {
     const profileSettingActiveTab = useAppSelector(state => state.app.profileSettingsTabs)
     return (
-        <div>
+        <nav>
             <ProfileSettingsAccordion />
-            <div>
+            <section>
                 {profileSettingActiveTab === 'generalInformation' && <GeneralInformation />}
                 {profileSettingActiveTab === 'devices' && <Devices />}
                 {profileSettingActiveTab === 'accountManagement' && <AccountManagement />}
                 {profileSettingActiveTab === 'myPayments' && <MyPayments />}
-            </div>
-        </div>
+            </section>
+        </nav>
     )
 }
