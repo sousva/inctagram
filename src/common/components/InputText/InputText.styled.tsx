@@ -78,6 +78,7 @@ export const Wrapper = styled.div`
         right: 10px;
         top: 4px;
     }
+
     .error {
         position: absolute;
         top: 90%;

@@ -7,11 +7,12 @@ import {AccountManagement} from 'app/profile/profile-settings/AccountManagement/
 import {Devices} from 'app/profile/profile-settings/Devices/Devices'
 import {GeneralInformation} from 'app/profile/profile-settings/GeneralInformation/GeneralInformation'
 import {MyPayments} from 'app/profile/profile-settings/MyPayments/MyPayments'
+import {ProfileSettingsWrapper} from 'app/profile/profile-settings/styled'
 
 export default function Page() {
     const profileSettingActiveTab = useAppSelector(state => state.app.profileSettingsTabs)
     return (
-        <nav>
+        <ProfileSettingsWrapper>
             <ProfileSettingsAccordion />
             <section>
                 {profileSettingActiveTab === 'generalInformation' && <GeneralInformation />}
@@ -19,6 +20,6 @@ export default function Page() {
                 {profileSettingActiveTab === 'accountManagement' && <AccountManagement />}
                 {profileSettingActiveTab === 'myPayments' && <MyPayments />}
             </section>
-        </nav>
+        </ProfileSettingsWrapper>
     )
 }
