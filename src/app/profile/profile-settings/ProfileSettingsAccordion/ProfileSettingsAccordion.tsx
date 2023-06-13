@@ -2,7 +2,6 @@ import React from 'react'
 import {setProfileSettingsTabsAC, TabsSettingsType} from 'redux/appSlice'
 import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
 import {TabButton} from 'common/components/TabButton/TabButton'
-import {ProfileSettingsAccordionWrapper} from 'app/profile/profile-settings/ProfileSettingsAccordion/styled'
 
 const ProfileSettingsAccordion = () => {
     const profileSettingActiveTab = useAppSelector(state => state.app.profileSettingsTabs)
@@ -12,7 +11,7 @@ const ProfileSettingsAccordion = () => {
         dispatch(setProfileSettingsTabsAC({tab}))
     }
     return (
-        <ProfileSettingsAccordionWrapper>
+        <section>
             <TabButton
                 active={profileSettingActiveTab === 'generalInformation'}
                 onClick={() => setAccordionHandler('generalInformation')}
@@ -34,7 +33,7 @@ const ProfileSettingsAccordion = () => {
             >
                 My Payments
             </TabButton>
-        </ProfileSettingsAccordionWrapper>
+        </section>
     )
 }
 
