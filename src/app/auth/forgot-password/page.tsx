@@ -1,8 +1,10 @@
 'use client'
 
+import {PATH} from 'app/path'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 import {Button} from 'common/components/Button/Button'
 import {InputText} from 'common/components/InputText/InputText'
+import Link from 'next/link'
 import React, {useState} from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import {SubmitHandler, useForm} from 'react-hook-form'
@@ -71,9 +73,11 @@ const ForgotPassword = () => {
                     <InputText {...register('email')} label={'Email'} />
                     <p className={'mention'}>Enter your email address and we will send you further instructions</p>
                     <ButtonWrapper type='submit'>Send Link</ButtonWrapper>
-                    <ButtonWrapper type='submit' variant={'text'}>
-                        Back to Sign In
-                    </ButtonWrapper>
+                    <Link href={PATH.LOGIN}>
+                        <ButtonWrapper type='submit' variant={'text'}>
+                            Back to Sign In
+                        </ButtonWrapper>
+                    </Link>
                     <ReCAPTCHA
                         className={'captcha'}
                         sitekey={'6LdEe1gmAAAAAI7O13oex31iSVHR8eV1zutI9nLA'}
