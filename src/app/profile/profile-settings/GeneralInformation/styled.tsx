@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
     display: flex;
     margin: 20px;
+    border-bottom: 0.5px solid #4c4c4c;
 `
 export const CircleSection = styled.div`
     display: flex;
