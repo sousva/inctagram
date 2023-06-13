@@ -1,4 +1,6 @@
 'use client'
+import {PATH} from 'app/path'
+import Link from 'next/link'
 import React from 'react'
 import {ConfirmationPageWrapper} from 'app/auth/registrationConfirmed/styled'
 import {Button} from 'common/components/Button/Button'
@@ -12,7 +14,9 @@ export default function Page() {
             <ConfirmationPageWrapper>
                 <h1>Congratulations!</h1>
                 <p>Your email has been confirmed</p>
-                <Button>Sing In</Button>
+                <Link href={PATH.LOGIN}>
+                    <Button>Sing In</Button>
+                </Link>
                 <span>
                     <Image src={congratulation} alt={'congratulation'} />
                 </span>
