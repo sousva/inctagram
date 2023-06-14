@@ -11,7 +11,7 @@ const ProfileSettingsAccordion = () => {
         dispatch(setProfileSettingsTabsAC({tab}))
     }
     return (
-        <section>
+        <div>
             <TabButton
                 active={profileSettingActiveTab === 'generalInformation'}
                 onClick={() => setAccordionHandler('generalInformation')}
@@ -33,7 +33,7 @@ const ProfileSettingsAccordion = () => {
             >
                 My Payments
             </TabButton>
-        </section>
+        </div>
     )
 }
 
