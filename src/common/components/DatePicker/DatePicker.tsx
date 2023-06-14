@@ -14,16 +14,7 @@ export const CustomDatePicker = () => {
     return (
         <CustomDatePickerWrapper>
             Date of birthday <br />
-            <DatePicker
-                showIcon
-                dayClassName={() => 'example-datepicker-day-class'}
-                popperClassName='example-datepicker-class'
-                dateFormat='dd.MM.yyyy'
-                selected={startDate}
-                onChange={setDateHandler}
-                minDate={today}
-                todayButton={'Today'}
-            />
+            <DatePicker dateFormat='dd.MM.yyyy' selected={startDate} onChange={setDateHandler} minDate={today} />
         </CustomDatePickerWrapper>
     )
 }

@@ -5,7 +5,7 @@ export const CustomDatePickerWrapper = styled.div`
     .react-datepicker,
     .react-datepicker__today-button {
         background-color: #171717;
-        border: none;
+        border: 0.5px solid #4c4c4c;
     }
 
     .react-datepicker__current-month,
@@ -14,23 +14,28 @@ export const CustomDatePickerWrapper = styled.div`
     }
 
     .react-datepicker__calendar-icon {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 2;
         width: 18px;
         height: 20px;
     }
 
     input {
+        width: 158px;
+        height: 36px;
         position: relative;
+    }
+
+    .react-datepicker__day--selected,
+    .react-datepicker__day--today {
+        border-radius: 50%;
+        background-color: #4283f6;
     }
 
     input,
     .react-datepicker-ignore-onclickoutside {
         background-color: #171717;
-        border: none;
+
         color: #fafafa;
+        border: 0.5px solid #4c4c4c;
     }
 
     .react-datepicker__triangle {
