@@ -1,7 +1,8 @@
 'use client'
 import styled from 'styled-components'
+import {Container} from 'common/components/Container/Container'
 
-export const HomeWrapper = styled.div`
+export const HomeWrapper = styled(Container)`
     display: flex;
     gap: 20px;
 
@@ -12,6 +13,5 @@ export const HomeWrapper = styled.div`
 
     section {
         width: 100%;
-        background-color: darkgray;
     }
 `
