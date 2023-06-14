@@ -17,16 +17,16 @@ export const GeneralInformation = () => {
                     <div className='circleImage'>
                         <Image className='photoIcon' width={36} height={36} src={image} alt={'image'} />
                     </div>
-                    <Button type='button' variant={'outlined'}>
+                    <Button className='buttonProfile' type='button' variant={'outlined'}>
                         Add a Profile photo
                     </Button>
                 </div>
                 <div className='inputSection'>
-                    <InputText label='Username'></InputText>
-                    <InputText label='First Name'></InputText>
-                    <InputText label='Last Name'></InputText>
+                    <InputText className='inputText' label='Username'></InputText>
+                    <InputText className='inputText' label='First Name'></InputText>
+                    <InputText className='inputText' label='Last Name'></InputText>
                     <CustomDatePicker></CustomDatePicker>
-                    <InputText label='City'></InputText>
+                    <InputText className='inputText' label='City'></InputText>
                     <Textarea label='About me'></Textarea>
                 </div>
             </div>

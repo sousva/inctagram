@@ -4,9 +4,11 @@ export const GeneralInformationWrapper = styled.form`
     display: flex;
     flex-direction: column;
     padding: 20px;
+    width: 720px;
 
     .buttonSave {
         align-self: flex-end;
+        margin-top: 20px;
     }
 
     .avatarImage {
@@ -15,12 +17,18 @@ export const GeneralInformationWrapper = styled.form`
         align-items: center;
     }
 
+    .buttonProfile {
+        margin-top: 20px;
+    }
+
+    .inputText {
+        width: 500px;
+    }
+
     .formSection {
         display: flex;
         flex-direction: row;
-    }
-
-    .inputSection {
+        justify-content: space-between;
     }
 
     .circleImage {
