@@ -1,4 +1,6 @@
 'use client'
+import {PATH} from 'app/path'
+import Link from 'next/link'
 import React, {useState} from 'react'
 import {InputText} from 'common/components/InputText/InputText'
 import {useForm} from 'react-hook-form'
@@ -90,9 +92,11 @@ export default function Page() {
                         Submit
                     </Button>
                     <p>Do you have an account?</p>
-                    <Button type={'button'} variant={'text'}>
-                        Sign In
-                    </Button>
+                    <Link href={PATH.LOGIN}>
+                        <Button type={'button'} variant={'text'}>
+                            Sign In
+                        </Button>
+                    </Link>
                 </form>
             </AuthPageStyled>
             <Modal handleClose={handleModalClose} isOpen={isModalOpen} title={'Email sent'}>
