@@ -3,45 +3,34 @@
 import Image from 'next/image'
 import React from 'react'
 import image from '../../../../common/assets/icons/image.png'
-import {
-    Circle,
-    CircleSection,
-    Container,
-    ImageWrapper,
-    InputsSection,
-    Wrapper,
-} from 'app/profile/profile-settings/GeneralInformation/styled'
+import {GeneralInformationWrapper} from 'app/profile/profile-settings/GeneralInformation/styled'
 import {Button} from 'common/components/Button/Button'
 import {InputText} from 'common/components/InputText/InputText'
 import {Textarea} from 'common/components/Textarea/Textarea'
+import {CustomDatePicker} from 'common/components/DatePicker/DatePicker'
 
 export const GeneralInformation = () => {
     return (
-        <Wrapper>
-            <Container>
-                <CircleSection>
-                    <Circle>
-                        <ImageWrapper>
-                            <Image width={36} height={36} src={image} alt={'image'} />
-                        </ImageWrapper>
-                    </Circle>
-                    <Button style={{marginTop: '20px'}} variant={'outlined'}>
+        <GeneralInformationWrapper>
+            <div className='formSection'>
+                <div className='avatarImage'>
+                    <div className='circleImage'>
+                        <Image className='photoIcon' width={36} height={36} src={image} alt={'image'} />
+                    </div>
+                    <Button className='buttonProfile' type='button' variant={'outlined'}>
                         Add a Profile photo
                     </Button>
-                </CircleSection>
-                <InputsSection>
-                    <InputText style={{width: '550px'}} label='Username'></InputText>
-                    <InputText label='First Name'></InputText>
-                    <InputText label='Last Name'></InputText>
-                    <div>
-                        Date of birthday <br />
-                        <input type='date' />
-                    </div>
-                    <InputText label='City'></InputText>
+                </div>
+                <div className='inputSection'>
+                    <InputText className='inputText' label='Username'></InputText>
+                    <InputText className='inputText' label='First Name'></InputText>
+                    <InputText className='inputText' label='Last Name'></InputText>
+                    <CustomDatePicker></CustomDatePicker>
+                    <InputText className='inputText' label='City'></InputText>
                     <Textarea label='About me'></Textarea>
-                </InputsSection>
-            </Container>
-            <Button>Save Changes</Button>
-        </Wrapper>
+                </div>
+            </div>
+            <Button className='buttonSave'>Save Changes</Button>
+        </GeneralInformationWrapper>
     )
 }

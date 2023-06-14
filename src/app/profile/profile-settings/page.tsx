@@ -14,12 +14,12 @@ export default function Page() {
     return (
         <ProfileSettingsWrapper>
             <ProfileSettingsAccordion />
-            <section>
+            <div>
                 {profileSettingActiveTab === 'generalInformation' && <GeneralInformation />}
                 {profileSettingActiveTab === 'devices' && <Devices />}
                 {profileSettingActiveTab === 'accountManagement' && <AccountManagement />}
                 {profileSettingActiveTab === 'myPayments' && <MyPayments />}
-            </section>
+            </div>
         </ProfileSettingsWrapper>
     )
 }
