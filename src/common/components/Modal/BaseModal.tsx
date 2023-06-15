@@ -39,11 +39,14 @@ export const Modal = ({children, isOpen, handleClose, title}: Props) => {
         <ReactPortal wrapperId='react-portal-modal-container'>
             <ModalWrapper className={isOpen && 'open'} onClick={onModalClick}>
                 <ModalContent className={isOpen && 'open'}>
-                    <div className={'header'}>
-                        {title}
-                        <IconButton onClick={handleCloseModal}>
-                            {theme === 'dark' ? <CloseIconWhite /> : <CloseIconDark />}
-                        </IconButton>
+                    <div>
+                        <div className={'header'}>
+                            {title}
+                            <IconButton onClick={handleCloseModal}>
+                                {theme === 'dark' ? <CloseIconWhite /> : <CloseIconDark />}
+                            </IconButton>
+                        </div>
+                        <div className={'line'}></div>
                     </div>
                     {children}
                 </ModalContent>
