@@ -13,7 +13,7 @@ export const api = createApi({
             const accessToken = loadLocalStorage()
 
             if (accessToken) {
-                headers.set('authorization', `Bearer ${accessToken}`)
+                headers.set('authorization', `Bearer ${JSON.parse(accessToken)}`)
             }
 
             return headers

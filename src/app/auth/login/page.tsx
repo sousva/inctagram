@@ -19,7 +19,7 @@ import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import {SetAppNotificationAC} from 'redux/appSlice'
-import {useLoginMutation} from 'redux/api/authAPI'
+import {useAuthMeMutation, useLoginMutation} from 'redux/api/authAPI'
 import {saveLocalStorage} from 'lib/LocalStorage/LocalStorage'
 
 const schema = yup.object({

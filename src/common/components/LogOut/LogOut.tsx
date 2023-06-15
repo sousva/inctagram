@@ -7,10 +7,12 @@ import {useLogOutMutation} from 'redux/api/authAPI'
 import {PATH} from 'app/path'
 import {SetAppNotificationAC} from 'redux/appSlice'
 import {useRouter} from 'next/navigation'
-import {useAppDispatch} from 'common/hooks/reduxHooks'
+import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
+import {saveLocalStorage} from 'lib/LocalStorage/LocalStorage'
 
 export const LogOut = () => {
     const [showModal, setShowModal] = useState(false)
+    const {email} = useAppSelector(state => state.userAuth)
     const dispatch = useAppDispatch()
 
     const router = useRouter()
@@ -22,6 +24,7 @@ export const LogOut = () => {
             .unwrap()
             .then(() => {
                 router.replace(PATH.LOGIN)
+                saveLocalStorage({accessToken: ''})
                 setShowModal(false)
                 dispatch(
                     SetAppNotificationAC({
@@ -55,7 +58,7 @@ export const LogOut = () => {
             <Button onClick={() => setShowModal(true)}>LOG OUT</Button>
             <Modal isOpen={showModal} title={'Log Out'} handleClose={handleCloseModal}>
                 <LogOutWrapper>
-                    <p>Are you really want to log out of your account {`'EMAP@EMAP.EMAP`}?</p>
+                    <p>Are you really want to log out of your account {email}?</p>
                     <ButtonWrapper>
                         <Button variant={'outlined'} onClick={onLogOut}>
                             Yes

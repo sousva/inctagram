@@ -14,3 +14,9 @@ export type SignUpResponseType = {
     ]
     error: string
 }
+
+export type UserResponseType = {
+    email: string
+    userId: number
+    userName: string
+}
