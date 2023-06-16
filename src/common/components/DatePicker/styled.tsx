@@ -8,9 +8,50 @@ export const CustomDatePickerWrapper = styled.div`
         border: 0.5px solid #4c4c4c;
     }
 
+    .react-datepicker__header {
+        border: none;
+    }
+
+    .react-datepicker__current-month {
+        height: 50px;
+    }
+
     .react-datepicker__current-month,
     .react-datepicker__day--disabled {
         color: white !important;
+    }
+
+    .react-datepicker__navigation--previous {
+        background-color: #4c4c4c;
+        left: 166px;
+    }
+
+    .react-datepicker__navigation {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+
+        transform: translate(-20%, 35%);
+    }
+
+    .react-datepicker__navigation--next {
+        background-color: #4c4c4c;
+    }
+
+    .react-datepicker__current-month {
+        display: flex;
+        padding-left: 30px;
+        align-items: center;
+    }
+
+    .react-datepicker-popper {
+        width: 300px;
+        padding: 0;
+        border-radius: 0 !important;
+    }
+
+    .react-datepicker__month-container {
+        border-radius: 0;
     }
 
     .react-datepicker__calendar-icon {
