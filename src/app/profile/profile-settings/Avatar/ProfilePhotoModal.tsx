@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import {InputFile} from 'common/components/InputFile/InputFile'
 import EmptyAvatarIcon from '../../../../common/assets/icons/emptyAvatar.svg'
 import AvatarEditor from 'react-avatar-editor'
+import {Button} from 'common/components/Button/Button'
 
 export const ProfilePhotoModalWrapper = styled.form`
     display: flex;
@@ -28,27 +29,40 @@ export const ProfilePhotoModalWrapper = styled.form`
 `
 
 export const ProfilePhotoModal = (props: BaseModalProps) => {
-    const [selectedFile, setSelectedFile] = useState<File | string>('https://picsum.photos/200/300')
-    const [imagePreviewUrl, setImagePreviewUrl] = useState<string | undefined | ArrayBuffer | null>()
+    // const [selectedFile, setSelectedFile] = useState<File | string>('https://picsum.photos/200/300')
+    const [scale, setScale] = useState<string>('1.5')
+
+    const [imagePreviewUrl, setImagePreviewUrl] = useState<any>()
 
     const handleChangePhoto = (e: ChangeEvent<HTMLInputElement>) => {
         // @ts-ignore
-        const files = e.target.files[0]
-        // setSelectedFile(files.name)
-        setImagePreviewUrl(files.name)
-        console.log(files)
+        const file = e.target.files[0]
+        let fileReader,
+            isCancel = false
+        if (file) {
+            fileReader = new FileReader()
+            fileReader.onload = e => {
+                const {result} = e.target
+                if (result && !isCancel) {
+                    setImagePreviewUrl(result)
+                }
+            }
+            fileReader.readAsDataURL(file)
+        }
+        // setImagePreviewUrl(url)
     }
     return (
         <Modal title={props.title} isOpen={props.isOpen} handleClose={props.handleClose}>
             <ProfilePhotoModalWrapper>
                 {imagePreviewUrl && (
                     <AvatarEditor
-                        image={selectedFile}
+                        image={imagePreviewUrl}
                         width={250}
                         height={250}
-                        border={0}
+                        border={10}
+                        borderRadius={150}
                         color={[255, 255, 255, 0.6]} // RGBA
-                        scale={1.2}
+                        scale={+scale}
                         rotate={0}
                     />
                 )}
@@ -57,13 +71,31 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
                         <EmptyAvatarIcon />
                     </div>
                 )}
-
-                <InputFile
-                    title={'Select from Computer'}
-                    onChange={handleChangePhoto}
-                    accept={'image/png, image/jpeg'}
-                />
+                {/*<input type='range' value={scale} onChange={e => setScale(e.target.value)} />*/}
+                {!imagePreviewUrl && (
+                    <InputFile
+                        title={'Select from Computer'}
+                        onChange={handleChangePhoto}
+                        accept={'image/png, image/jpeg'}
+                        multiple={false}
+                    />
+                )}
+                {imagePreviewUrl && (
+                    <>
+                        <Button>Save</Button>
+                        <input
+                            type='range'
+                            value={scale}
+                            onChange={e => setScale(e.target.value)}
+                            min={1}
+                            max={2}
+                            step='0.1'
+                        />
+                    </>
+                )}
             </ProfilePhotoModalWrapper>
         </Modal>
     )
 }
+
+//https://blog.logrocket.com/using-filereader-api-preview-images-react/

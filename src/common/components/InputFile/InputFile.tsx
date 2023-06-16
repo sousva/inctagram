@@ -8,8 +8,8 @@ type InputFileProps = DefaultInputPropsType & {
 }
 export const InputFile = forwardRef<HTMLInputElement, InputFileProps>((props, ref) => {
     return (
-        <InputFileWrapper htmlFor='actual-btn'>
-            <input type='file' id='actual-btn' ref={ref} {...props} hidden />
+        <InputFileWrapper htmlFor='InputFile'>
+            <input type='file' id='InputFile' ref={ref} {...props} hidden />
             {props.title}
         </InputFileWrapper>
     )
