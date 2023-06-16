@@ -23,7 +23,7 @@ export const ModalContent = styled.div`
   box-shadow: 0 0 70px 10px #000;
   border: 1px solid ${props => props.theme.palette.dark['100']};
   transform: scale(0.5);
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.palette.common.white};
   transition: 1s linear;
 
   &.open {
