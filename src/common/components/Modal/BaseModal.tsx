@@ -6,13 +6,13 @@ import CloseIconDark from './../../assets/icons/closeBlack.svg'
 import {useAppSelector} from 'common/hooks/reduxHooks'
 import {ModalContent, ModalWrapper} from 'common/components/Modal/BaseModal.styled'
 
-type Props = {
-    children: ReactNode
+export type BaseModalProps = {
+    children?: ReactNode
     isOpen: boolean
     handleClose: () => void
     title: string
 }
-export const Modal = ({children, isOpen, handleClose, title}: Props) => {
+export const Modal = ({children, isOpen, handleClose, title}: BaseModalProps) => {
     const theme = useAppSelector(state => state.app.theme)
     const handleCloseModal = () => {
         document.body.classList.remove('isModalOpen')

@@ -20,6 +20,11 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,

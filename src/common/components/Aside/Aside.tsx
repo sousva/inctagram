@@ -8,17 +8,19 @@ import MessengerIcon from 'common/assets/icons/messenger.svg'
 import StatisticsIcon from 'common/assets/icons/statistics.svg'
 import CreateIcon from 'common/assets/icons/create.svg'
 import SearchIcon from 'common/assets/icons/search.svg'
+import {PATH} from 'app/path'
 
 export const Aside = () => {
     return (
         <AsideWrapper>
             <nav>
-                <NavLink href={'/profile/home'} name={'Home'} icon={<HomeIcon />} />
-                <NavLink href={'/profile/create'} name={'Create'} icon={<CreateIcon />} />
-                <NavLink href={'/profile/my-profile'} name={'My Profile'} icon={<MyProfileIcon />} />
-                <NavLink href={'/profile/messenger'} name={'Messenger'} icon={<MessengerIcon />} />
-                <NavLink href={'/profile/search'} name={'Search'} icon={<SearchIcon />} />
-                <NavLink href={'/profile/statistics'} name={'Statistics'} icon={<StatisticsIcon />} />
+                <NavLink href={PATH.HOME} name={'Home'} icon={<HomeIcon />} />
+                <NavLink href={PATH.CREATE} name={'Create'} icon={<CreateIcon />} />
+                <NavLink href={PATH.MY_PROFILE} name={'My Profile'} icon={<MyProfileIcon />} />
+                <NavLink href={PATH.MESSENGER} name={'Messenger'} icon={<MessengerIcon />} />
+                <NavLink href={PATH.SEARCH} name={'Search'} icon={<SearchIcon />} />
+                <NavLink href={PATH.STATISTICS} name={'Statistics'} icon={<StatisticsIcon />} />
+                <NavLink href={'/profile/profile-settings'} name={'preferences'} icon={<StatisticsIcon />} />
             </nav>
         </AsideWrapper>
     )

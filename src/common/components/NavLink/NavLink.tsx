@@ -1,24 +1,8 @@
 import React, {ComponentProps, ReactNode} from 'react'
-import styled from 'styled-components'
 import Link from 'next/link'
 import {usePathname} from 'next/navigation'
 import {NavIconWrapper} from 'common/components/NavLink/NavIcon'
-
-export const NavLinkWrapper = styled(Link)`
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-weight: 500;
-    font-family: Inter serif;
-    font-size: 14px;
-
-    text-decoration: none;
-    color: ${props => props.theme.textColor};
-
-    &.active {
-        color: ${props => props.theme.palette.primary['500']};
-    }
-`
+import {NavLinkWrapper} from 'common/components/NavLink/styled'
 
 type DefaultLinkPropsType = ComponentProps<typeof Link>
 
