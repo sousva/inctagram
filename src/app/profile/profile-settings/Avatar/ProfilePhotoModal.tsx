@@ -1,5 +1,5 @@
 import {BaseModalProps, Modal} from 'common/components/Modal/BaseModal'
-import React, {ChangeEvent, useRef, useState} from 'react'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {InputFile} from 'common/components/InputFile/InputFile'
 import AvatarEditor from 'react-avatar-editor'
@@ -20,36 +20,40 @@ export const ProfilePhotoModalWrapper = styled.div`
 
 export const ProfilePhotoModal = (props: BaseModalProps) => {
     const dispatch = useAppDispatch()
-    const [avatarFile, setAvatarFile] = useState<File | string>()
     const [scale, setScale] = useState<string>('1.5')
-    const [imagePreviewUrl, setImagePreviewUrl] = useState<string>()
+
+    const [avatarFile, setAvatarFile] = useState<any>()
+    const [preview, setPreview] = useState<any>()
 
     const [user, {isLoading}] = useUserAvatarMutation()
-    const editor = useRef(null)
-    const handleChangePhoto = (e: ChangeEvent<HTMLInputElement>) => {
-        // @ts-ignore
-        const file = e.target.files[0]
-        let fileReader,
-            isCancel = false
-        if (file) {
-            fileReader = new FileReader()
-            fileReader.onload = e => {
-                // @ts-ignore
-                const {result} = e.target
-                if (result && !isCancel) {
-                    setImagePreviewUrl(result)
-                }
-            }
-            fileReader.readAsDataURL(file)
+
+    useEffect(() => {
+        if (!avatarFile) {
+            setPreview(undefined)
+            return
         }
+        const objectUrl = URL.createObjectURL(avatarFile)
+        setPreview(objectUrl)
+
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [avatarFile])
+
+    const handleChangePhoto = (e: ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setAvatarFile(undefined)
+            return
+        }
+        setAvatarFile(e.target.files[0])
     }
+
     const handleClear = () => {
-        setImagePreviewUrl('')
+        setPreview('')
     }
     const handleSave = () => {
-        // @ts-ignore
-        const canvasScaled = editor.current.getImageScaledToCanvas()
-        user({avatars: canvasScaled})
+        const formData = new FormData()
+        formData.append('file', avatarFile)
+
+        user(formData)
             .unwrap()
             .then(() =>
                 dispatch(
@@ -58,6 +62,7 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
                     })
                 )
             )
+
             .catch(error =>
                 dispatch(
                     SetAppNotificationAC({notifications: {type: 'error', message: error.data.messages[0].message}})
@@ -67,16 +72,15 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
     return (
         <Modal title={props.title} isOpen={props.isOpen} handleClose={props.handleClose}>
             <ProfilePhotoModalWrapper>
-                {imagePreviewUrl && (
+                {preview && (
                     <>
                         <AvatarEditor
-                            ref={editor}
-                            image={imagePreviewUrl}
-                            width={250}
-                            height={250}
+                            image={preview}
+                            width={300}
+                            height={300}
                             border={10}
                             borderRadius={150}
-                            color={[255, 255, 255, 0.6]} // RGBA
+                            color={[255, 255, 255, 0.6]}
                             scale={+scale}
                             rotate={0}
                         />
@@ -88,7 +92,7 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
                         />
                     </>
                 )}
-                {!imagePreviewUrl && (
+                {!preview && (
                     <>
                         <EmptyAvatarPlaceholder />
                         <InputFile
@@ -103,5 +107,3 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
         </Modal>
     )
 }
-
-//https://blog.logrocket.com/using-filereader-api-preview-images-react/

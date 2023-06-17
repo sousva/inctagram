@@ -1,16 +1,12 @@
 import {api} from 'redux/api/api'
-import {ResponseType} from 'redux/types/authTypes'
 
 export const profileAPI = api.injectEndpoints({
     endpoints: build => ({
-        userAvatar: build.mutation<ResponseType, UserAvatar>({
+        userAvatar: build.mutation<UserAvatar, FormData | File>({
             query: body => ({
                 url: `users/profile/avatar`,
                 method: 'POST',
                 body,
-                headers: {
-                    // 'Content-Type: multipart/form-data'
-                },
             }),
         }),
     }),
