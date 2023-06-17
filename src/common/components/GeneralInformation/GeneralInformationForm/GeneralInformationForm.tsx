@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import {InputText} from 'common/components/InputText/InputText'
 import {CustomDatePicker} from 'common/components/DatePicker/DatePicker'

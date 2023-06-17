@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const GeneralInformationWrapper = styled.form`
+export const GeneralInformationWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     width: 780px;
