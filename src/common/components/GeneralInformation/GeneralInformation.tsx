@@ -2,10 +2,10 @@
 
 import Image from 'next/image'
 import React from 'react'
-import image from '../../../../common/assets/icons/image.png'
-import {GeneralInformationWrapper} from 'app/profile/profile-settings/GeneralInformation/styled'
+import image from 'common/assets/icons/image.png'
+import {GeneralInformationWrapper} from 'common/components/GeneralInformation/styled'
 import {Button} from 'common/components/Button/Button'
-import {GeneralInformationForm} from 'app/profile/profile-settings/GeneralInformation/GeneralInformationForm/GeneralInformationForm'
+import {GeneralInformationForm} from 'common/components/GeneralInformation/GeneralInformationForm/GeneralInformationForm'
 
 export const GeneralInformation = () => {
     return (

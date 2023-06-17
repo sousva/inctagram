@@ -5,7 +5,7 @@ import {UserType} from './authAPITypes'
 const initialState: UserType = {
     email: null,
     userId: null,
-    userName: null,
+    userName: undefined,
 }
 
 export const userSlice = createSlice({

@@ -26,7 +26,7 @@ export const ProfileSettingsAccordion = () => {
             {tabNames.map(tabName => (
                 <TabButton
                     key={tabName.name}
-                    active={profileSettingActiveTab === `${tabName.name}`}
+                    active={profileSettingActiveTab === tabName.name}
                     onClick={() => setAccordionHandler(`${tabName.name}`)}
                 >
                     {tabName.labelName}
