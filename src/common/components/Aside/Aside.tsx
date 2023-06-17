@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import {LogOut} from 'common/components/LogOut/LogOut'
 import {AsideWrapper} from 'common/components/Aside/styled'
 import {NavLink} from 'common/components/NavLink/NavLink'
 import HomeIcon from 'common/assets/icons/home.svg'
@@ -9,7 +10,7 @@ import StatisticsIcon from 'common/assets/icons/statistics.svg'
 import CreateIcon from 'common/assets/icons/create.svg'
 import SearchIcon from 'common/assets/icons/search.svg'
 import {PATH} from 'app/path'
-
+import FavoritesIcon from 'common/assets/icons/favorites.svg'
 export const Aside = () => {
     return (
         <AsideWrapper>
@@ -20,7 +21,9 @@ export const Aside = () => {
                 <NavLink href={PATH.MESSENGER} name={'Messenger'} icon={<MessengerIcon />} />
                 <NavLink href={PATH.SEARCH} name={'Search'} icon={<SearchIcon />} />
                 <NavLink href={PATH.STATISTICS} name={'Statistics'} icon={<StatisticsIcon />} />
+                <NavLink href={'/profile/favorites'} name={'Favorites'} icon={<FavoritesIcon />} />
                 <NavLink href={'/profile/profile-settings'} name={'preferences'} icon={<StatisticsIcon />} />
+                <LogOut />
             </nav>
         </AsideWrapper>
     )
