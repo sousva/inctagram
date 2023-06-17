@@ -10,11 +10,10 @@ export const CustomDatePicker = () => {
         setStartDate(date)
     }
 
-    const today = new Date()
     return (
         <CustomDatePickerWrapper>
             Date of birthday <br />
-            <DatePicker dateFormat='dd.MM.yyyy' selected={startDate} onChange={setDateHandler} minDate={today} />
+            <DatePicker dateFormat='dd.MM.yyyy' selected={startDate} onChange={setDateHandler} />
         </CustomDatePickerWrapper>
     )
 }

@@ -54,6 +54,14 @@ export const CustomDatePickerWrapper = styled.div`
         border-radius: 0;
     }
 
+    .react-datepicker__day {
+        color: white !important;
+    }
+
+    .react-datepicker__day--outside-month {
+        color: #4c4c4c !important;
+    }
+
     .react-datepicker__calendar-icon {
         width: 18px;
         height: 20px;
@@ -63,6 +71,8 @@ export const CustomDatePickerWrapper = styled.div`
         width: 158px;
         height: 36px;
         position: relative;
+        padding: 5px;
+        font-size: 16px;
     }
 
     .react-datepicker__day--selected,

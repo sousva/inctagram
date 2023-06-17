@@ -2,14 +2,9 @@ import styled from 'styled-components'
 
 export const GeneralInformationWrapper = styled.form`
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    width: 770px;
     padding: 20px;
-    width: 720px;
-
-    .buttonSave {
-        align-self: flex-end;
-        margin-top: 20px;
-    }
 
     .avatarImage {
         display: flex;
@@ -22,7 +17,7 @@ export const GeneralInformationWrapper = styled.form`
     }
 
     .inputText {
-        width: 500px;
+        width: 100%;
     }
 
     .formSection {

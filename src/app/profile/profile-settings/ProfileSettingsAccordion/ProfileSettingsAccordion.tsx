@@ -3,38 +3,35 @@ import {setProfileSettingsTabsAC, TabsSettingsType} from 'redux/appSlice'
 import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
 import {TabButton} from 'common/components/TabButton/TabButton'
 
-const ProfileSettingsAccordion = () => {
+type TabNamesType = {
+    name: TabsSettingsType
+    labelName: string
+}
+export const ProfileSettingsAccordion = () => {
     const profileSettingActiveTab = useAppSelector(state => state.app.profileSettingsTabs)
     const dispatch = useAppDispatch()
+
+    const tabNames: TabNamesType[] = [
+        {name: 'generalInformation', labelName: 'General Information'},
+        {name: 'devices', labelName: 'Devices'},
+        {name: 'accountManagement', labelName: 'Account Management'},
+        {name: 'myPayments', labelName: 'My Payments'},
+    ]
 
     const setAccordionHandler = (tab: TabsSettingsType) => {
         dispatch(setProfileSettingsTabsAC({tab}))
     }
     return (
         <div>
-            <TabButton
-                active={profileSettingActiveTab === 'generalInformation'}
-                onClick={() => setAccordionHandler('generalInformation')}
-            >
-                General Information
-            </TabButton>
-            <TabButton active={profileSettingActiveTab === 'devices'} onClick={() => setAccordionHandler('devices')}>
-                Devices
-            </TabButton>
-            <TabButton
-                active={profileSettingActiveTab === 'accountManagement'}
-                onClick={() => setAccordionHandler('accountManagement')}
-            >
-                Account Management
-            </TabButton>
-            <TabButton
-                active={profileSettingActiveTab === 'myPayments'}
-                onClick={() => setAccordionHandler('myPayments')}
-            >
-                My Payments
-            </TabButton>
+            {tabNames.map(tabName => (
+                <TabButton
+                    key={tabName.name}
+                    active={profileSettingActiveTab === `${tabName.name}`}
+                    onClick={() => setAccordionHandler(`${tabName.name}`)}
+                >
+                    {tabName.labelName}
+                </TabButton>
+            ))}
         </div>
     )
 }
-
-export default ProfileSettingsAccordion
