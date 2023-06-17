@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const GeneralInformationWrapper = styled.form`
     display: flex;
     justify-content: space-between;
-    width: 770px;
+    width: 780px;
     padding: 20px;
 
     .avatarImage {
@@ -14,16 +14,6 @@ export const GeneralInformationWrapper = styled.form`
 
     .buttonProfile {
         margin-top: 20px;
-    }
-
-    .inputText {
-        width: 100%;
-    }
-
-    .formSection {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
     }
 
     .circleImage {

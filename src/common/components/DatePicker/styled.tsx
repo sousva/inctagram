@@ -5,7 +5,8 @@ export const CustomDatePickerWrapper = styled.div`
     .react-datepicker,
     .react-datepicker__today-button {
         background-color: #171717;
-        border: 0.5px solid #4c4c4c;
+
+        border: none !important;
     }
 
     .react-datepicker__header {
@@ -44,10 +45,21 @@ export const CustomDatePickerWrapper = styled.div`
         align-items: center;
     }
 
+    .react-datepicker__navigation-icon--previous::before {
+        transform: rotate(225deg);
+        right: -5px;
+        top: 8px;
+    }
+
+    .react-datepicker__navigation-icon--next::before {
+        transform: rotate(45deg);
+        right: -5px;
+        top: 8px;
+    }
+
     .react-datepicker-popper {
         width: 300px;
         padding: 0;
-        border-radius: 0 !important;
     }
 
     .react-datepicker__month-container {
@@ -73,6 +85,8 @@ export const CustomDatePickerWrapper = styled.div`
         position: relative;
         padding: 5px;
         font-size: 16px;
+        border: none !important;
+        outline: none !important;
     }
 
     .react-datepicker__day--selected,
