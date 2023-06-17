@@ -53,7 +53,7 @@ export const CustomDatePickerWrapper = styled.div`
 
     .react-datepicker__navigation-icon--next::before {
         transform: rotate(45deg);
-        right: -5px;
+        left: -5px;
         top: 8px;
     }
 
