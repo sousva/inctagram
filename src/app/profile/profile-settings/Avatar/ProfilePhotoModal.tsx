@@ -1,39 +1,31 @@
 import {BaseModalProps, Modal} from 'common/components/Modal/BaseModal'
-import React, {ChangeEvent, useState} from 'react'
+import React, {ChangeEvent, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {InputFile} from 'common/components/InputFile/InputFile'
-import EmptyAvatarIcon from '../../../../common/assets/icons/emptyAvatar.svg'
 import AvatarEditor from 'react-avatar-editor'
-import {Button} from 'common/components/Button/Button'
+import {ProfilePhotoModalFooter} from 'app/profile/profile-settings/Avatar/components/ProfilePhotoModalFooter'
+import {EmptyAvatarPlaceholder} from 'app/profile/profile-settings/Avatar/components/EmptyAvatarPlaceholder'
+import {useUserAvatarMutation} from 'redux/api/profileAPI'
+import {SetAppNotificationAC} from 'redux/appSlice'
+import {useAppDispatch} from 'common/hooks/reduxHooks'
 
-export const ProfilePhotoModalWrapper = styled.form`
+export const ProfilePhotoModalWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
     max-height: 504px;
-    padding: 40px 0;
-
-    div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        max-width: 222px;
-        height: 228px;
-
-        margin-bottom: 30px;
-        background-color: ${props =>
-            props.theme.name === 'dark' ? props.theme.palette.dark['500'] : props.theme.palette.light['500']};
-    }
+    padding: 40px;
 `
 
 export const ProfilePhotoModal = (props: BaseModalProps) => {
-    // const [selectedFile, setSelectedFile] = useState<File | string>('https://picsum.photos/200/300')
+    const dispatch = useAppDispatch()
+    const [avatarFile, setAvatarFile] = useState<File | string>()
     const [scale, setScale] = useState<string>('1.5')
+    const [imagePreviewUrl, setImagePreviewUrl] = useState<string>()
 
-    const [imagePreviewUrl, setImagePreviewUrl] = useState<any>()
-
+    const [user, {isLoading}] = useUserAvatarMutation()
+    const editor = useRef(null)
     const handleChangePhoto = (e: ChangeEvent<HTMLInputElement>) => {
         // @ts-ignore
         const file = e.target.files[0]
@@ -42,6 +34,7 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
         if (file) {
             fileReader = new FileReader()
             fileReader.onload = e => {
+                // @ts-ignore
                 const {result} = e.target
                 if (result && !isCancel) {
                     setImagePreviewUrl(result)
@@ -49,47 +42,60 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
             }
             fileReader.readAsDataURL(file)
         }
-        // setImagePreviewUrl(url)
+    }
+    const handleClear = () => {
+        setImagePreviewUrl('')
+    }
+    const handleSave = () => {
+        // @ts-ignore
+        const canvasScaled = editor.current.getImageScaledToCanvas()
+        user({avatars: canvasScaled})
+            .unwrap()
+            .then(() =>
+                dispatch(
+                    SetAppNotificationAC({
+                        notifications: {type: 'success', message: 'Your Avatar was successfully uploaded'},
+                    })
+                )
+            )
+            .catch(error =>
+                dispatch(
+                    SetAppNotificationAC({notifications: {type: 'error', message: error.data.messages[0].message}})
+                )
+            )
     }
     return (
         <Modal title={props.title} isOpen={props.isOpen} handleClose={props.handleClose}>
             <ProfilePhotoModalWrapper>
                 {imagePreviewUrl && (
-                    <AvatarEditor
-                        image={imagePreviewUrl}
-                        width={250}
-                        height={250}
-                        border={10}
-                        borderRadius={150}
-                        color={[255, 255, 255, 0.6]} // RGBA
-                        scale={+scale}
-                        rotate={0}
-                    />
-                )}
-                {!imagePreviewUrl && (
-                    <div>
-                        <EmptyAvatarIcon />
-                    </div>
-                )}
-                {/*<input type='range' value={scale} onChange={e => setScale(e.target.value)} />*/}
-                {!imagePreviewUrl && (
-                    <InputFile
-                        title={'Select from Computer'}
-                        onChange={handleChangePhoto}
-                        accept={'image/png, image/jpeg'}
-                        multiple={false}
-                    />
-                )}
-                {imagePreviewUrl && (
                     <>
-                        <Button>Save</Button>
-                        <input
-                            type='range'
+                        <AvatarEditor
+                            ref={editor}
+                            image={imagePreviewUrl}
+                            width={250}
+                            height={250}
+                            border={10}
+                            borderRadius={150}
+                            color={[255, 255, 255, 0.6]} // RGBA
+                            scale={+scale}
+                            rotate={0}
+                        />
+                        <ProfilePhotoModalFooter
+                            clearImagePreview={handleClear}
+                            savePhoto={handleSave}
                             value={scale}
                             onChange={e => setScale(e.target.value)}
-                            min={1}
-                            max={2}
-                            step='0.1'
+                        />
+                    </>
+                )}
+                {!imagePreviewUrl && (
+                    <>
+                        <EmptyAvatarPlaceholder />
+                        <InputFile
+                            title={'Select from Computer'}
+                            onChange={handleChangePhoto}
+                            accept={'image/png, image/jpeg'}
+                            multiple={false}
                         />
                     </>
                 )}

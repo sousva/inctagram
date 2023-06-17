@@ -4,7 +4,7 @@ export type SignUpRequestType = {
     password: string
 }
 
-export type SignUpResponseType = {
+export type ResponseType = {
     statusCode: number
     messages: [
         {
