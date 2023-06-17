@@ -1,14 +1,15 @@
 'use client'
-import {Button} from '../Button/Button'
-import {useState} from 'react'
-import {ButtonWrapper, LogOutWrapper} from './LogOut.styled'
-import {Modal} from '../Modal/BaseModal'
-import {useLogOutMutation} from 'redux/api/authAPI'
 import {PATH} from 'app/path'
-import {SetAppNotificationAC} from 'redux/appSlice'
-import {useRouter} from 'next/navigation'
 import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
 import {saveLocalStorage} from 'lib/LocalStorage/LocalStorage'
+import {useRouter} from 'next/navigation'
+import React, {useState} from 'react'
+import {useLogOutMutation} from 'redux/api/authAPI'
+import {SetAppNotificationAC} from 'redux/appSlice'
+import LogoutIcon from '../../assets/icons/logout.svg'
+import {Button} from '../Button/Button'
+import {Modal} from '../Modal/BaseModal'
+import {ButtonWrapper, LogOutWrapper} from './LogOut.styled'
 
 export const LogOut = () => {
     const [showModal, setShowModal] = useState(false)
@@ -52,10 +53,12 @@ export const LogOut = () => {
     const handleCloseModal = () => {
         setShowModal(false)
     }
-
     return (
         <>
-            <Button onClick={() => setShowModal(true)}>LOG OUT</Button>
+            <Button onClick={() => setShowModal(true)} variant={'isIcon'}>
+                <LogoutIcon />
+                Log Out
+            </Button>
             <Modal isOpen={showModal} title={'Log Out'} handleClose={handleCloseModal}>
                 <LogOutWrapper>
                     <p>Are you really want to log out of your account {email}?</p>
