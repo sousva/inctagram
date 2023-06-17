@@ -5,6 +5,7 @@ import MessengerIcon from 'common/assets/icons/messenger.svg'
 import MyProfileIcon from 'common/assets/icons/myProfile.svg'
 import SearchIcon from 'common/assets/icons/search.svg'
 import StatisticsIcon from 'common/assets/icons/statistics.svg'
+import FavoritesIcon from 'common/assets/icons/favorites.svg'
 import {AsideWrapper} from 'common/components/Aside/styled'
 import {LogOut} from 'common/components/LogOut/LogOut'
 import {NavLink} from 'common/components/NavLink/NavLink'
@@ -20,7 +21,7 @@ export const Aside = () => {
                 <NavLink href={'/profile/messenger'} name={'Messenger'} icon={<MessengerIcon />} />
                 <NavLink href={'/profile/search'} name={'Search'} icon={<SearchIcon />} />
                 <NavLink href={'/profile/statistics'} name={'Statistics'} icon={<StatisticsIcon />} />
-                <NavLink href={'/profile/favorites'} name={'Favorites'} icon={<StatisticsIcon />} />
+                <NavLink href={'/profile/favorites'} name={'Favorites'} icon={<FavoritesIcon />} />
                 <LogOut />
             </nav>
         </AsideWrapper>
