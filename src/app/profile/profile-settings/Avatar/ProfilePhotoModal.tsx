@@ -1,11 +1,11 @@
 import {BaseModalProps, Modal} from 'common/components/Modal/BaseModal'
-import React, {ChangeEvent, useEffect, useState} from 'react'
+import React, {ChangeEvent, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {InputFile} from 'common/components/InputFile/InputFile'
 import AvatarEditor from 'react-avatar-editor'
 import {ProfilePhotoModalFooter} from 'app/profile/profile-settings/Avatar/components/ProfilePhotoModalFooter'
 import {EmptyAvatarPlaceholder} from 'app/profile/profile-settings/Avatar/components/EmptyAvatarPlaceholder'
-import {useUserAvatarMutation} from 'redux/api/profileAPI'
+import {useUploadAvatarMutation} from 'redux/api/profileAPI'
 import {SetAppNotificationAC} from 'redux/appSlice'
 import {useAppDispatch} from 'common/hooks/reduxHooks'
 
@@ -20,12 +20,13 @@ export const ProfilePhotoModalWrapper = styled.div`
 
 export const ProfilePhotoModal = (props: BaseModalProps) => {
     const dispatch = useAppDispatch()
+
     const [scale, setScale] = useState<string>('1.5')
 
     const [avatarFile, setAvatarFile] = useState<any>()
     const [preview, setPreview] = useState<any>()
 
-    const [user, {isLoading}] = useUserAvatarMutation()
+    const [user, {isLoading}] = useUploadAvatarMutation()
 
     useEffect(() => {
         if (!avatarFile) {
@@ -50,6 +51,7 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
         setPreview('')
     }
     const handleSave = () => {
+        // const canvasScaled = editorRef.getImageScaledToCanvas()
         const formData = new FormData()
         formData.append('file', avatarFile)
 
@@ -69,6 +71,7 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
                 )
             )
     }
+
     return (
         <Modal title={props.title} isOpen={props.isOpen} handleClose={props.handleClose}>
             <ProfilePhotoModalWrapper>

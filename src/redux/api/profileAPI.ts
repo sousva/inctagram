@@ -2,10 +2,17 @@ import {api} from 'redux/api/api'
 
 export const profileAPI = api.injectEndpoints({
     endpoints: build => ({
-        userAvatar: build.mutation<UserAvatar, FormData | File>({
+        uploadAvatar: build.mutation<UserAvatar, FormData | File>({
             query: body => ({
                 url: `users/profile/avatar`,
                 method: 'POST',
+                body,
+            }),
+        }),
+        deleteAvatar: build.mutation({
+            query: body => ({
+                url: `users/profile/avatar`,
+                method: 'DELETE',
                 body,
             }),
         }),
@@ -21,4 +28,4 @@ export type UserAvatarAvatars = {
     height: number
     fileSize: number
 }
-export const {useUserAvatarMutation} = profileAPI
+export const {useUploadAvatarMutation, useDeleteAvatarMutation} = profileAPI

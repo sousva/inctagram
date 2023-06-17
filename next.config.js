@@ -12,4 +12,5 @@ module.exports = {
     compiler: {
         styledComponents: true,
     },
+    images: {domains: ['storage.yandexcloud.net']},
 }
