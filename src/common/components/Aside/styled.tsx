@@ -11,4 +11,11 @@ export const AsideWrapper = styled.aside`
         flex-direction: column;
         gap: 22px;
     }
+    nav a:nth-child(6) {
+        margin-top: 60px;
+    }
+    & button {
+        margin-top: 180px;
+        padding: 0;
+    }
 `
