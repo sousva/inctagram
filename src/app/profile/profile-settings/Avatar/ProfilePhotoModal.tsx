@@ -9,6 +9,7 @@ import {useUploadAvatarMutation} from 'redux/api/profileAPI'
 import {SetAppNotificationAC} from 'redux/appSlice'
 
 import {useAppDispatch} from 'common/hooks/reduxHooks'
+import {Loader} from 'common/components/Loader/Loader'
 
 export const ProfilePhotoModalWrapper = styled.div`
     display: flex;
@@ -18,78 +19,46 @@ export const ProfilePhotoModalWrapper = styled.div`
     max-height: 504px;
     padding: 40px;
 `
-export const base64ToFile = (base64String: string, fileName: string) => {
-    console.log('base64String', base64String)
-    // Remove the data URL prefix (e.g., "data:image/jpeg;base64,")
-    const base64Data = base64String.replace(/^data:image\/(png|jpeg|jpg);base64,/, '')
-
-    // Convert the Base64 string to a Uint8Array
-    const byteCharacters = atob(base64Data)
-    const byteNumbers = new Array(byteCharacters.length)
-    for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i)
-    }
-    const byteArray = new Uint8Array(byteNumbers)
-
-    // Create a Blob object from the Uint8Array
-    const blob = new Blob([byteArray], {type: 'image/jpeg'}) // Replace 'image/jpeg' with the appropriate MIME type if needed
-    // Create a File object from the Blob
-    const file = new File([blob], fileName, {type: blob.type})
-
-    // Add the length property to the File object
-    Object.defineProperty(file, 'length', {
-        value: byteArray.length,
-        writable: false,
-        enumerable: true,
-        configurable: true,
-    })
-
-    return file
-}
 
 export const ProfilePhotoModal = (props: BaseModalProps) => {
     const dispatch = useAppDispatch()
-    const [user, {isLoading}] = useUploadAvatarMutation()
-    let editor = ''
+    const [avatar, {isLoading}] = useUploadAvatarMutation()
+    const [editor, setEditor] = useState<AvatarEditor | null>(null)
     const [picture, setPicture] = useState({
         img: '',
         zoom: '2',
         croppedImg: '',
     })
 
-    const setEditorRef = (ed: any) => {
-        editor = ed
-    }
-
     const handleSave = () => {
-        // @ts-ignore
-        const canvasScaled = editor.getImageScaledToCanvas()
-        const croppedImg = canvasScaled.toDataURL()
-        setPicture({
-            ...picture,
-            img: '',
-            croppedImg: croppedImg,
-        })
-        const file = base64ToFile(picture.croppedImg, 'file')
+        if (editor) {
+            const canvas = editor.getImage()
 
-        const formData = new FormData()
-        formData.append('formData', file)
+            canvas.toBlob((blob: any) => {
+                const formData = new FormData()
 
-        user(formData)
-            .unwrap()
-            .then(() =>
-                dispatch(
-                    SetAppNotificationAC({
-                        notifications: {type: 'success', message: 'Your Avatar was successfully uploaded'},
+                formData.append('file', blob)
+
+                avatar(formData)
+                    .unwrap()
+                    .then(() => {
+                        props.handleClose()
+                        dispatch(
+                            SetAppNotificationAC({
+                                notifications: {type: 'success', message: 'Your Avatar was successfully uploaded'},
+                            })
+                        )
                     })
-                )
-            )
 
-            .catch(error =>
-                dispatch(
-                    SetAppNotificationAC({notifications: {type: 'error', message: error.data.messages[0].message}})
-                )
-            )
+                    .catch(error =>
+                        dispatch(
+                            SetAppNotificationAC({
+                                notifications: {type: 'error', message: error.data.messages[0].message},
+                            })
+                        )
+                    )
+            })
+        }
     }
 
     const handleChangePhoto = e => {
@@ -108,16 +77,19 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
 
     return (
         <Modal title={props.title} isOpen={props.isOpen} handleClose={props.handleClose}>
+            {isLoading && <Loader />}
             <ProfilePhotoModalWrapper>
                 {picture.img && (
                     <>
                         <AvatarEditor
-                            ref={setEditorRef}
+                            ref={ref => {
+                                setEditor(ref)
+                            }}
                             image={picture.img}
-                            width={300}
-                            height={300}
-                            border={10}
-                            borderRadius={150}
+                            width={192}
+                            height={192}
+                            border={50}
+                            borderRadius={100}
                             color={[255, 255, 255, 0.6]}
                             scale={+picture.zoom}
                             rotate={0}
@@ -150,44 +122,3 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
         </Modal>
     )
 }
-// useEffect(() => {
-//     if (!avatarFile) {
-//         setPreview(undefined)
-//         return
-//     }
-//     const objectUrl = URL.createObjectURL(avatarFile)
-//     setPreview(objectUrl)
-//
-//     return () => URL.revokeObjectURL(objectUrl)
-// }, [avatarFile])
-//
-// const handleChangePhoto = (e: ChangeEvent<HTMLInputElement>) => {
-//     if (!e.target.files || e.target.files.length === 0) {
-//         setAvatarFile(undefined)
-//         return
-//     }
-//     setAvatarFile(e.target.files[0])
-// }
-//
-// const handleClear = () => {
-//     setPreview('')
-// }
-// const handleSave = () => {
-//     const formData = new FormData()
-//     formData.append('file', avatarFile)
-
-// user(formData)
-//     .unwrap()
-//     .then(() =>
-//         dispatch(
-//             SetAppNotificationAC({
-//                 notifications: {type: 'success', message: 'Your Avatar was successfully uploaded'},
-//             })
-//         )
-//     )
-//
-//     .catch(error =>
-//         dispatch(
-//             SetAppNotificationAC({notifications: {type: 'error', message: error.data.messages[0].message}})
-//         )
-//     )
