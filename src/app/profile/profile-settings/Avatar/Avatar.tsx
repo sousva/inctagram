@@ -40,9 +40,15 @@ const Wrapper = styled.span`
     margin-bottom: 30px;
     background-color: ${props =>
         props.theme.name === 'dark' ? props.theme.palette.dark['500'] : props.theme.palette.light['500']};
-    img {
-        width: 200px;
-        height: 200px;
+
+    .avatar {
+        position: relative;
+
+        button {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
     }
 `
 
@@ -73,7 +79,7 @@ export const UserAvatar = () => {
     return (
         <Wrapper>
             {imgUrl ? (
-                <div>
+                <div className={'avatar'}>
                     <Image src={imgUrl} alt={'imgUrl'} width={192} height={192} />
                     <IconButton onClick={handleDeleteAvatar} disabled={isLoading}>
                         <DeleteAvatarIcon />
