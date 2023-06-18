@@ -1,10 +1,10 @@
 import {BaseModalProps, Modal} from 'common/components/Modal/BaseModal'
-import React, {useState} from 'react'
+import React, {ChangeEvent, useState} from 'react'
 import styled from 'styled-components'
 import {InputFile} from 'common/components/InputFile/InputFile'
 import AvatarEditor from 'react-avatar-editor'
-import {ProfilePhotoModalFooter} from 'app/profile/profile-settings/Avatar/components/ProfilePhotoModalFooter'
-import {EmptyAvatarPlaceholder} from 'app/profile/profile-settings/Avatar/components/EmptyAvatarPlaceholder'
+import {ProfilePhotoModalFooter} from 'common/components/Avatar/components/ProfilePhotoModalFooter'
+import {EmptyAvatarPlaceholder} from 'common/components/Avatar/components/EmptyAvatarPlaceholder'
 import {useUploadAvatarMutation} from 'redux/api/profileAPI'
 import {SetAppNotificationAC} from 'redux/appSlice'
 

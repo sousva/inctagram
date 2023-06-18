@@ -6,13 +6,14 @@ export const PATH = {
     EXPIRED_LINK: '/auth/email-resending',
     REGISTRATION_CONFIRMED: '/auth/registrationConfirmed',
     CREATE_NEW_PASSWORD: '/create-new-password/:token',
-    PROFILE_SETTINGS: 'profile/profile-settings',
 
     // Aside
     HOME: '/profile/home',
     CREATE: '/profile/create',
     MY_PROFILE: '/profile/my-profile',
+    PROFILE_SETTINGS: 'profile/profile-settings',
     MESSENGER: '/profile/messenger',
     SEARCH: '/profile/search',
+    FAVORITES: '/profile/favorites',
     STATISTICS: '/profile/statistics',
 } as const

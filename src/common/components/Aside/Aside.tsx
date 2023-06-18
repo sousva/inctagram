@@ -21,8 +21,7 @@ export const Aside = () => {
                 <NavLink href={PATH.MESSENGER} name={'Messenger'} icon={<MessengerIcon />} />
                 <NavLink href={PATH.SEARCH} name={'Search'} icon={<SearchIcon />} />
                 <NavLink href={PATH.STATISTICS} name={'Statistics'} icon={<StatisticsIcon />} />
-                <NavLink href={'/profile/favorites'} name={'Favorites'} icon={<FavoritesIcon />} />
-                <NavLink href={'/profile/profile-settings'} name={'preferences'} icon={<StatisticsIcon />} />
+                <NavLink href={PATH.FAVORITES} name={'Favorites'} icon={<FavoritesIcon />} />
                 <LogOut />
             </nav>
         </AsideWrapper>
