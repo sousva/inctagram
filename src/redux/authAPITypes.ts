@@ -17,5 +17,5 @@ export type NewPasswordArgType = {
 export type UserType = {
     email: string | null
     userId: number | null
-    userName: string | null
+    userName: string | undefined
 }

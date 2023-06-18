@@ -1,15 +1,10 @@
 import styled from 'styled-components'
 
-export const GeneralInformationWrapper = styled.form`
+export const GeneralInformationWrapper = styled.div`
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    width: 780px;
     padding: 20px;
-    width: 720px;
-
-    .buttonSave {
-        align-self: flex-end;
-        margin-top: 20px;
-    }
 
     .avatarImage {
         display: flex;
@@ -19,16 +14,6 @@ export const GeneralInformationWrapper = styled.form`
 
     .buttonProfile {
         margin-top: 20px;
-    }
-
-    .inputText {
-        width: 500px;
-    }
-
-    .formSection {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
     }
 
     .circleImage {
