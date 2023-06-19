@@ -44,10 +44,14 @@ const Wrapper = styled.span`
     .avatar {
         position: relative;
 
+        img {
+            border-radius: 50%;
+        }
+
         button {
             position: absolute;
             top: 0;
-            right: 0;
+            right: 20px;
         }
     }
 `

@@ -50,18 +50,20 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
                         )
                     })
 
-                    .catch(error =>
+                    .catch(error => {
                         dispatch(
                             SetAppNotificationAC({
-                                notifications: {type: 'error', message: error.data.messages[0].message},
+                                notifications: {type: 'error', message: error.message},
                             })
                         )
-                    )
+                    })
             })
         }
     }
 
-    const handleChangePhoto = e => {
+    const handleChangePhoto = (e: ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files) return
+
         let url = URL.createObjectURL(e.target.files[0])
         setPicture({
             ...picture,
@@ -74,6 +76,15 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
             img: '',
         })
     }
+    const handleZoom = (e: ChangeEvent<HTMLInputElement>) => {
+        setPicture({
+            ...picture,
+            zoom: e.target.value,
+        })
+    }
+    const setEditorRef = (ref: AvatarEditor | null) => {
+        setEditor(ref)
+    }
 
     return (
         <Modal title={props.title} isOpen={props.isOpen} handleClose={props.handleClose}>
@@ -82,9 +93,7 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
                 {picture.img && (
                     <>
                         <AvatarEditor
-                            ref={ref => {
-                                setEditor(ref)
-                            }}
+                            ref={setEditorRef}
                             image={picture.img}
                             width={192}
                             height={192}
@@ -98,12 +107,7 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
                             clearImagePreview={handleClear}
                             savePhoto={handleSave}
                             value={picture.zoom}
-                            onChange={e =>
-                                setPicture({
-                                    ...picture,
-                                    zoom: e.target.value,
-                                })
-                            }
+                            onChange={handleZoom}
                         />
                     </>
                 )}
