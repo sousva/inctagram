@@ -19,8 +19,9 @@ import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import {SetAppNotificationAC} from 'redux/appSlice'
-import {useAuthMeMutation, useLoginMutation} from 'redux/api/authAPI'
+import {useLoginMutation} from 'redux/api/authAPI'
 import {saveLocalStorage} from 'lib/LocalStorage/LocalStorage'
+import {signIn} from 'next-auth/react'
 
 const schema = yup.object({
     email: yup.string().email().required('Email is required'),
@@ -62,7 +63,7 @@ export default function Login() {
             <AuthPageStyled>
                 <h1>Sign In</h1>
                 <div>
-                    <IconButton>
+                    <IconButton onClick={() => signIn('google')}>
                         <GoogleIcon />
                     </IconButton>
                     <IconButton>{theme === 'light' ? <GithubBlack /> : <GithubWhite />}</IconButton>

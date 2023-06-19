@@ -3,8 +3,8 @@ import {Aside} from 'common/components/Aside/Aside'
 import {HomeWrapper} from 'app/profile/styled'
 
 export const metadata = {
-    title: 'Home page title',
-    description: 'Home page description',
+    title: 'Home',
+    description: 'home page description',
 }
 
 export default function HomeLayout({children}: {children: React.ReactNode}) {

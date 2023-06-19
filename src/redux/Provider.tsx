@@ -8,6 +8,7 @@ import {darkTheme} from 'common/themes/darkTheme'
 import {GlobalStyle} from 'common/themes/GlobalStyle'
 import {ThemeProvider} from 'styled-components'
 import {useAppSelector} from 'common/hooks/reduxHooks'
+import {SessionProvider} from 'next-auth/react'
 
 export function Providers({children}: {children: ReactNode}) {
     return (
@@ -22,8 +23,10 @@ export function ThemeStyled({children}: {children: ReactNode}) {
 
     return (
         <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-            <GlobalStyle />
-            {children}
+            <SessionProvider>
+                <GlobalStyle />
+                {children}
+            </SessionProvider>
         </ThemeProvider>
     )
 }

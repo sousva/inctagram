@@ -10,7 +10,7 @@ export const PATH = {
     UPDATE_TOKENS: '/auth/update-tokens',
 
     // Aside
-    HOME: '/profile/home',
+    HOME: '/profile',
     CREATE: '/profile/create',
     MY_PROFILE: '/profile/my-profile',
     PROFILE_SETTINGS: 'profile/profile-settings',
