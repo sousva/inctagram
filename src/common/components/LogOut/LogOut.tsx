@@ -10,6 +10,7 @@ import LogoutIcon from '../../assets/icons/logout.svg'
 import {Button} from '../Button/Button'
 import {Modal} from '../Modal/BaseModal'
 import {ButtonWrapper, LogOutWrapper} from './LogOut.styled'
+import {signOut} from 'next-auth/react'
 
 export const LogOut = () => {
     const [showModal, setShowModal] = useState(false)
@@ -21,33 +22,34 @@ export const LogOut = () => {
     const [logOut, {isSuccess, isError}] = useLogOutMutation()
 
     const onLogOut = async () => {
-        await logOut()
-            .unwrap()
-            .then(() => {
-                router.replace(PATH.LOGIN)
-                saveLocalStorage({accessToken: ''})
-                setShowModal(false)
-                dispatch(
-                    SetAppNotificationAC({
-                        notifications: {
-                            type: 'success',
-                            message: 'Logout completed successfully',
-                        },
-                    })
-                )
-            })
-            .catch(error => {
-                router.replace(PATH.LOGIN)
-                setShowModal(false)
-                dispatch(
-                    SetAppNotificationAC({
-                        notifications: {
-                            type: 'error',
-                            message: error.data.messages[0].message,
-                        },
-                    })
-                )
-            })
+        await signOut()
+        // await logOut()
+        //     .unwrap()
+        //     .then(() => {
+        //         router.replace(PATH.LOGIN)
+        //         saveLocalStorage({accessToken: ''})
+        //         setShowModal(false)
+        //         dispatch(
+        //             SetAppNotificationAC({
+        //                 notifications: {
+        //                     type: 'success',
+        //                     message: 'Log-Out completed successfully',
+        //                 },
+        //             })
+        //         )
+        //     })
+        //     .catch(error => {
+        //         router.replace(PATH.LOGIN)
+        //         setShowModal(false)
+        //         dispatch(
+        //             SetAppNotificationAC({
+        //                 notifications: {
+        //                     type: 'error',
+        //                     message: error.data.messages[0].message,
+        //                 },
+        //             })
+        //         )
+        //     })
     }
 
     const handleCloseModal = () => {
@@ -61,7 +63,7 @@ export const LogOut = () => {
             </Button>
             <Modal isOpen={showModal} title={'Log Out'} handleClose={handleCloseModal}>
                 <LogOutWrapper>
-                    <p>Are you really want to log out of your account {email}?</p>
+                    <p>Do you really want to log out of your account {email}?</p>
                     <ButtonWrapper>
                         <Button variant={'outlined'} onClick={onLogOut}>
                             Yes

@@ -21,7 +21,7 @@ import * as yup from 'yup'
 import {SetAppNotificationAC} from 'redux/appSlice'
 import {useLoginMutation} from 'redux/api/authAPI'
 import {saveLocalStorage} from 'lib/LocalStorage/LocalStorage'
-import {signIn} from 'next-auth/react'
+import {signIn, useSession} from 'next-auth/react'
 
 const schema = yup.object({
     email: yup.string().email().required('Email is required'),
@@ -34,28 +34,42 @@ export default function Login() {
     const dispatch = useAppDispatch()
     const theme = useAppSelector(state => state.app.theme)
     const router = useRouter()
+    const session = useSession()
     const [login, {isLoading}] = useLoginMutation()
     const {
         register,
         handleSubmit,
         formState: {errors},
-    } = useForm<FormData>({resolver: yupResolver(schema)})
+    } = useForm<FormData>({
+        resolver: yupResolver(schema),
+        defaultValues: {email: 'sevoyo7702@soremap.com', password: '123456'},
+    })
+
+    console.log(session)
 
     const onSubmit = async (data: FormData) => {
-        await login({email: data.email, password: data.password})
-            .unwrap()
-            .then(data => {
-                saveLocalStorage(data)
-                router.replace(PATH.HOME)
-            })
-            .catch(error =>
-                dispatch(
-                    SetAppNotificationAC({notifications: {type: 'error', message: error.data.messages[0].message}})
-                )
-            )
+        await signIn('credentials', {email: data.email, password: data.password})
+
+        // await login({email: data.email, password: data.password})
+        //     .unwrap()
+        //     .then(data => {
+        //         saveLocalStorage(data)
+        //         router.replace(PATH.HOME)
+        //     })
+        //     .catch(error =>
+        //         dispatch(
+        //             SetAppNotificationAC({notifications: {type: 'error', message: error.data.messages[0].message}})
+        //         )
+        //     )
     }
     const handleRedirectOnRegistration = () => {
         router.push(PATH.REGISTRATION)
+    }
+    if (session.status === 'loading') {
+        return <p>progress...</p>
+    }
+    if (session.status === 'authenticated') {
+        router.replace(PATH.HOME)
     }
 
     return (
@@ -63,7 +77,7 @@ export default function Login() {
             <AuthPageStyled>
                 <h1>Sign In</h1>
                 <div>
-                    <IconButton onClick={() => signIn('google')}>
+                    <IconButton onClick={() => signIn('google', {redirect: true, callbackUrl: PATH.HOME})}>
                         <GoogleIcon />
                     </IconButton>
                     <IconButton>{theme === 'light' ? <GithubBlack /> : <GithubWhite />}</IconButton>

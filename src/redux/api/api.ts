@@ -5,7 +5,7 @@ import {PATH} from 'app/path'
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
-const baseQuery = fetchBaseQuery({
+export const baseQuery = fetchBaseQuery({
     baseUrl: baseUrl,
     credentials: 'include',
     prepareHeaders: headers => {
