@@ -3,7 +3,8 @@ import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import {PATH} from 'app/path'
 import axios from 'axios'
-import {ACCESS_TOKEN, saveLocalStorage} from 'lib/LocalStorage/LocalStorage'
+
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL as string
 
 const handler = NextAuth({
     providers: [
@@ -19,16 +20,28 @@ const handler = NextAuth({
             id: 'credentials',
             name: 'credentials',
             async authorize(credentials, req) {
-                const res = await login(credentials!.email, credentials!.password)
+                try {
+                    const loginResponse = await login(credentials!.email, credentials!.password)
 
-                if (res) {
-                    return res
+                    const userResponse = await instance.get<{userId: number; userName: string; email: string}>(
+                        'auth/me',
+                        {withCredentials: true, headers: {Authorization: `Bearer ${loginResponse}`}}
+                    )
+
+                    const userData = userResponse.data
+                    if (userData) {
+                        return userData
+                    }
+
+                    return null
+                } catch (e) {
+                    console.log(e)
+                    return null
                 }
-
-                return null
             },
         }),
     ],
+    debug: process.env.NODE_ENV !== 'production',
     pages: {
         signIn: PATH.LOGIN,
         error: PATH.LOGIN,
@@ -38,9 +51,9 @@ const handler = NextAuth({
         async signIn({user, account, profile, email, credentials}) {
             return true
         },
-        async redirect({url, baseUrl}) {
-            return baseUrl
-        },
+        // async redirect({url, baseUrl}) {
+        //     return baseUrl
+        // },
         async session({session, user, token}) {
             return session
         },
@@ -54,33 +67,28 @@ export {handler as GET, handler as POST}
 
 const login = async (email: string, password: string) => {
     console.log('loginfunction')
-
-    const token = await instance.post<{email: string; password: string}, {accessToken: string}>('auth/login', {
-        email,
-        password,
-    })
-    await saveLocalStorage({accessToken: token.accessToken})
-    const user = await instance.get<{userId: number; userName: string; email: string}>('auth/me')
-
-    if (user) {
-        return user
+    try {
+        const res = await instance.post<{email: string; password: string}, {data: {accessToken: string}}>(
+            'auth/login',
+            {
+                email,
+                password,
+            }
+        )
+        const token = res.data.accessToken
+        if (token) {
+            return token
+        }
+        return null
+    } catch (e) {
+        console.log(e)
+        return null
     }
-    return null
+
+    //
 }
 
 export const instance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_BASE_URL as string,
+    baseURL,
     withCredentials: true,
 })
-instance.interceptors.request.use(
-    config => {
-        const token = localStorage.getItem(ACCESS_TOKEN)
-
-        if (token) {
-            config.headers.Authorization = 'Bearer ' + token
-        }
-
-        return config
-    },
-    error => Promise.reject(error)
-)
