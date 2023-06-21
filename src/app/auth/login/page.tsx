@@ -18,9 +18,7 @@ import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import {SetAppNotificationAC} from 'redux/appSlice'
 import {useLoginMutation} from 'redux/api/authAPI'
-import {saveLocalStorage} from 'lib/LocalStorage/LocalStorage'
 import {signIn, useSession} from 'next-auth/react'
 
 const schema = yup.object({

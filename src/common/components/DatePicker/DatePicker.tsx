@@ -15,7 +15,7 @@ export const CustomDatePicker = React.forwardRef<DatePicker, DatePickerPropsType
             Date of Birthday <br />
             <Controller
                 control={props.control}
-                name='dateOfBirthday'
+                name='dateOfBirth'
                 render={({field}) => (
                     <DatePicker
                         ref={ref}

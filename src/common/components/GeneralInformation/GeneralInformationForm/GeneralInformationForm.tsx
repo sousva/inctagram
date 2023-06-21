@@ -16,7 +16,7 @@ export interface IFormInput {
     userName: string
     firstName: string
     lastName: string
-    dateOfBirthday: Date
+    dateOfBirth: Date
     city: string
     aboutMe: string
 }
@@ -29,7 +29,7 @@ const schema = yup.object().shape({
         .max(30, 'Username must be at least 30 characters long'),
     firstName: yup.string().required('First Name is required'),
     lastName: yup.string().required('Last Name is required'),
-    dateOfBirthday: yup.date().notRequired(),
+    dateOfBirth: yup.date().notRequired(),
     city: yup.string().required('City is required'),
     aboutMe: yup
         .string()
@@ -38,7 +38,7 @@ const schema = yup.object().shape({
 })
 
 export const GeneralInformationForm = () => {
-    const defaultDate = new Date(Date.UTC(1900, 0, 1))
+    const defaultDate = new Date()
     const datePickerRef = useRef<DatePicker>(null)
     const {
         register,
@@ -47,26 +47,29 @@ export const GeneralInformationForm = () => {
         formState: {errors},
     } = useForm<IFormInput>({
         resolver: yupResolver(schema),
-        defaultValues: {dateOfBirthday: defaultDate},
+        defaultValues: {dateOfBirth: defaultDate},
     })
     const userName = useAppSelector(state => state.userAuth.userName)
 
     const onSubmit: SubmitHandler<IFormInput> = data => {
         console.log(data)
-        const result = toDate(data.dateOfBirthday).toISOString()
+        const result = toDate(data.dateOfBirth).toISOString()
         console.log(result)
     }
 
     return (
         <GeneralInformationFormWrapper onSubmit={handleSubmit(onSubmit)}>
-            <InputText {...register('userName')} defaultValue={userName} label='Username'></InputText>
-            {errors.userName && <p>{errors.userName.message}</p>}
+            <InputText
+                {...register('userName')}
+                defaultValue={userName}
+                label='Username'
+                error={errors.userName}
+            ></InputText>
             <InputText {...register('firstName')} label='First Name'></InputText>
             <InputText {...register('lastName')} label='Last Name'></InputText>
-            <CustomDatePicker control={control} {...register('dateOfBirthday')} ref={datePickerRef} />
+            <CustomDatePicker control={control} {...register('dateOfBirth')} ref={datePickerRef} />
             <InputText {...register('city')} label='City'></InputText>
-            <Textarea {...register('aboutMe')} label='About me'></Textarea>
-            {errors.aboutMe && <p>{errors.aboutMe.message}</p>}
+            <Textarea {...register('aboutMe')} label='About me' error={errors.aboutMe}></Textarea>
             <Button type='submit' className='buttonSave'>
                 Save Changes
             </Button>
