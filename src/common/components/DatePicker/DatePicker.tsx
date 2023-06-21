@@ -12,6 +12,7 @@ type DatePickerPropsType = {
 export const CustomDatePicker = React.forwardRef<DatePicker, DatePickerPropsType>((props, ref) => {
     return (
         <CustomDatePickerWrapper>
+            Date of Birthday <br />
             <Controller
                 control={props.control}
                 name='dateOfBirthday'
