@@ -7,17 +7,17 @@ import {IFormInput} from 'common/components/GeneralInformation/GeneralInformatio
 
 type DatePickerPropsType = {
     control: Control<IFormInput, {dateOfBirthday: Date}>
-    defaultValue: Date
 }
-export const CustomDatePicker = (props: DatePickerPropsType) => {
+
+export const CustomDatePicker = React.forwardRef<DatePicker, DatePickerPropsType>((props, ref) => {
     return (
         <CustomDatePickerWrapper>
             <Controller
-                defaultValue={props.defaultValue}
                 control={props.control}
                 name='dateOfBirthday'
                 render={({field}) => (
                     <DatePicker
+                        ref={ref}
                         dateFormat={'dd.MM.yyyy'}
                         selected={field.value}
                         onChange={date => field.onChange(date)}
@@ -26,4 +26,5 @@ export const CustomDatePicker = (props: DatePickerPropsType) => {
             />
         </CustomDatePickerWrapper>
     )
-}
+})
+CustomDatePicker.displayName = 'CustomDatePicker'
