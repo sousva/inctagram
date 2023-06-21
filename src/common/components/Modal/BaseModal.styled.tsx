@@ -45,6 +45,6 @@ export const ModalContent = styled.div`
 
   .line {
     width: 100%;
-    border-bottom: 1px solid ${props =>
+    color: ${props =>
         props.theme.name === 'dark' ? props.theme.palette.dark['100'] : props.theme.palette.light['100']};
 `

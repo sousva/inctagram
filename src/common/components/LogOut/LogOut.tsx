@@ -15,7 +15,6 @@ export const LogOut = () => {
     const onLogOut = async () => {
         setShowModal(false)
         await signOut({callbackUrl: PATH.LOGIN})
-
     }
 
     const handleCloseModal = () => {
@@ -29,7 +28,9 @@ export const LogOut = () => {
             </Button>
             <Modal isOpen={showModal} title={'Log Out'} handleClose={handleCloseModal}>
                 <LogOutWrapper>
-                    <p>Do you really want to log out of your account {email}?</p>
+                    <p>
+                        Do you really want to log out of your account <span>{email}</span>?
+                    </p>
                     <ButtonWrapper>
                         <Button variant={'outlined'} onClick={onLogOut}>
                             Yes
