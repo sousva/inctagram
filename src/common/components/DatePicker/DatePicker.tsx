@@ -1,43 +1,29 @@
-import React, {ComponentProps, forwardRef, useState} from 'react'
+import React from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import {CustomDatePickerWrapper} from 'common/components/DatePicker/styled'
-import {Control, Controller, useForm} from 'react-hook-form'
-import * as dns from 'dns'
+import {Control, Controller} from 'react-hook-form'
+import {IFormInput} from 'common/components/GeneralInformation/GeneralInformationForm/GeneralInformationForm'
 
-interface RHFDatePickerFieldProps {
-    control: Control<any>
-    name: string
-    placeholder?: string
+type DatePickerPropsType = {
+    control: Control<IFormInput, {dateOfBirthday: Date}>
+    defaultValue: Date
 }
-
-export const CustomDatePicker = forwardRef<HTMLInputElement, RHFDatePickerFieldProps>((props, ref) => {
-    const [startDate, setStartDate] = useState(new Date())
-    const {control} = useForm()
-    const setDateHandler = (date: Date) => {
-        setStartDate(date)
-    }
-
+export const CustomDatePicker = (props: DatePickerPropsType) => {
     return (
         <CustomDatePickerWrapper>
-            Date of birthday <br />
             <Controller
-                defaultValue={{...props}}
+                defaultValue={props.defaultValue}
                 control={props.control}
-                name={props.name}
-                render={({field, fieldState}) => (
+                name='dateOfBirthday'
+                render={({field}) => (
                     <DatePicker
-                        onChange={date => {
-                            field.onChange(date ? date.valueOf() : null)
-                        }}
-                        value={field.value}
-                        name={field.name}
-                        ref={field.ref}
-                        dateFormat='dd.MM.yyyy'
+                        dateFormat={'dd.MM.yyyy'}
+                        selected={field.value}
+                        onChange={date => field.onChange(date)}
                     />
                 )}
             />
         </CustomDatePickerWrapper>
     )
-})
-CustomDatePicker.displayName = 'CustomDatePicker'
+}
