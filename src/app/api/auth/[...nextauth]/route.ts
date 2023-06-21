@@ -1,8 +1,10 @@
-import NextAuth from 'next-auth'
+import NextAuth, {User} from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import GitHubProvider from 'next-auth/providers/github'
 import {PATH} from 'app/path'
 import axios from 'axios'
+import Cookies from 'universal-cookie'
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL as string
 
@@ -11,6 +13,10 @@ const handler = NextAuth({
         GoogleProvider({
             clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET as string,
+        }),
+        GitHubProvider({
+            clientId: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID as string,
+            clientSecret: process.env.NEXT_PUBLIC_GITHUB_CLIENT_SECRET as string,
         }),
         CredentialsProvider({
             credentials: {
@@ -21,14 +27,24 @@ const handler = NextAuth({
             name: 'credentials',
             async authorize(credentials, req) {
                 try {
-                    const loginResponse = await login(credentials!.email, credentials!.password)
+                    const accessToken = await login(credentials!.email, credentials!.password)
+
+                    // document.cookie = `accessToken=${accessToken}`
+                    // const cookies = new Cookies()
+                    // cookies.set('nazarToken', accessToken, {httpOnly: true})
+                    // console.log(cookies.get('nazarToken'))
 
                     const userResponse = await instance.get<{userId: number; userName: string; email: string}>(
                         'auth/me',
-                        {withCredentials: true, headers: {Authorization: `Bearer ${loginResponse}`}}
+                        {withCredentials: true, headers: {Authorization: `Bearer ${accessToken}`}}
                     )
 
-                    const userData = userResponse.data
+                    const userData: User = {
+                        id: userResponse.data.userId + '',
+                        name: userResponse.data.userName,
+                        email: userResponse.data.email,
+                    }
+
                     if (userData) {
                         return userData
                     }
@@ -58,6 +74,11 @@ const handler = NextAuth({
             return session
         },
         async jwt({token, user, account, profile, isNewUser}) {
+            // if (account) {
+            console.log()
+            // token.accessToken = account.access_token
+            // token.id = profile.id
+            // }
             return token
         },
     },

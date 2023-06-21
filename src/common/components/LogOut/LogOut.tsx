@@ -1,11 +1,7 @@
 'use client'
 import {PATH} from 'app/path'
-import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
-import {saveLocalStorage} from 'lib/LocalStorage/LocalStorage'
-import {useRouter} from 'next/navigation'
+import {useAppSelector} from 'common/hooks/reduxHooks'
 import React, {useState} from 'react'
-import {useLogOutMutation} from 'redux/api/authAPI'
-import {SetAppNotificationAC} from 'redux/appSlice'
 import LogoutIcon from '../../assets/icons/logout.svg'
 import {Button} from '../Button/Button'
 import {Modal} from '../Modal/BaseModal'
@@ -15,14 +11,17 @@ import {signOut} from 'next-auth/react'
 export const LogOut = () => {
     const [showModal, setShowModal] = useState(false)
     const {email} = useAppSelector(state => state.userAuth)
-    const dispatch = useAppDispatch()
 
-    const router = useRouter()
+    // const dispatch = useAppDispatch()
 
-    const [logOut, {isSuccess, isError}] = useLogOutMutation()
+    // const router = useRouter()
+
+    // const [logOut, {isSuccess, isError}] = useLogOutMutation()
 
     const onLogOut = async () => {
-        await signOut()
+        setShowModal(false)
+        await signOut({callbackUrl: PATH.LOGIN})
+
         // await logOut()
         //     .unwrap()
         //     .then(() => {

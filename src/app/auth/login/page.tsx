@@ -14,13 +14,10 @@ import {IconButton} from 'common/components/IconButton/IconButton'
 import GoogleIcon from 'common/assets/icons/google.svg'
 import GithubBlack from 'common/assets/icons/githubBlack.svg'
 import GithubWhite from 'common/assets/icons/githubWhite.svg'
-import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
+import {useAppSelector} from 'common/hooks/reduxHooks'
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import {SetAppNotificationAC} from 'redux/appSlice'
-import {useLoginMutation} from 'redux/api/authAPI'
-import {saveLocalStorage} from 'lib/LocalStorage/LocalStorage'
 import {signIn, useSession} from 'next-auth/react'
 
 const schema = yup.object({
@@ -31,11 +28,10 @@ const schema = yup.object({
 type FormData = yup.InferType<typeof schema>
 
 export default function Login() {
-    const dispatch = useAppDispatch()
     const theme = useAppSelector(state => state.app.theme)
     const router = useRouter()
     const session = useSession()
-    const [login, {isLoading}] = useLoginMutation()
+
     const {
         register,
         handleSubmit,
@@ -48,19 +44,7 @@ export default function Login() {
     console.log(session)
 
     const onSubmit = async (data: FormData) => {
-        await signIn('credentials', {email: data.email, password: data.password})
-
-        // await login({email: data.email, password: data.password})
-        //     .unwrap()
-        //     .then(data => {
-        //         saveLocalStorage(data)
-        //         router.replace(PATH.HOME)
-        //     })
-        //     .catch(error =>
-        //         dispatch(
-        //             SetAppNotificationAC({notifications: {type: 'error', message: error.data.messages[0].message}})
-        //         )
-        //     )
+        await signIn('credentials', {email: data.email, password: data.password, callbackUrl: PATH.HOME})
     }
     const handleRedirectOnRegistration = () => {
         router.push(PATH.REGISTRATION)
@@ -80,15 +64,15 @@ export default function Login() {
                     <IconButton onClick={() => signIn('google', {redirect: true, callbackUrl: PATH.HOME})}>
                         <GoogleIcon />
                     </IconButton>
-                    <IconButton>{theme === 'light' ? <GithubBlack /> : <GithubWhite />}</IconButton>
+                    <IconButton onClick={() => signIn('github', {redirect: true, callbackUrl: PATH.HOME})}>
+                        {theme === 'light' ? <GithubBlack /> : <GithubWhite />}
+                    </IconButton>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <InputText label={'Email'} type={'email'} {...register('email')} error={errors.email} />
                     <InputPassword label={'Password'} {...register('password')} error={errors.password} />
                     <Link href={PATH.FORGOT_PASSWORD}>Forgot Password</Link>
-                    <Button type={'submit'} disabled={isLoading}>
-                        Sign In
-                    </Button>
+                    <Button type={'submit'}>Sign In</Button>
                     <p>Dont you have an account?</p>
                     <Button type={'button'} variant={'text'} onClick={handleRedirectOnRegistration}>
                         Sign Up
