@@ -6,14 +6,17 @@ import {Container} from '../Container/Container'
 import {ThemeSwitcher} from '../ThemeSwitcher/ThemeSwitcher'
 import {LogOut} from '../LogOut/LogOut'
 import {PATH} from 'app/path'
+import {useSession} from 'next-auth/react'
 
 export const Header = () => {
+    const {status} = useSession()
+
     return (
         <HeaderStyled>
             <Container>
                 <Link href={PATH.HOME}>Inctagram</Link>
                 <ThemeSwitcher />
-                <LogOut />
+                {status === 'authenticated' ? <LogOut /> : null}
             </Container>
         </HeaderStyled>
     )
