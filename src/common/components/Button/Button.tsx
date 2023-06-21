@@ -31,6 +31,7 @@ export const Button = styled.button<{variant?: 'contained' | 'outlined' | 'text'
                         color: ${props => props.theme.palette.dark[900]};
                         border: 2px solid ${props => props.theme.palette.primary[700]};
                     }
+
                     &:disabled {
                         background-color: ${props => props.theme.palette.light[900]};
                         color: ${props => props.theme.palette.dark[100]};
@@ -53,6 +54,7 @@ export const Button = styled.button<{variant?: 'contained' | 'outlined' | 'text'
                         color: ${props => props.theme.palette.primary[500]};
                         border: 2px solid ${props => props.theme.palette.primary[700]};
                     }
+
                     &:disabled {
                         color: ${props => props.theme.palette.primary[900]};
                     }
@@ -76,6 +78,7 @@ export const Button = styled.button<{variant?: 'contained' | 'outlined' | 'text'
                         color: ${props => props.theme.palette.primary[700]};
                         border: 2px solid ${props => props.theme.palette.primary[700]};
                     }
+
                     &:disabled {
                         border: 2px solid ${props => props.theme.palette.primary[900]};
                         color: ${props => props.theme.palette.primary[900]};
@@ -87,11 +90,23 @@ export const Button = styled.button<{variant?: 'contained' | 'outlined' | 'text'
                     align-items: center;
                     gap: 15px;
                     background-color: inherit;
-                    color: ${props => props.theme.palette.light[100]};
+                    color: ${props =>
+                        props.theme.name === 'dark'
+                            ? props.theme.palette.common.white
+                            : props.theme.palette.common.black};
                     font-size: 14px;
                     font-weight: 500;
+
+                    & svg path {
+                        fill: ${props =>
+                            props.theme.name === 'dark'
+                                ? props.theme.palette.common.white
+                                : props.theme.palette.common.black};
+                    }
+
                     &:active {
                         color: ${props => props.theme.palette.primary[700]};
+
                         & svg path {
                             fill: ${props => props.theme.palette.primary[700]};
                         }
@@ -99,6 +114,7 @@ export const Button = styled.button<{variant?: 'contained' | 'outlined' | 'text'
 
                     &:hover {
                         color: ${props => props.theme.palette.primary[100]};
+
                         & svg path {
                             fill: ${props => props.theme.palette.primary[100]};
                         }
@@ -106,12 +122,15 @@ export const Button = styled.button<{variant?: 'contained' | 'outlined' | 'text'
 
                     &:focus {
                         color: ${props => props.theme.palette.primary[700]};
+
                         & svg path {
                             fill: ${props => props.theme.palette.primary[700]};
                         }
                     }
+
                     &:disabled {
                         color: ${props => props.theme.palette.primary[900]};
+
                         & svg path {
                             fill: ${props => props.theme.palette.primary[900]};
                         }
@@ -136,6 +155,7 @@ export const Button = styled.button<{variant?: 'contained' | 'outlined' | 'text'
                         background-color: ${props => props.theme.palette.primary[700]};
                         color: ${props => props.theme.palette.light[100]};
                     }
+
                     &:disabled {
                         background-color: ${props => props.theme.palette.primary[900]};
                         color: ${props => props.theme.palette.light[900]};
