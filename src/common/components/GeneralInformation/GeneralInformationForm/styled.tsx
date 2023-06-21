@@ -4,6 +4,7 @@ export const GeneralInformationFormWrapper = styled.form`
     display: flex;
     flex-direction: column;
     width: 500px;
+    gap: 15px;
 
     .buttonSave {
         align-self: flex-end;
