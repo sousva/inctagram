@@ -1,4 +1,5 @@
 import {api} from 'redux/api/api'
+import {UserAvatar} from 'redux/types/profileTypes'
 
 export const profileAPI = api.injectEndpoints({
     endpoints: build => ({
@@ -19,13 +20,4 @@ export const profileAPI = api.injectEndpoints({
     }),
 })
 
-export type UserAvatar = {
-    avatars: UserAvatarAvatars[]
-}
-export type UserAvatarAvatars = {
-    url: string
-    width: number
-    height: number
-    fileSize: number
-}
 export const {useUploadAvatarMutation, useDeleteAvatarMutation} = profileAPI

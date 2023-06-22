@@ -1,6 +1,11 @@
-import {ForgotPasswordArgType, NewPasswordArgType} from 'redux/authAPITypes'
 import {api} from 'redux/api/api'
-import {SignUpRequestType, ResponseType, UserResponseType} from 'redux/types/authTypes'
+import {
+    SignUpRequestType,
+    ResponseType,
+    UserResponseType,
+    ForgotPasswordArgType,
+    NewPasswordArgType,
+} from 'redux/types/authTypes'
 
 export const authAPI = api.injectEndpoints({
     endpoints: build => ({
