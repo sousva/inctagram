@@ -10,8 +10,12 @@ export const LogOutWrapper = styled.div`
         font-style: normal;
         font-weight: 400;
         font-size: 17px;
-        line-height: 24px;
+        line-height: 30px;
         margin: 30px 24px 0 24px;
+
+        span {
+            color: darkorange;
+        }
     }
 `
 

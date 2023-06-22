@@ -44,7 +44,7 @@ export default function Login() {
     console.log(session)
 
     const onSubmit = async (data: FormData) => {
-        await signIn('credentials', {email: data.email, password: data.password, callbackUrl: PATH.HOME})
+        await signIn('credentials', {email: data.email, password: data.password, redirect: false})
     }
     const handleRedirectOnRegistration = () => {
         router.push(PATH.REGISTRATION)
