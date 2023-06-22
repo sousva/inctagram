@@ -4,13 +4,16 @@ import {InputText} from 'common/components/InputText/InputText'
 import {Textarea} from 'common/components/Textarea/Textarea'
 import {Button} from 'common/components/Button/Button'
 import {GeneralInformationFormWrapper} from 'common/components/GeneralInformation/GeneralInformationForm/styled'
-import {SubmitHandler, useForm} from 'react-hook-form'
-import {useAppSelector} from 'common/hooks/reduxHooks'
+import {useForm} from 'react-hook-form'
+import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
 import {toDate} from 'date-fns'
 import {CustomDatePicker} from 'common/components/DatePicker/DatePicker'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import DatePicker from 'react-datepicker'
+import {useUpdateUserMutation} from 'redux/api/profileAPI'
+import {SetAppNotificationAC} from 'redux/appSlice'
+import {Loader} from 'common/components/Loader/Loader'
 
 export interface IFormInput {
     userName: string
@@ -38,6 +41,7 @@ const schema = yup.object().shape({
 })
 
 export const GeneralInformationForm = () => {
+    const dispatch = useAppDispatch()
     const defaultDate = new Date()
     const datePickerRef = useRef<DatePicker>(null)
     const {
@@ -50,15 +54,35 @@ export const GeneralInformationForm = () => {
         defaultValues: {dateOfBirth: defaultDate},
     })
     const userName = useAppSelector(state => state.userAuth.userName)
+    const [updateProfile, {isLoading}] = useUpdateUserMutation()
 
-    const onSubmit: SubmitHandler<IFormInput> = data => {
-        console.log(data)
-        const result = toDate(data.dateOfBirth).toISOString()
-        console.log(result)
+    const onSubmit = async (data: IFormInput) => {
+        const result = String(toDate(data.dateOfBirth).toISOString())
+        await updateProfile({
+            userName: data.userName,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            city: data.city,
+            dateOfBirth: result,
+            aboutMe: data.aboutMe,
+        })
+            .unwrap()
+            .then()
+            .catch(error => dispatch(SetAppNotificationAC({notifications: {type: 'error', message: error.message}})))
+
+        console.log({
+            userName: data.userName,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            city: data.city,
+            dateOfBirth: result,
+            aboutMe: data.aboutMe,
+        })
     }
 
     return (
         <GeneralInformationFormWrapper onSubmit={handleSubmit(onSubmit)}>
+            {isLoading && <Loader />}
             <InputText
                 {...register('userName')}
                 defaultValue={userName}

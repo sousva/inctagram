@@ -1,5 +1,6 @@
 import {api} from 'redux/api/api'
-import {UserAvatar} from 'redux/types/profileTypes'
+import {UpdateUserRequest, UserAvatar} from 'redux/types/profileTypes'
+import {ResponseType} from 'redux/types/authTypes'
 
 export const profileAPI = api.injectEndpoints({
     endpoints: build => ({
@@ -17,7 +18,14 @@ export const profileAPI = api.injectEndpoints({
                 body,
             }),
         }),
+        updateUser: build.mutation<ResponseType, UpdateUserRequest>({
+            query: body => ({
+                url: `/users/profile`,
+                method: 'PUT',
+                body,
+            }),
+        }),
     }),
 })
 
-export const {useUploadAvatarMutation, useDeleteAvatarMutation} = profileAPI
+export const {useUploadAvatarMutation, useDeleteAvatarMutation, useUpdateUserMutation} = profileAPI
