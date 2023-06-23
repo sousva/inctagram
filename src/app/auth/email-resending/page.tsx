@@ -1,9 +1,8 @@
-'use client'
-import React, {useState} from 'react'
+import React from 'react'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 import {Button} from 'common/components/Button/Button'
 import Image from 'next/image'
-import timeManagement from 'common/assets/pictures/timeManagement.png'
+import timeManagement from '@pictures/timeManagement.png'
 import {useResendConfirmationLinkMutation} from 'redux/api/authAPI'
 import {RegistrationModalContent} from 'app/auth/registration/styled'
 import {Modal} from 'common/components/Modal/BaseModal'
@@ -18,18 +17,19 @@ export default function Page() {
     const dispatch = useAppDispatch()
     const router = useRouter()
     const [resend, {isLoading}] = useResendConfirmationLinkMutation()
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    // const [isModalOpen, setIsModalOpen] = useState(false)
     const email = useSearchParams().get('email') as string
 
     const handleModalClose = () => {
-        setIsModalOpen(false)
+        // setIsModalOpen(false)
         router.replace(PATH.LOGIN)
     }
 
     const handleResend = () => {
         resend({email})
             .unwrap()
-            .then(() => setIsModalOpen(true))
+            // .then(() => setIsModalOpen(true))
+            .then(() => {})
             .catch(error =>
                 dispatch(
                     SetAppNotificationAC({notifications: {type: 'error', message: error.data.messages[0].message}})
@@ -50,7 +50,7 @@ export default function Page() {
                     <Image src={timeManagement} alt={'timeManagement picture'} />
                 </span>
             </EmailResendWrapper>
-            <Modal handleClose={handleModalClose} isOpen={isModalOpen} title={'Email sent'}>
+            <Modal handleClose={handleModalClose} isOpen={false} title={'Email sent'}>
                 <RegistrationModalContent>
                     <div>
                         We have sent a link to confirm your email to <span>{email}</span>

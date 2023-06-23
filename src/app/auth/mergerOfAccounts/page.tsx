@@ -1,9 +1,8 @@
-'use client'
 import React from 'react'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 import styled from 'styled-components'
 import {Button} from 'common/components/Button/Button'
-import re from 'common/assets/pictures/congratulation.png'
+import re from '@pictures/congratulation.png'
 import Image from 'next/image'
 
 const Wrapper = styled.div`

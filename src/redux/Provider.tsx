@@ -9,12 +9,15 @@ import {GlobalStyle} from 'common/themes/GlobalStyle'
 import {ThemeProvider} from 'styled-components'
 import {useAppSelector} from 'common/hooks/reduxHooks'
 import {SessionProvider} from 'next-auth/react'
+import StyledComponentsRegistry from 'lib'
 
 export function Providers({children}: {children: ReactNode}) {
     return (
-        <Provider store={store}>
-            <ThemeStyled>{children}</ThemeStyled>
-        </Provider>
+        <StyledComponentsRegistry>
+            <Provider store={store}>
+                <ThemeStyled>{children}</ThemeStyled>
+            </Provider>
+        </StyledComponentsRegistry>
     )
 }
 

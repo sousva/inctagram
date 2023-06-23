@@ -1,8 +1,9 @@
+'use client'
 import React, {ReactNode, useEffect} from 'react'
 import {ReactPortal} from 'common/components/Modal/ReactPortal'
 import {IconButton} from 'common/components/IconButton/IconButton'
-import CloseIconWhite from './../../assets/icons/closeWhite.svg'
-import CloseIconDark from './../../assets/icons/closeBlack.svg'
+import CloseIconWhite from '@icons/closeWhite.svg'
+import CloseIconDark from '@icons/closeBlack.svg'
 import {useAppSelector} from 'common/hooks/reduxHooks'
 import {ModalContent, ModalWrapper} from 'common/components/Modal/BaseModal.styled'
 

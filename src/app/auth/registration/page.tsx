@@ -1,14 +1,13 @@
-'use client'
 import {PATH} from 'app/path'
 import Link from 'next/link'
-import React, {useState} from 'react'
+import React from 'react'
 import {InputText} from 'common/components/InputText/InputText'
 import {useForm} from 'react-hook-form'
 import {Button} from 'common/components/Button/Button'
 import {InputPassword} from 'common/components/InputPassword/InputPassword'
-import GoogleIcon from './../../../common/assets/icons/google.svg'
-import GithubWhite from './../../../common/assets/icons/githubWhite.svg'
-import GithubBlack from './../../../common/assets/icons/githubBlack.svg'
+import GoogleIcon from '@icons/google.svg'
+import GithubWhite from '@icons/githubWhite.svg'
+import GithubBlack from '@icons/githubBlack.svg'
 import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 import {AuthPageStyled, RegistrationModalContent} from 'app/auth/registration/styled'
@@ -41,7 +40,7 @@ type FormData = yup.InferType<typeof schema>
 
 export default function Page() {
     const dispatch = useAppDispatch()
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    // const [isModalOpen, setIsModalOpen] = useState(false)
     const theme = useAppSelector(state => state.app.theme)
 
     const {
@@ -56,7 +55,8 @@ export default function Page() {
     const onSubmit = async (data: FormData) => {
         await addNewUser({email: data.email, userName: data.userName, password: data.password})
             .unwrap()
-            .then(() => setIsModalOpen(true))
+            // .then(() => setIsModalOpen(true))
+            .then(() => {})
             .catch(error =>
                 dispatch(
                     SetAppNotificationAC({notifications: {type: 'error', message: error.data.messages[0].message}})
@@ -65,7 +65,7 @@ export default function Page() {
     }
 
     const handleModalClose = () => {
-        setIsModalOpen(false)
+        // setIsModalOpen(false)
     }
 
     return (
@@ -99,7 +99,7 @@ export default function Page() {
                     </Link>
                 </form>
             </AuthPageStyled>
-            <Modal handleClose={handleModalClose} isOpen={isModalOpen} title={'Email sent'}>
+            <Modal handleClose={handleModalClose} isOpen={false} title={'Email sent'}>
                 <RegistrationModalContent>
                     <div>
                         We have sent a link to confirm your email to <span>{getValues('email')}</span>

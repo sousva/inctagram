@@ -1,4 +1,3 @@
-'use client'
 import React from 'react'
 import {useSession} from 'next-auth/react'
 import {useRouter} from 'next/navigation'
@@ -9,9 +8,6 @@ export default function Page() {
     const session = useSession()
     console.log(session)
 
-    if (session.status === 'loading') {
-        return <p>progress...</p>
-    }
     if (session.status === 'unauthenticated') {
         router.replace(PATH.LOGIN)
     }

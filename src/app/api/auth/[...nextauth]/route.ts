@@ -3,9 +3,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GitHubProvider from 'next-auth/providers/github'
 import {PATH} from 'app/path'
-import axios from 'axios'
-
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL as string
+import {instance, login} from 'redux/api/axios/instance'
 
 const handler = NextAuth({
     session: {
@@ -76,29 +74,3 @@ const handler = NextAuth({
     ],
 })
 export {handler as GET, handler as POST}
-
-const login = async (email: string, password: string) => {
-    console.log('loginfunction')
-    try {
-        const res = await instance.post<{email: string; password: string}, {data: {accessToken: string}}>(
-            'auth/login',
-            {
-                email,
-                password,
-            }
-        )
-        const token = res.data.accessToken
-        if (token) {
-            return token
-        }
-        return null
-    } catch (e) {
-        console.log(e)
-        return null
-    }
-}
-
-export const instance = axios.create({
-    baseURL,
-    withCredentials: true,
-})

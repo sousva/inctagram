@@ -3,8 +3,8 @@ import React from 'react'
 import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
 import {setThemeAppAC} from 'redux/appSlice'
 import {IconButton} from '../IconButton/IconButton'
-import MoonIcon from './../../assets/icons/moon.svg'
-import SunIcon from './../../assets/icons/sun.svg'
+import MoonIcon from '@icons/moon.svg'
+import SunIcon from '@icons/sun.svg'
 
 export const ThemeSwitcher = () => {
     const dispatch = useAppDispatch()

@@ -1,16 +1,15 @@
-'use client'
 import React from 'react'
 import {LogOut} from 'common/components/LogOut/LogOut'
 import {AsideWrapper} from 'common/components/Aside/styled'
 import {NavLink} from 'common/components/NavLink/NavLink'
-import HomeIcon from 'common/assets/icons/home.svg'
-import MyProfileIcon from 'common/assets/icons/myProfile.svg'
-import MessengerIcon from 'common/assets/icons/messenger.svg'
-import StatisticsIcon from 'common/assets/icons/statistics.svg'
-import CreateIcon from 'common/assets/icons/create.svg'
-import SearchIcon from 'common/assets/icons/search.svg'
+import HomeIcon from '@icons/home.svg'
+import MyProfileIcon from '@icons/myProfile.svg'
+import MessengerIcon from '@icons/messenger.svg'
+import StatisticsIcon from '@icons/statistics.svg'
+import CreateIcon from '@icons/create.svg'
+import SearchIcon from '@icons/search.svg'
 import {PATH} from 'app/path'
-import FavoritesIcon from 'common/assets/icons/favorites.svg'
+import FavoritesIcon from '@icons/favorites.svg'
 export const Aside = () => {
     return (
         <AsideWrapper>

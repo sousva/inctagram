@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 
@@ -11,9 +9,9 @@ import {useRouter} from 'next/navigation'
 import {PATH} from 'app/path'
 import {AuthPageStyled} from 'app/auth/registration/styled'
 import {IconButton} from 'common/components/IconButton/IconButton'
-import GoogleIcon from 'common/assets/icons/google.svg'
-import GithubBlack from 'common/assets/icons/githubBlack.svg'
-import GithubWhite from 'common/assets/icons/githubWhite.svg'
+import GoogleIcon from '@icons/google.svg'
+import GithubBlack from '@icons/githubBlack.svg'
+import GithubWhite from '@icons/githubWhite.svg'
 import {useAppSelector} from 'common/hooks/reduxHooks'
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
@@ -49,9 +47,7 @@ export default function Login() {
     const handleRedirectOnRegistration = () => {
         router.push(PATH.REGISTRATION)
     }
-    if (session.status === 'loading') {
-        return <p>progress...</p>
-    }
+
     if (session.status === 'authenticated') {
         router.replace(PATH.HOME)
     }

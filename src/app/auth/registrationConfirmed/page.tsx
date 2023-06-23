@@ -1,11 +1,10 @@
-'use client'
 import {PATH} from 'app/path'
 import Link from 'next/link'
 import React from 'react'
 import {ConfirmationPageWrapper} from 'app/auth/registrationConfirmed/styled'
 import {Button} from 'common/components/Button/Button'
 import Image from 'next/image'
-import congratulation from 'common/assets/pictures/congratulation.png'
+import congratulation from '@pictures/congratulation.png'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 
 export default function Page() {
