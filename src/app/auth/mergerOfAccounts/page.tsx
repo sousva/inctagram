@@ -3,7 +3,7 @@ import React from 'react'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 import styled from 'styled-components'
 import {Button} from 'common/components/Button/Button'
-import re from 'common/assets/pictures/congratulation.png'
+import congratulation from '@pictures/congratulation.png'
 import Image from 'next/image'
 
 const Wrapper = styled.div`
@@ -35,7 +35,7 @@ export default function Page() {
                 <Button variant={'outlined'}>Yes, merge</Button>
                 <Button variant={'outlined'}>No</Button>
                 <span>
-                    <Image src={re} alt={'re'} />
+                    <Image src={congratulation} alt={'re'} />
                 </span>
             </Wrapper>
         </AuthContainer>

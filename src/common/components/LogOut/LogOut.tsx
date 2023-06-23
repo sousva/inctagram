@@ -1,7 +1,7 @@
 'use client'
 import {PATH} from 'app/path'
 import React, {useState} from 'react'
-import LogoutIcon from '../../assets/icons/logout.svg'
+import LogoutIcon from '@icons/logout.svg'
 import {Button} from '../Button/Button'
 import {Modal} from '../Modal/BaseModal'
 import {ButtonWrapper, LogOutWrapper} from './LogOut.styled'
