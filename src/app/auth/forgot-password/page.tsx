@@ -4,6 +4,7 @@ import {PATH} from 'app/path'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 import {Button} from 'common/components/Button/Button'
 import {InputText} from 'common/components/InputText/InputText'
+import {ThemeSelector} from 'common/constant'
 import {useAppSelector} from 'common/hooks/reduxHooks'
 import Link from 'next/link'
 import {useState} from 'react'
@@ -51,7 +52,7 @@ type ForgotPasswordFormType = {
 }
 
 const ForgotPassword = () => {
-    const theme = useAppSelector(state => state.app.theme)
+    const theme = useAppSelector(ThemeSelector)
     const {register, handleSubmit} = useForm({
         defaultValues: {
             email: '',
