@@ -3,8 +3,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GitHubProvider from 'next-auth/providers/github'
 import {PATH} from 'app/path'
-
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL as string
+import {authMe, login} from 'lib/server-api/server-api'
 
 const handler = NextAuth({
     session: {
@@ -48,36 +47,13 @@ const handler = NextAuth({
             async authorize(credentials, req) {
                 try {
                     const data = {email: credentials!.email, password: credentials!.password}
-                    const login = await fetch(`${baseURL}auth/login`, {
-                        method: 'POST',
-                        body: JSON.stringify(data),
-                        headers: new Headers({
-                            'Content-Type': 'application/json',
-                            accept: 'application/json',
-                        }),
-                    })
-                    const loginResponse = await login.json()
+                    await login(data)
+                    const meResponse = await authMe()
 
-                    console.log(loginResponse.accessToken)
-
-                    const meRequest = await fetch(`${baseURL}/auth/me`, {
-                        method: 'GET',
-                        headers: new Headers({
-                            Authorization: `Bearer ${loginResponse.accessToken}`,
-                            'Content-Type': 'application/json',
-                            accept: 'application/json',
-                            credentials: 'include',
-                        }),
-                    })
-                    const meResponse = await meRequest.json()
-
-                    console.log(meResponse)
-                    const userData: User & {userId: number; accessToken: string} = {
-                        id: meResponse.userId + '',
+                    const userData: User = {
                         name: meResponse.userName,
                         email: meResponse.email,
-                        accessToken: loginResponse.accessToken,
-                        userId: meResponse.userId,
+                        id: meResponse.userId,
                     }
 
                     if (userData) {
