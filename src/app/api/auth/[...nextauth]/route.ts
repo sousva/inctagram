@@ -3,7 +3,6 @@ import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GitHubProvider from 'next-auth/providers/github'
 import {PATH} from 'app/path'
-import axios from 'axios'
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL as string
 
@@ -48,19 +47,37 @@ const handler = NextAuth({
             name: 'credentials',
             async authorize(credentials, req) {
                 try {
-                    const accessToken = (await login(credentials!.email, credentials!.password)) as string
+                    const data = {email: credentials!.email, password: credentials!.password}
+                    const login = await fetch(`${baseURL}auth/login`, {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: new Headers({
+                            'Content-Type': 'application/json',
+                            accept: 'application/json',
+                        }),
+                    })
+                    const loginResponse = await login.json()
 
-                    const userResponse = await instance.get<{userId: number; userName: string; email: string}>(
-                        'auth/me',
-                        {withCredentials: true, headers: {Authorization: `Bearer ${accessToken}`}}
-                    )
+                    console.log(loginResponse.accessToken)
 
+                    const meRequest = await fetch(`${baseURL}/auth/me`, {
+                        method: 'GET',
+                        headers: new Headers({
+                            Authorization: `Bearer ${loginResponse.accessToken}`,
+                            'Content-Type': 'application/json',
+                            accept: 'application/json',
+                            credentials: 'include',
+                        }),
+                    })
+                    const meResponse = await meRequest.json()
+
+                    console.log(meResponse)
                     const userData: User & {userId: number; accessToken: string} = {
-                        id: userResponse.data.userId + '',
-                        name: userResponse.data.userName,
-                        email: userResponse.data.email,
-                        accessToken,
-                        userId: userResponse.data.userId,
+                        id: meResponse.userId + '',
+                        name: meResponse.userName,
+                        email: meResponse.email,
+                        accessToken: loginResponse.accessToken,
+                        userId: meResponse.userId,
                     }
 
                     if (userData) {
@@ -76,29 +93,3 @@ const handler = NextAuth({
     ],
 })
 export {handler as GET, handler as POST}
-
-const login = async (email: string, password: string) => {
-    console.log('loginfunction')
-    try {
-        const res = await instance.post<{email: string; password: string}, {data: {accessToken: string}}>(
-            'auth/login',
-            {
-                email,
-                password,
-            }
-        )
-        const token = res.data.accessToken
-        if (token) {
-            return token
-        }
-        return null
-    } catch (e) {
-        console.log(e)
-        return null
-    }
-}
-
-export const instance = axios.create({
-    baseURL,
-    withCredentials: true,
-})
