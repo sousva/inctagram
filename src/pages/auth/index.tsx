@@ -8,8 +8,7 @@ import {InputPassword} from 'common/components/InputPassword/InputPassword'
 import Link from 'next/link'
 import {Button} from 'common/components/Button/Button'
 import {useRouter} from 'next/navigation'
-import {PATH} from 'app/path'
-import {AuthPageStyled} from 'app/auth/registration/styled'
+
 import {IconButton} from 'common/components/IconButton/IconButton'
 import GoogleIcon from 'common/assets/icons/google.svg'
 import GithubBlack from 'common/assets/icons/githubBlack.svg'
@@ -19,6 +18,8 @@ import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import {signIn, useSession} from 'next-auth/react'
+import {PATH} from 'appNew/path'
+import {AuthPageStyled} from 'appNew/auth/registration/styled'
 
 const schema = yup.object({
     email: yup.string().email().required('Email is required'),
