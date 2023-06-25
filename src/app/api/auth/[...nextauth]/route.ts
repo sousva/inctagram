@@ -1,11 +1,11 @@
-import NextAuth, {User} from 'next-auth'
+import NextAuth, {NextAuthOptions, User} from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GitHubProvider from 'next-auth/providers/github'
 import {PATH} from 'app/path'
-import {authMe, login} from 'lib/server-api/server-api'
+import {serverAuthAPI} from 'lib/server-api/server-api'
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
     session: {
         strategy: 'jwt',
     },
@@ -47,8 +47,8 @@ const handler = NextAuth({
             async authorize(credentials, req) {
                 try {
                     const data = {email: credentials!.email, password: credentials!.password}
-                    await login(data)
-                    const meResponse = await authMe()
+                    await serverAuthAPI.login(data)
+                    const meResponse = await serverAuthAPI.authMe()
 
                     const userData: User = {
                         name: meResponse.userName,
@@ -67,5 +67,6 @@ const handler = NextAuth({
             },
         }),
     ],
-})
+}
+const handler = NextAuth(authOptions)
 export {handler as GET, handler as POST}

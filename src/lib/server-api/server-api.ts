@@ -2,36 +2,51 @@ import {cookies} from 'next/headers'
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL as string
 
-export const login = async (data: loginDataType) => {
-    const res = await fetch(`${baseURL}auth/login`, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: new Headers({
-            'Content-Type': 'application/json',
-            accept: 'application/json',
-        }),
-    })
-    const loginResponse = await res.json()
+export const serverAuthAPI = {
+    async login(data: loginDataType) {
+        try {
+            const res = await fetch(`${baseURL}auth/login`, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    accept: 'application/json',
+                }),
+            })
+            const loginResponse = await res.json()
 
-    cookies().set('accessToken', loginResponse.accessToken)
-    return loginResponse
+            if (loginResponse.accessToken) {
+                cookies().set('accessToken', loginResponse.accessToken)
+                return loginResponse.accessToken
+            }
+        } catch (e) {
+            throw new Error('Cant obtain accessToken')
+        }
+    },
+    async authMe() {
+        try {
+            const accessToken = cookies().get('accessToken')
+
+            if (accessToken?.value) {
+                const res = await fetch(`${baseURL}auth/me`, {
+                    method: 'GET',
+                    headers: new Headers({
+                        Authorization: `Bearer ${accessToken?.value}`,
+                        'Content-Type': 'application/json',
+                        accept: 'application/json',
+                        credentials: 'include',
+                    }),
+                })
+                const meResponse = await res.json()
+                return meResponse
+            }
+            return null
+        } catch (e) {
+            throw new Error('Cant make authMe request')
+        }
+    },
 }
 
-export const authMe = async () => {
-    const accessToken = cookies().get('accessToken')
-
-    const res = await fetch(`${baseURL}/auth/me`, {
-        method: 'GET',
-        headers: new Headers({
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-            accept: 'application/json',
-            credentials: 'include',
-        }),
-    })
-    const meResponse = await res.json()
-    return meResponse
-}
 /////////////////////////////////////////////////////////////////////////
 
 type loginDataType = {

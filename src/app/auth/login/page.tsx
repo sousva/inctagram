@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, {useEffect} from 'react'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 
 import {InputText} from 'common/components/InputText/InputText'
@@ -44,18 +44,28 @@ export default function Login() {
     console.log(session)
 
     const onSubmit = async (data: FormData) => {
-        await signIn('credentials', {email: data.email, password: data.password, redirect: false})
+        await signIn('credentials', {
+            email: data.email,
+            password: data.password,
+            redirect: true,
+            callbackUrl: PATH.HOME,
+        })
     }
     const handleRedirectOnRegistration = () => {
         router.push(PATH.REGISTRATION)
     }
-    if (session.status === 'loading') {
-        return <p>progress...</p>
-    }
-    if (session.status === 'authenticated') {
-        router.replace(PATH.HOME)
-    }
-
+    // if (session.status === 'loading') {
+    //     return <p>progress...</p>
+    // }
+    // if (session.status === 'authenticated') {
+    //     router.push(PATH.HOME)
+    // }
+    useEffect(() => {
+        // Redirect to the protected route if the user is authenticated
+        if (session.status === 'authenticated') {
+            router.push(PATH.HOME)
+        }
+    }, [session, router])
     return (
         <AuthContainer>
             <AuthPageStyled>
