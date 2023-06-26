@@ -2,8 +2,9 @@ import NextAuth, {NextAuthOptions, User} from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GitHubProvider from 'next-auth/providers/github'
-import {PATH} from 'app/path'
+
 import {serverAuthAPI} from 'lib/server-api/server-api'
+import {PATH} from 'common/constant/PATH'
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -47,8 +48,8 @@ export const authOptions: NextAuthOptions = {
             async authorize(credentials, req) {
                 try {
                     const data = {email: credentials!.email, password: credentials!.password}
-                    await serverAuthAPI.login(data)
-                    const meResponse = await serverAuthAPI.authMe()
+                    const accessToken = await serverAuthAPI.login(data)
+                    const meResponse = await serverAuthAPI.authMe(accessToken)
 
                     const userData: User = {
                         name: meResponse.userName,
@@ -68,5 +69,4 @@ export const authOptions: NextAuthOptions = {
         }),
     ],
 }
-const handler = NextAuth(authOptions)
-export {handler as GET, handler as POST}
+export default NextAuth(authOptions)

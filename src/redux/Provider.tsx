@@ -23,10 +23,8 @@ export function ThemeStyled({children}: {children: ReactNode}) {
 
     return (
         <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-            <SessionProvider>
-                <GlobalStyle />
-                {children}
-            </SessionProvider>
+            <GlobalStyle />
+            {children}
         </ThemeProvider>
     )
 }

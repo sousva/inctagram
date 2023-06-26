@@ -18,8 +18,8 @@ import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import {signIn, useSession} from 'next-auth/react'
-import {PATH} from 'appNew/path'
-import {AuthPageStyled} from 'appNew/auth/registration/styled'
+import {PATH} from 'common/constant/PATH'
+import {AuthPageStyled} from 'common/app-new/auth/registration/styled'
 
 const schema = yup.object({
     email: yup.string().email().required('Email is required'),
