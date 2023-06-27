@@ -19,7 +19,10 @@ import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import {signIn, useSession} from 'next-auth/react'
 import {PATH} from 'common/constant/PATH'
-import {AuthPageStyled} from 'common/app-new/auth/registration/styled'
+
+import {getLayout} from 'common/Layout/BaseLayout'
+import Home from 'pages/index'
+import {AuthPageStyled} from 'pages/auth/registration/styled'
 
 const schema = yup.object({
     email: yup.string().email().required('Email is required'),
@@ -28,7 +31,7 @@ const schema = yup.object({
 
 type FormData = yup.InferType<typeof schema>
 
-export default function Login() {
+const Login = () => {
     const theme = useAppSelector(state => state.app.theme)
     const router = useRouter()
     const session = useSession()
@@ -93,3 +96,5 @@ export default function Login() {
         </AuthContainer>
     )
 }
+Login.getLayout = getLayout
+export default Login

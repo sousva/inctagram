@@ -5,6 +5,7 @@ import {Layout} from 'common/Layout/Layout'
 export const BaseLayout: NextPage<PropsWithChildren> = props => {
     const {children} = props
 
+    // @ts-ignore
     return <Layout>{children}</Layout>
 }
 

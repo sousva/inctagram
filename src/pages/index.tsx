@@ -1,7 +1,8 @@
-import {NextPageWithLayout} from './_app'
-import {getLayout} from 'common/Layout/BaseLayout/BaseLayout'
+import {getLayout} from 'common/Layout/BaseLayout'
 
-const Home: NextPageWithLayout = () => <div></div>
+const Home = () => {
+    return <div> dkfsdf</div>
+}
 
 Home.getLayout = getLayout
 export default Home

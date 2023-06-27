@@ -1,6 +1,5 @@
 'use client'
 
-import {PATH} from 'app/path'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 import {Button} from 'common/components/Button/Button'
 import {InputText} from 'common/components/InputText/InputText'
@@ -12,6 +11,7 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import {SubmitHandler, useForm} from 'react-hook-form'
 import {useForgotPasswordMutation} from 'redux/api/authAPI'
 import styled from 'styled-components'
+import {PATH} from 'common/constant/PATH'
 
 const ForgotPasswordStyled = styled.div`
     display: flex;
