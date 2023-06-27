@@ -6,10 +6,5 @@ import {Header} from 'common/components'
 export const Layout: NextPage<PropsWithChildren> = props => {
     const {children} = props
 
-    return (
-        <Container>
-            <Header />
-            {children}
-        </Container>
-    )
+    return <Container>{children}</Container>
 }

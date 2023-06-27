@@ -1,5 +1,5 @@
 'use client'
-import {PATH} from 'app/path'
+
 import Link from 'next/link'
 import React, {useState} from 'react'
 import {InputText} from 'common/components/InputText/InputText'
@@ -11,7 +11,6 @@ import GithubWhite from './../../../common/assets/icons/githubWhite.svg'
 import GithubBlack from './../../../common/assets/icons/githubBlack.svg'
 import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
-import {AuthPageStyled, RegistrationModalContent} from 'app/auth/registration/styled'
 import {IconButton} from 'common/components/IconButton/IconButton'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -19,6 +18,8 @@ import {Modal} from 'common/components/Modal/BaseModal'
 import {useAddNewUserMutation} from 'redux/api/authAPI'
 import {SetAppNotificationAC} from 'redux/appSlice'
 import {Loader} from 'common/components/Loader/Loader'
+import {PATH} from 'common/constant/PATH'
+import {AuthPageStyled, RegistrationModalContent} from 'pages/auth/registration/styled'
 
 const schema = yup
     .object({
@@ -49,7 +50,7 @@ export default function Page() {
         handleSubmit,
         formState: {errors},
         getValues,
-    } = useForm<FormData>({resolver: yupResolver(schema)})
+    } = useForm({resolver: yupResolver(schema)})
 
     const [addNewUser, {isLoading}] = useAddNewUserMutation()
 

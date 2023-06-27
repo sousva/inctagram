@@ -3,7 +3,7 @@ import React, {useEffect} from 'react'
 import {useSignUpConfirmationMutation} from 'redux/api/authAPI'
 import {useRouter, useSearchParams} from 'next/navigation'
 import {Loader} from 'common/components/Loader/Loader'
-import {PATH} from 'app/path'
+import {PATH} from 'common/constant/PATH'
 
 export default function Page() {
     const router = useRouter()

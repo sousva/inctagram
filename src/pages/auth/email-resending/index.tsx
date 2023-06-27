@@ -5,14 +5,14 @@ import {Button} from 'common/components/Button/Button'
 import Image from 'next/image'
 import timeManagement from 'common/assets/pictures/timeManagement.png'
 import {useResendConfirmationLinkMutation} from 'redux/api/authAPI'
-import {RegistrationModalContent} from 'app/auth/registration/styled'
 import {Modal} from 'common/components/Modal/BaseModal'
 import {SetAppNotificationAC} from 'redux/appSlice'
 import {useAppDispatch} from 'common/hooks/reduxHooks'
 import {useRouter, useSearchParams} from 'next/navigation'
 import {Loader} from 'common/components/Loader/Loader'
-import {EmailResendWrapper} from 'app/auth/email-resending/styled'
-import {PATH} from 'app/path'
+import {PATH} from 'common/constant/PATH'
+import {EmailResendWrapper} from 'pages/auth/email-resending/styled'
+import {RegistrationModalContent} from 'pages/auth/registration/styled'
 
 export default function Page() {
     const dispatch = useAppDispatch()

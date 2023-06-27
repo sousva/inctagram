@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
-import {PATH} from 'app/path'
+import {PATH} from 'common/constant/PATH'
 
 export default function Page() {
     return (

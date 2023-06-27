@@ -6,10 +6,10 @@ import {useAppSelector} from 'common/hooks/reduxHooks'
 
 import {GeneralInformation} from 'common/components/GeneralInformation/GeneralInformation'
 import {MyPayments} from 'common/components/MyPayments/MyPayments'
-import {ProfileSettingsWrapper} from 'app/profile/profile-settings/styled'
 import {ProfileSettingsAccordion} from 'common/components/ProfileSettingsAccordion/ProfileSettingsAccordion'
 import {Devices} from 'common/components/Devices/Devices'
 import {AccountManagement} from 'common/components/AccountManagement/AccountManagement'
+import {ProfileSettingsWrapper} from 'pages/profile/profile-settings/styled'
 
 export default function Page() {
     const profileSettingActiveTab = useAppSelector(state => state.app.profileSettingsTabs)

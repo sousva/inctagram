@@ -1,12 +1,12 @@
 'use client'
-import {PATH} from 'app/path'
 import Link from 'next/link'
 import React from 'react'
-import {ConfirmationPageWrapper} from 'app/auth/registrationConfirmed/styled'
 import {Button} from 'common/components/Button/Button'
 import Image from 'next/image'
 import congratulation from 'common/assets/pictures/congratulation.png'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
+import {PATH} from 'common/constant/PATH'
+import {ConfirmationPageWrapper} from 'pages/auth/registrationConfirmed/styled'
 
 export default function Page() {
     return (
@@ -14,9 +14,7 @@ export default function Page() {
             <ConfirmationPageWrapper>
                 <h1>Congratulations!</h1>
                 <p>Your email has been confirmed</p>
-                <Link href={PATH.LOGIN}>
-                    <Button>Sing In</Button>
-                </Link>
+                <Link href={PATH.LOGIN}>Sing In</Link>TODO
                 <span>
                     <Image src={congratulation} alt={'congratulation'} />
                 </span>

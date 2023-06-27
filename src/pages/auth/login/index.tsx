@@ -21,7 +21,7 @@ import {signIn, useSession} from 'next-auth/react'
 import {PATH} from 'common/constant/PATH'
 
 import {getLayout} from 'common/Layout/BaseLayout'
-import Home from 'pages/index'
+
 import {AuthPageStyled} from 'pages/auth/registration/styled'
 
 const schema = yup.object({
