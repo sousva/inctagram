@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import {CustomDatePickerWrapper, DatePickerHeader} from 'common/components/DatePicker/styled'
@@ -38,7 +38,7 @@ export const CustomDatePicker = React.forwardRef<DatePicker, DatePickerPropsType
                         ref={ref}
                         dateFormat={'dd.MM.yyyy'}
                         selected={field.value}
-                        onChange={date => field.onChange(date)}
+                        onChange={date => field.onChange(date as Date | ChangeEvent<Element>)}
                         renderCustomHeader={({
                             date,
                             changeYear,
