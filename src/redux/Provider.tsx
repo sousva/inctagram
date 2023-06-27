@@ -8,12 +8,18 @@ import {darkTheme} from 'common/themes/darkTheme'
 import {GlobalStyle} from 'common/themes/GlobalStyle'
 import {ThemeProvider} from 'styled-components'
 import {useAppSelector} from 'common/hooks/reduxHooks'
+import {SessionProvider} from 'next-auth/react'
+import StyledComponentsRegistry from 'lib/StyledComponentsRegistry'
 
 export function Providers({children}: {children: ReactNode}) {
     return (
-        <Provider store={store}>
-            <ThemeStyled>{children}</ThemeStyled>
-        </Provider>
+        <SessionProvider>
+            <StyledComponentsRegistry>
+                <Provider store={store}>
+                    <ThemeStyled>{children}</ThemeStyled>
+                </Provider>
+            </StyledComponentsRegistry>
+        </SessionProvider>
     )
 }
 

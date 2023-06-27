@@ -1,6 +1,6 @@
 import React from 'react'
 import {Aside} from 'common/components/Aside/Aside'
-import {HomeWrapper} from 'app/profile/styled'
+import {HomeWrapper} from 'pages/profile/styled'
 
 export const metadata = {
     title: 'Home',
