@@ -10,8 +10,9 @@ import {ProfileSettingsAccordion} from 'common/components/ProfileSettingsAccordi
 import {Devices} from 'common/components/Devices/Devices'
 import {AccountManagement} from 'common/components/AccountManagement/AccountManagement'
 import {ProfileSettingsWrapper} from 'pages/profile/profile-settings/styled'
+import {getHomeLayout} from 'common/Layouts/HomeLayout'
 
-export default function Page() {
+export default function ProfileSettingsPage() {
     const profileSettingActiveTab = useAppSelector(state => state.app.profileSettingsTabs)
     return (
         <ProfileSettingsWrapper>
@@ -25,3 +26,4 @@ export default function Page() {
         </ProfileSettingsWrapper>
     )
 }
+ProfileSettingsPage.getLayout = getHomeLayout

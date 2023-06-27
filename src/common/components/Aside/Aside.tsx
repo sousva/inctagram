@@ -1,4 +1,3 @@
-'use client'
 import React from 'react'
 import {LogOut} from 'common/components/LogOut/LogOut'
 import {AsideWrapper} from 'common/components/Aside/styled'
@@ -9,8 +8,8 @@ import MessengerIcon from 'common/assets/icons/messenger.svg'
 import StatisticsIcon from 'common/assets/icons/statistics.svg'
 import CreateIcon from 'common/assets/icons/create.svg'
 import SearchIcon from 'common/assets/icons/search.svg'
-import {PATH} from 'app/path'
 import FavoritesIcon from 'common/assets/icons/favorites.svg'
+import {PATH} from 'common/constant/PATH'
 export const Aside = () => {
     return (
         <AsideWrapper>

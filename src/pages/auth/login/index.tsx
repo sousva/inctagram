@@ -20,9 +20,9 @@ import * as yup from 'yup'
 import {signIn, useSession} from 'next-auth/react'
 import {PATH} from 'common/constant/PATH'
 
-import {getLayout} from 'common/Layout/BaseLayout'
-
 import {AuthPageStyled} from 'pages/auth/registration/styled'
+import {getHomeLayout} from 'common/Layouts/HomeLayout'
+import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
 
 const schema = yup.object({
     email: yup.string().email().required('Email is required'),
@@ -96,5 +96,5 @@ const Login = () => {
         </AuthContainer>
     )
 }
-Login.getLayout = getLayout
+Login.getLayout = getLayoutWithHeader
 export default Login

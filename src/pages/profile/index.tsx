@@ -1,9 +1,8 @@
 import React from 'react'
-import {getLayout} from 'common/Layout/BaseLayout'
+import {getHomeLayout} from 'common/Layouts/HomeLayout'
 
-const Home = () => {
+export default function Home() {
     return <div> dkfsdf</div>
 }
 
-Home.getLayout = getLayout
-export default Home
+Home.getLayout = getHomeLayout

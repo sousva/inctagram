@@ -1,8 +1,8 @@
-import {getLayout} from 'common/Layout/BaseLayout'
+import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
 
 const Home = () => {
     return <div> dkfsdf</div>
 }
 
-Home.getLayout = getLayout
+Home.getLayout = getLayoutWithHeader
 export default Home
