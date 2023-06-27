@@ -45,6 +45,25 @@ export const serverAuthAPI = {
             throw new Error('Cant make authMe request')
         }
     },
+    async refreshTokens() {
+        try {
+            const res = await fetch(`${baseURL}auth/update-tokens`, {
+                method: 'POST',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    accept: 'application/json',
+                    credentials: 'include',
+                }),
+            })
+            const meResponse = await res.json()
+
+            await cookies().set('accessToken', meResponse.accessToken)
+
+            return meResponse
+        } catch (e) {
+            throw new Error('Cant make request for refresh tokens')
+        }
+    },
 }
 
 /////////////////////////////////////////////////////////////////////////

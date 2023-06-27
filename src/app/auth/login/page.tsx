@@ -54,12 +54,7 @@ export default function Login() {
     const handleRedirectOnRegistration = () => {
         router.push(PATH.REGISTRATION)
     }
-    // if (session.status === 'loading') {
-    //     return <p>progress...</p>
-    // }
-    // if (session.status === 'authenticated') {
-    //     router.push(PATH.HOME)
-    // }
+
     useEffect(() => {
         // Redirect to the protected route if the user is authenticated
         if (session.status === 'authenticated') {

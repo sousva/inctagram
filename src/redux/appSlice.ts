@@ -14,11 +14,6 @@ const initialState = {
     theme: 'dark' as ThemeAppType,
     notifications: [] as NotificationType[],
 }
-// const testMessage = {
-//     id: '23',
-//     type: 'error',
-//     message: 'some mess ag fff fff ddd ddddd ddddddd ddddddd dddddddd dddd ddddddd dddddd ddddd ddddd ddde',
-// }
 
 export const appSlice = createSlice({
     name: 'app',
