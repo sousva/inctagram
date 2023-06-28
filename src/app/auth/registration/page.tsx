@@ -49,7 +49,7 @@ export default function Page() {
         handleSubmit,
         formState: {errors},
         getValues,
-    } = useForm<FormData>({resolver: yupResolver(schema)})
+    } = useForm({resolver: yupResolver(schema)})
 
     const [addNewUser, {isLoading}] = useAddNewUserMutation()
 

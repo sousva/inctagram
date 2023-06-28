@@ -1,18 +1,20 @@
 import * as process from 'process'
 import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from '@reduxjs/toolkit/query/react'
-import {loadLocalStorage, saveLocalStorage} from 'lib/LocalStorage/LocalStorage'
 import {PATH} from 'app/path'
+import Cookies from 'universal-cookie'
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+
+const cookies = new Cookies()
 
 export const baseQuery = fetchBaseQuery({
     baseUrl: baseUrl,
     credentials: 'include',
     prepareHeaders: headers => {
-        const accessToken = loadLocalStorage()
+        const accessToken = cookies.get('accessToken')
 
         if (accessToken) {
-            headers.set('authorization', `Bearer ${JSON.parse(accessToken)}`)
+            headers.set('authorization', `Bearer ${accessToken}`)
         }
         return headers
     },
@@ -37,7 +39,8 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
         )) as {data: {accessToken: string}}
 
         if (refreshResult.data.accessToken) {
-            await saveLocalStorage({accessToken: refreshResult.data.accessToken as string})
+            cookies.set('accessToken', refreshResult.data.accessToken as string)
+            // await saveLocalStorage({accessToken: refreshResult.data.accessToken as string})
 
             // retry the initial query
             result = await baseQuery(args, api, extraOptions)

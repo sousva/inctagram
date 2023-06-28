@@ -105,3 +105,9 @@ export const CustomDatePickerWrapper = styled.div`
         color: #4c4c4c;
     }
 `
+
+export const DatePickerHeader = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+`
