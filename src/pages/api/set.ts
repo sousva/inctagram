@@ -1,6 +1,13 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
+import nookies from 'nookies'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-    res.setHeader('Set-Cookie', ['nazar=nisdsdsdnja'])
-    res.end('ok')
+    if (req.method === 'POST') {
+        const accessTokenValue = req.body.accessToken
+
+        res.setHeader('Set-Cookie', [`accessToken=${accessTokenValue}`])
+        res.end()
+    } else {
+        res.end()
+    }
 }

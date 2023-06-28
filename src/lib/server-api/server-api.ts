@@ -2,6 +2,7 @@ import axios from 'axios'
 import cookie from 'react-cookies'
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL as string
+const domainURL = process.env.NEXT_PUBLIC_DOMAIN_URL as string
 
 export const instance = axios.create({
     withCredentials: true,
@@ -46,30 +47,36 @@ export const serverAuthAPI = {
     async login(data: loginDataType) {
         try {
             const res = await instance.post<{accessToken: string}>(`${baseURL}auth/login`, data)
+            console.log(res.headers)
+            // await axios.post(`${domainURL}api/set`, {accessToken: res.data.accessToken})
+            // cookie.setRawCookie(`accessToken=${res.data.accessToken}`)
 
-            cookie.save('accessToken', res.data.accessToken, {})
+            // const token = cookie.load('accessToken')
+            // console.log(token)
 
-            const token = cookie.load('accessToken')
-            console.log(token)
-
-            return res.headers['set-cookie']
+            return
         } catch (e) {
             throw new Error('Cant login and obtain accessToken')
         }
     },
     async authMe() {
-        try {
-            const accessToken = cookie.load('accessToken')
-            const res = await instance.get<authMeDataType>(`${baseURL}auth/me`, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            })
+        const accessToken = cookie.load('accessToken')
 
-            return res.data
-        } catch (e) {
-            throw new Error('Cant make authMe request')
+        if (accessToken) {
+            try {
+                const res = await instance.get<authMeDataType>(`${baseURL}auth/me`, {
+                    withCredentials: true,
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                })
+
+                return res.data
+            } catch (e) {
+                throw new Error('Cant make authMe request')
+            }
         }
+        throw new Error(`i couldn't obtain accessToken in authMe request`)
     },
     async refreshTokens() {
         try {

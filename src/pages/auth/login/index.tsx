@@ -23,7 +23,8 @@ import {PATH} from 'common/constant/PATH'
 import {AuthPageStyled} from 'pages/auth/registration/styled'
 import {getHomeLayout} from 'common/Layouts/HomeLayout'
 import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
-
+import {useLoginMutation} from 'redux/api/authAPI'
+import cookie from 'react-cookies'
 const schema = yup.object({
     email: yup.string().email().required('Email is required'),
     password: yup.string().required('Password is required'),
@@ -35,6 +36,7 @@ const Login = () => {
     const theme = useAppSelector(state => state.app.theme)
     const router = useRouter()
     const session = useSession()
+    const [login] = useLoginMutation()
 
     const {
         register,
@@ -54,6 +56,10 @@ const Login = () => {
             redirect: true,
             callbackUrl: PATH.HOME,
         })
+        // login({email: data.email, password: data.password})
+        //     .unwrap()
+        //     .then(payload => cookie.save('accessToken', payload.accessToken, {}))
+        //     .catch(error => console.error('rejected', error))
     }
     const handleRedirectOnRegistration = () => {
         router.push(PATH.REGISTRATION)
