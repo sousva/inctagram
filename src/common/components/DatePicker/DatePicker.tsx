@@ -13,7 +13,7 @@ type DatePickerPropsType = {
 }
 
 export const CustomDatePicker = React.forwardRef<DatePicker, DatePickerPropsType>((props, ref) => {
-    const years = range(1923, getYear(new Date()) + 1, 1)
+    const years = range(1923, getYear(new Date()) + 1, 1) //todo
 
     const yearsList = years.map(option => (
         <option key={option} value={option}>

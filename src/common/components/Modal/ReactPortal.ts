@@ -13,6 +13,7 @@ export const ReactPortal = ({children, wrapperId}: Props) => {
         element = createWrapperAndAppendToBody(wrapperId)
     }
 
+    // @ts-ignore
     return createPortal(children, element)
 }
 

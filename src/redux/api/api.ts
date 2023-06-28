@@ -1,17 +1,14 @@
 import * as process from 'process'
 import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from '@reduxjs/toolkit/query/react'
-import Cookies from 'universal-cookie'
-import {PATH} from 'common/constant/PATH'
+import cookie from 'react-cookies'
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
-
-const cookies = new Cookies()
 
 export const baseQuery = fetchBaseQuery({
     baseUrl: baseUrl,
     credentials: 'include',
     prepareHeaders: headers => {
-        const accessToken = cookies.get('accessToken')
+        const accessToken = cookie.load('accessToken')
 
         if (accessToken) {
             headers.set('authorization', `Bearer ${accessToken}`)
@@ -31,7 +28,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
         // try to get a new token
         const refreshResult = (await baseQuery(
             {
-                url: PATH.UPDATE_TOKENS,
+                url: 'auth/update-tokens',
                 method: 'POST',
             },
             api,
@@ -39,15 +36,14 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
         )) as {data: {accessToken: string}}
 
         if (refreshResult.data.accessToken) {
-            cookies.set('accessToken', refreshResult.data.accessToken as string)
-            // await saveLocalStorage({accessToken: refreshResult.data.accessToken as string})
+            cookie.save('accessToken', refreshResult.data.accessToken as string, {})
 
             // retry the initial query
             result = await baseQuery(args, api, extraOptions)
         } else {
             await baseQuery(
                 {
-                    url: PATH.LOG_OUT,
+                    url: 'auth/logout',
                     method: 'POST',
                 },
                 api,

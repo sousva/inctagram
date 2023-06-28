@@ -6,6 +6,7 @@ import {LayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
 
 export const HomeLayout: NextPage<PropsWithChildren> = ({children}) => {
     return (
+        // @ts-ignore
         <LayoutWithHeader>
             <HomeWrapper>
                 <Aside />

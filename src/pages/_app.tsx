@@ -14,5 +14,6 @@ type AppPropsWithLayout = AppProps & {
 export default function App({Component, pageProps: {session, ...pageProps}}: AppPropsWithLayout) {
     const getLayout = Component.getLayout ?? (page => page)
 
+    // @ts-ignore
     return <Providers>{getLayout(<Component {...pageProps} />)}</Providers>
 }

@@ -47,13 +47,13 @@ export const authOptions: NextAuthOptions = {
             async authorize(credentials, req) {
                 try {
                     const data = {email: credentials!.email, password: credentials!.password}
-                    const accessToken = await serverAuthAPI.login(data)
-                    const meResponse = await serverAuthAPI.authMe(accessToken)
+                    await serverAuthAPI.login(data)
+                    const meResponse = await serverAuthAPI.authMe()
 
                     const userData: User = {
                         name: meResponse.userName,
                         email: meResponse.email,
-                        id: meResponse.userId,
+                        id: meResponse.userId + '',
                     }
 
                     if (userData) {
