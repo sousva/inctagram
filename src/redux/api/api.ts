@@ -1,7 +1,7 @@
 import * as process from 'process'
 import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from '@reduxjs/toolkit/query/react'
-import {PATH} from 'app/path'
 import Cookies from 'universal-cookie'
+import {PATH} from 'common/constant/PATH'
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 

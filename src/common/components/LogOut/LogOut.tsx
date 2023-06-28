@@ -1,11 +1,12 @@
 'use client'
-import {PATH} from 'app/path'
+
 import React, {useState} from 'react'
 import LogoutIcon from '../../assets/icons/logout.svg'
 import {Button} from '../Button/Button'
 import {Modal} from '../Modal/BaseModal'
 import {ButtonWrapper, LogOutWrapper} from './LogOut.styled'
 import {signOut, useSession} from 'next-auth/react'
+import {PATH} from 'common/constant/PATH'
 
 export const LogOut = () => {
     const [showModal, setShowModal] = useState(false)

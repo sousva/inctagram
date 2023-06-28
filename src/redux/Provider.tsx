@@ -9,12 +9,17 @@ import {GlobalStyle} from 'common/themes/GlobalStyle'
 import {ThemeProvider} from 'styled-components'
 import {useAppSelector} from 'common/hooks/reduxHooks'
 import {SessionProvider} from 'next-auth/react'
+import StyledComponentsRegistry from 'lib/StyledComponentsRegistry'
 
 export function Providers({children}: {children: ReactNode}) {
     return (
-        <Provider store={store}>
-            <ThemeStyled>{children}</ThemeStyled>
-        </Provider>
+        <SessionProvider>
+            <StyledComponentsRegistry>
+                <Provider store={store}>
+                    <ThemeStyled>{children}</ThemeStyled>
+                </Provider>
+            </StyledComponentsRegistry>
+        </SessionProvider>
     )
 }
 
@@ -23,10 +28,8 @@ export function ThemeStyled({children}: {children: ReactNode}) {
 
     return (
         <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-            <SessionProvider>
-                <GlobalStyle />
-                {children}
-            </SessionProvider>
+            <GlobalStyle />
+            {children}
         </ThemeProvider>
     )
 }
