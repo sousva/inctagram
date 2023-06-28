@@ -32,7 +32,7 @@ const schema = yup.object().shape({
         .max(30, 'Username must be at least 30 characters long'),
     firstName: yup.string().required('First Name is required'),
     lastName: yup.string().required('Last Name is required'),
-    dateOfBirth: yup.date().notRequired(),
+    dateOfBirth: yup.date().required(),
     city: yup.string().required('City is required'),
     aboutMe: yup
         .string()
