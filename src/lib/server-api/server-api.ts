@@ -47,21 +47,20 @@ export const serverAuthAPI = {
     async login(data: loginDataType) {
         try {
             const res = await instance.post<{accessToken: string}>(`${baseURL}auth/login`, data)
-            console.log(res.headers)
-            // await axios.post(`${domainURL}api/set`, {accessToken: res.data.accessToken})
-            // cookie.setRawCookie(`accessToken=${res.data.accessToken}`)
-
-            // const token = cookie.load('accessToken')
-            // console.log(token)
-
-            return
+            return res
+            // const accessToken = res.data.accessToken
+            // const refreshToken = res.headers['set-cookie']
+            //
+            // if (accessToken && refreshToken) {
+            //     return {accessToken, refreshToken: refreshToken[0]}
+            // } else {
+            //     return new Error('Cant login and obtain accessToken && refreshToken')
+            // }
         } catch (e) {
-            throw new Error('Cant login and obtain accessToken')
+            throw new Error('Cant send login request')
         }
     },
-    async authMe() {
-        const accessToken = cookie.load('accessToken')
-
+    async authMe(accessToken: string) {
         if (accessToken) {
             try {
                 const res = await instance.get<authMeDataType>(`${baseURL}auth/me`, {
