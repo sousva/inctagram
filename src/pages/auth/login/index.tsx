@@ -50,16 +50,16 @@ const Login = () => {
     console.log(session)
 
     const onSubmit = async (data: FormData) => {
-        await signIn('credentials', {
-            email: data.email,
-            password: data.password,
-            redirect: true,
-            callbackUrl: PATH.HOME,
-        })
-        // login({email: data.email, password: data.password})
-        //     .unwrap()
-        //     .then(payload => cookie.save('accessToken', payload.accessToken, {}))
-        //     .catch(error => console.error('rejected', error))
+        // await signIn('credentials', {
+        //     email: data.email,
+        //     password: data.password,
+        //     redirect: true,
+        //     callbackUrl: PATH.HOME,
+        // })
+        login({email: data.email, password: data.password})
+            .unwrap()
+            .then(payload => cookie.save('accessToken', payload.accessToken, {path: ''}))
+            .catch(error => console.error('rejected', error))
     }
     const handleRedirectOnRegistration = () => {
         router.push(PATH.REGISTRATION)

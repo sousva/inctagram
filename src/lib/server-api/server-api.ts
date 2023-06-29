@@ -1,5 +1,7 @@
 import axios from 'axios'
 import cookie from 'react-cookies'
+import {NextApiResponse} from 'next'
+import {setCookie} from 'nookies'
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL as string
 const domainURL = process.env.NEXT_PUBLIC_DOMAIN_URL as string
@@ -44,18 +46,33 @@ instance.interceptors.response.use(
 )
 
 export const serverAuthAPI = {
-    async login(data: loginDataType) {
+    async login(data: loginDataType, res: NextApiResponse) {
         try {
-            const res = await instance.post<{accessToken: string}>(`${baseURL}auth/login`, data)
-            return res
-            // const accessToken = res.data.accessToken
-            // const refreshToken = res.headers['set-cookie']
-            //
-            // if (accessToken && refreshToken) {
-            //     return {accessToken, refreshToken: refreshToken[0]}
-            // } else {
-            //     return new Error('Cant login and obtain accessToken && refreshToken')
-            // }
+            const response = await instance.post<{accessToken: string}>(`${baseURL}auth/login`, data)
+
+            const cookies = response.headers['set-cookie']?.length ? response.headers['set-cookie'][0] : ''
+            const arr = cookies.split(' ')
+
+            let refreshToken = ''
+
+            arr.forEach(el => {
+                if (el.includes('refresh')) {
+                    refreshToken = el.split('=')[1].slice(0, -1)
+                }
+            })
+
+            setCookie({res}, 'accessToken', response.data.accessToken, {
+                path: '/',
+                httpOnly: false,
+            })
+            setCookie({res}, 'refreshToken', refreshToken, {
+                path: '/',
+                httpOnly: true,
+                sameSite: 'none',
+                secure: true,
+                // domain: 'inctagram-api.vercel.app',
+            })
+            return response
         } catch (e) {
             throw new Error('Cant send login request')
         }

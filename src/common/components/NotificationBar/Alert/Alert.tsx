@@ -60,7 +60,7 @@ export const Alert = (props: NotificationType) => {
     }
 
     return (
-        <AlertWrapper exit={exit} type={props.type}>
+        <AlertWrapper $exit={exit} type={props.type}>
             <AlertItem onMouseEnter={handlePauseTimer} onMouseLeave={handleStartTimer}>
                 <p>{props.message}</p>
                 <CloseAlertIcon onClick={handleClose} />

@@ -1,8 +1,6 @@
-'use client'
 import * as process from 'process'
 import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from '@reduxjs/toolkit/query/react'
 import cookie from 'react-cookies'
-
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
 export const baseQuery = fetchBaseQuery({
@@ -37,7 +35,7 @@ const baseQueryWithReAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
         )) as {data: {accessToken: string}}
 
         if (refreshResult.data.accessToken) {
-            cookie.save('accessToken', refreshResult.data.accessToken as string, {})
+            cookie.save('accessToken', refreshResult.data.accessToken as string, {httpOnly: false})
 
             // retry the initial query
             result = await baseQuery(args, api, extraOptions)

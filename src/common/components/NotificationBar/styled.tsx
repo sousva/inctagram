@@ -30,12 +30,12 @@ export const NotificationBarWrapper = styled.div`
     z-index: 100;
 `
 
-export const AlertWrapper = styled.div<Pick<NotificationType, 'type'> & {exit: boolean}>`
+export const AlertWrapper = styled.div<Pick<NotificationType, 'type'> & {$exit: boolean}>`
     position: relative;
     border-radius: 15px;
     color: #fff;
     margin-top: 33px;
-    animation: ${props => (props.exit ? SlideLeft : SlideRight)} 0.4s; //TODO cheek why doesnt work Slide to Left
+    animation: ${props => (props.$exit ? SlideLeft : SlideRight)} 0.4s; //TODO cheek why doesnt work Slide to Left
     animation-fill-mode: forwards;
 
     ${props => {

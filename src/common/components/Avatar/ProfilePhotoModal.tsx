@@ -26,7 +26,7 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
     const [editor, setEditor] = useState<AvatarEditor | null>(null)
     const [picture, setPicture] = useState({
         img: '',
-        zoom: '2',
+        zoom: '1.3',
         croppedImg: '',
     })
 
@@ -97,7 +97,7 @@ export const ProfilePhotoModal = (props: BaseModalProps) => {
                             image={picture.img}
                             width={192}
                             height={192}
-                            border={50}
+                            border={10}
                             borderRadius={100}
                             color={[255, 255, 255, 0.6]}
                             scale={+picture.zoom}

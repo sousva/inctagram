@@ -7,7 +7,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
         res.setHeader('Set-Cookie', [`accessToken=${accessTokenValue}`])
         res.end()
-    } else {
+    } else if (req.method === 'GET') {
         res.end()
     }
 }

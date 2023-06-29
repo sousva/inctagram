@@ -5,7 +5,7 @@ import {PATH} from 'common/constant/PATH'
 import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
 import {serverAuthAPI} from 'lib/server-api/server-api'
-import {setCookie} from 'nookies'
+import {setCookie, destroyCookie} from 'nookies'
 //https://github.com/nextauthjs/next-auth/discussions/4428
 //https://stackoverflow.com/questions/67594977/how-to-send-httponly-cookies-client-side-when-using-next-auth-credentials-provid/69418553#69418553
 //https://stackoverflow.com/questions/68235182/nextjs-with-next-auth-setting-cookie-received-from-node-js
@@ -25,23 +25,20 @@ const nextAuthOptions: NextAuthOptionsCallback = (req, res) => {
             newUser: PATH.PROFILE_SETTINGS,
         },
         callbacks: {
-            async signIn({user, account, profile, email, credentials}) {
+            async signIn() {
                 return true
             },
-            async session({session, user, token}) {
+            async session({session, token}) {
                 session.user = token as any
                 return session
             },
-            async jwt({token, user, account, profile, isNewUser}) {
+            async jwt({token, user}) {
                 return {...token, ...user}
             },
         },
         events: {
-            async signOut({token}) {
-                setCookie({res}, 'refreshToken', 'out', {
-                    path: '/',
-                    httpOnly: true,
-                })
+            async signOut() {
+                destroyCookie({res}, 'refreshToken')
             },
         },
         providers: [
@@ -63,32 +60,11 @@ const nextAuthOptions: NextAuthOptionsCallback = (req, res) => {
                 async authorize(credentials) {
                     try {
                         const data = {email: credentials!.email, password: credentials!.password}
-                        const loginData = await serverAuthAPI.login(data)
+                        const loginData = await serverAuthAPI.login(data, res)
 
                         const accessToken = loginData.data.accessToken
-                        const cookies = loginData.headers['set-cookie']?.length
-                            ? loginData.headers['set-cookie'][0]
-                            : ''
-                        const arr = cookies.split(' ')
 
-                        let refreshToken = ''
-
-                        arr.forEach(el => {
-                            if (el.includes('refresh')) {
-                                refreshToken = el.split('=')[1].slice(0, -1)
-                            }
-                        })
-
-                        if (accessToken && refreshToken) {
-                            setCookie({res}, 'accessToken', accessToken, {
-                                path: '/',
-                                httpOnly: true,
-                            })
-                            setCookie({res}, 'refreshToken', refreshToken, {
-                                path: '/',
-                                httpOnly: true,
-                            })
-
+                        if (accessToken) {
                             const meResponse = await serverAuthAPI.authMe(accessToken)
 
                             const userData: User = {

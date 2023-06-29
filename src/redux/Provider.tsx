@@ -1,5 +1,4 @@
 'use client'
-
 import {store} from './store'
 import {Provider} from 'react-redux'
 import React, {ReactNode} from 'react'
@@ -10,16 +9,19 @@ import {ThemeProvider} from 'styled-components'
 import {useAppSelector} from 'common/hooks/reduxHooks'
 import {SessionProvider} from 'next-auth/react'
 import StyledComponentsRegistry from 'lib/StyledComponentsRegistry'
+import {CookiesProvider} from 'react-cookie'
 
 export function Providers({children}: {children: ReactNode}) {
     return (
-        <SessionProvider>
-            <StyledComponentsRegistry>
-                <Provider store={store}>
-                    <ThemeStyled>{children}</ThemeStyled>
-                </Provider>
-            </StyledComponentsRegistry>
-        </SessionProvider>
+        <CookiesProvider>
+            <SessionProvider>
+                <StyledComponentsRegistry>
+                    <Provider store={store}>
+                        <ThemeStyled>{children}</ThemeStyled>
+                    </Provider>
+                </StyledComponentsRegistry>
+            </SessionProvider>
+        </CookiesProvider>
     )
 }
 
