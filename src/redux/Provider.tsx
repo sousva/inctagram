@@ -7,21 +7,15 @@ import {darkTheme} from 'common/themes/darkTheme'
 import {GlobalStyle} from 'common/themes/GlobalStyle'
 import {ThemeProvider} from 'styled-components'
 import {useAppSelector} from 'common/hooks/reduxHooks'
-import {SessionProvider} from 'next-auth/react'
 import StyledComponentsRegistry from 'lib/StyledComponentsRegistry'
-import {CookiesProvider} from 'react-cookie'
 
 export function Providers({children}: {children: ReactNode}) {
     return (
-        <CookiesProvider>
-            <SessionProvider>
-                <StyledComponentsRegistry>
-                    <Provider store={store}>
-                        <ThemeStyled>{children}</ThemeStyled>
-                    </Provider>
-                </StyledComponentsRegistry>
-            </SessionProvider>
-        </CookiesProvider>
+        <StyledComponentsRegistry>
+            <Provider store={store}>
+                <ThemeStyled>{children}</ThemeStyled>
+            </Provider>
+        </StyledComponentsRegistry>
     )
 }
 
