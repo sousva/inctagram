@@ -3,13 +3,14 @@
 import {SubmitHandler, useForm} from 'react-hook-form'
 import React from 'react'
 import {useNewPasswordMutation} from 'redux/api/authAPI'
+import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
 
 type NewPasswordFormType = {
     password: string
     passwordConfirm: string
 }
 
-export default function NewPassword() {
+export default function NewPasswordPage() {
     const {
         register,
         handleSubmit,
@@ -73,3 +74,4 @@ export default function NewPassword() {
         </div>
     )
 }
+NewPasswordPage.getLayout = getLayoutWithHeader

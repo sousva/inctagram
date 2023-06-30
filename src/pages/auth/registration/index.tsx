@@ -20,6 +20,7 @@ import {SetAppNotificationAC} from 'redux/appSlice'
 import {Loader} from 'common/components/Loader/Loader'
 import {PATH} from 'common/constant/PATH'
 import {AuthPageStyled, RegistrationModalContent} from 'common/styles/RegistrationPage'
+import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
 
 const schema = yup
     .object({
@@ -40,7 +41,7 @@ const schema = yup
 
 type FormData = yup.InferType<typeof schema>
 
-export default function Page() {
+export default function RegistrationPage() {
     const dispatch = useAppDispatch()
     const [isModalOpen, setIsModalOpen] = useState(false)
     const theme = useAppSelector(state => state.app.theme)
@@ -111,3 +112,5 @@ export default function Page() {
         </AuthContainer>
     )
 }
+
+RegistrationPage.getLayout = getLayoutWithHeader
