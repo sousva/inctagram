@@ -47,6 +47,7 @@ instance.interceptors.response.use(
 
 export const serverAuthAPI = {
     async login(data: loginDataType, res: NextApiResponse) {
+        // async login(data: loginDataType) {
         try {
             const response = await instance.post<{accessToken: string}>(`${baseURL}auth/login`, data)
 

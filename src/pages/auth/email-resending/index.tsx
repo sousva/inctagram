@@ -11,14 +11,15 @@ import {useAppDispatch} from 'common/hooks/reduxHooks'
 import {useRouter, useSearchParams} from 'next/navigation'
 import {Loader} from 'common/components/Loader/Loader'
 import {PATH} from 'common/constant/PATH'
-import {EmailResendWrapper} from 'pages/auth/email-resending/styled'
-import {RegistrationModalContent} from 'pages/auth/registration/styled'
+import {EmailResendWrapper} from 'common/styles/EmailResendPage'
+import {RegistrationModalContent} from 'common/styles/RegistrationPage'
 
 export default function Page() {
     const dispatch = useAppDispatch()
     const router = useRouter()
     const [resend, {isLoading}] = useResendConfirmationLinkMutation()
     const [isModalOpen, setIsModalOpen] = useState(false)
+
     const email = useSearchParams().get('email') as string
 
     const handleModalClose = () => {

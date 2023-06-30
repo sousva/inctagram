@@ -9,7 +9,7 @@ import {MyPayments} from 'common/components/MyPayments/MyPayments'
 import {ProfileSettingsAccordion} from 'common/components/ProfileSettingsAccordion/ProfileSettingsAccordion'
 import {Devices} from 'common/components/Devices/Devices'
 import {AccountManagement} from 'common/components/AccountManagement/AccountManagement'
-import {ProfileSettingsWrapper} from 'pages/profile/profile-settings/styled'
+import {ProfileSettingsWrapper} from 'common/styles/ProfileSettingsPage'
 import {getHomeLayout} from 'common/Layouts/HomeLayout'
 
 export default function ProfileSettingsPage() {

@@ -19,7 +19,7 @@ import {useAddNewUserMutation} from 'redux/api/authAPI'
 import {SetAppNotificationAC} from 'redux/appSlice'
 import {Loader} from 'common/components/Loader/Loader'
 import {PATH} from 'common/constant/PATH'
-import {AuthPageStyled, RegistrationModalContent} from 'pages/auth/registration/styled'
+import {AuthPageStyled, RegistrationModalContent} from 'common/styles/RegistrationPage'
 
 const schema = yup
     .object({
