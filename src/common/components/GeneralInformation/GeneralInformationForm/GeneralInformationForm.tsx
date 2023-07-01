@@ -1,11 +1,11 @@
 'use client'
-import React, {useRef} from 'react'
+import React, {FC, useRef} from 'react'
 import {InputText} from 'common/components/InputText/InputText'
 import {Textarea} from 'common/components/Textarea/Textarea'
 import {Button} from 'common/components/Button/Button'
 import {GeneralInformationFormWrapper} from 'common/components/GeneralInformation/GeneralInformationForm/styled'
 import {useForm} from 'react-hook-form'
-import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
+import {useAppDispatch} from 'common/hooks/reduxHooks'
 import {toDate} from 'date-fns'
 import {CustomDatePicker} from 'common/components/DatePicker/DatePicker'
 import {yupResolver} from '@hookform/resolvers/yup'
@@ -14,6 +14,7 @@ import DatePicker from 'react-datepicker'
 import {useUpdateUserMutation} from 'redux/api/profileAPI'
 import {SetAppNotificationAC} from 'redux/appSlice'
 import {Loader} from 'common/components/Loader/Loader'
+import {UserProfile} from '../../../../pages/profile/profile-settings'
 
 export interface IFormInput {
     userName: string
@@ -40,7 +41,7 @@ const schema = yup.object().shape({
         .max(200, 'About me field must be at least 200 characters long'),
 })
 
-export const GeneralInformationForm = () => {
+export const GeneralInformationForm: FC<{data: UserProfile}> = ({data}) => {
     const dispatch = useAppDispatch()
     const defaultDate = new Date()
     const datePickerRef = useRef<DatePicker>(null)
@@ -53,7 +54,6 @@ export const GeneralInformationForm = () => {
         resolver: yupResolver(schema),
         defaultValues: {dateOfBirth: defaultDate},
     })
-    const userName = useAppSelector(state => state.userAuth.userName)
     const [updateProfile, {isLoading}] = useUpdateUserMutation()
 
     const onSubmit = async (data: IFormInput) => {
@@ -85,15 +85,20 @@ export const GeneralInformationForm = () => {
             {isLoading && <Loader />}
             <InputText
                 {...register('userName')}
-                defaultValue={userName}
+                defaultValue={data.userName}
                 label='Username'
                 error={errors.userName}
             ></InputText>
-            <InputText {...register('firstName')} label='First Name'></InputText>
-            <InputText {...register('lastName')} label='Last Name'></InputText>
+            <InputText defaultValue={data.firstName} {...register('firstName')} label='First Name'></InputText>
+            <InputText defaultValue={data.lastName} {...register('lastName')} label='Last Name'></InputText>
             <CustomDatePicker control={control} {...register('dateOfBirth')} ref={datePickerRef} />
-            <InputText {...register('city')} label='City'></InputText>
-            <Textarea {...register('aboutMe')} label='About me' error={errors.aboutMe}></Textarea>
+            <InputText defaultValue={data.city} {...register('city')} label='City'></InputText>
+            <Textarea
+                defaultValue={data.aboutMe}
+                {...register('aboutMe')}
+                label='About me'
+                error={errors.aboutMe}
+            ></Textarea>
             <Button type='submit' className='buttonSave'>
                 Save Changes
             </Button>
