@@ -70,14 +70,17 @@ export const GeneralInformationForm: FC<{data: UserProfile}> = ({data}) => {
             .then()
             .catch(error => dispatch(SetAppNotificationAC({notifications: {type: 'error', message: error.message}})))
 
-        console.log({
-            userName: data.userName,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            city: data.city,
-            dateOfBirth: result,
-            aboutMe: data.aboutMe,
-        })
+        console.log(
+            {
+                userName: data.userName,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                city: data.city,
+                dateOfBirth: result,
+                aboutMe: data.aboutMe,
+            },
+            defaultDate
+        )
     }
 
     return (

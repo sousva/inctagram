@@ -7,7 +7,7 @@ import {UserProfile} from '../../../pages/profile/profile-settings'
 export const GeneralInformation: FC<{data: UserProfile}> = ({data}) => {
     return (
         <GeneralInformationWrapper>
-            <Avatar data={data} />
+            <Avatar />
             <GeneralInformationForm data={data} />
         </GeneralInformationWrapper>
     )

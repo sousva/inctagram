@@ -31,11 +31,13 @@ export interface UserProfileAvatars {
 
 export const getServerSideProps: GetServerSideProps<{
     serverData: UserProfile
-}> = async () => {
+}> = async context => {
+    const accessToken = context.req.cookies.accessToken
+
     const res = await fetch('https://inctagram-api.vercel.app/api/users/profile', {
         method: 'GET',
         headers: {
-            authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI0OCwiaWF0IjoxNjg4MjE4NTMzLCJleHAiOjE2ODgyMjIxMzN9.s6WKUN_YEnDp84Re8ULWeWQG6iKeXGH1Xb4TrwquDpU`,
+            authorization: `Bearer ${accessToken}`,
         },
     })
     const serverData = await res.json()
