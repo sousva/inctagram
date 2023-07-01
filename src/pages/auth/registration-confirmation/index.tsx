@@ -1,11 +1,13 @@
 'use client'
+
 import React, {useEffect} from 'react'
 import {useSignUpConfirmationMutation} from 'redux/api/authAPI'
 import {useRouter, useSearchParams} from 'next/navigation'
 import {Loader} from 'common/components/Loader/Loader'
 import {PATH} from 'common/constant/PATH'
+import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
 
-export default function Page() {
+export default function ConfirmationPage() {
     const router = useRouter()
     const code = useSearchParams().get('code') as string
     const email = useSearchParams().get('email') as string
@@ -24,3 +26,5 @@ export default function Page() {
 
     return <Loader />
 }
+
+ConfirmationPage.getLayout = getLayoutWithHeader

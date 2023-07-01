@@ -29,7 +29,7 @@ const schema = yup.object({
 
 type FormData = yup.InferType<typeof schema>
 
-const Login = () => {
+export default function LoginPage() {
     const dispatch = useAppDispatch()
     const theme = useAppSelector(state => state.app.theme)
     const router = useRouter()
@@ -98,5 +98,4 @@ const Login = () => {
         </AuthContainer>
     )
 }
-Login.getLayout = getLayoutWithHeader
-export default Login
+LoginPage.getLayout = getLayoutWithHeader

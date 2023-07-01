@@ -13,8 +13,10 @@ import {Loader} from 'common/components/Loader/Loader'
 import {PATH} from 'common/constant/PATH'
 import {EmailResendWrapper} from 'common/styles/EmailResendPage'
 import {RegistrationModalContent} from 'common/styles/RegistrationPage'
+import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
+import ForgotPasswordPage from 'pages/auth/forgot-password'
 
-export default function Page() {
+export default function EmailResendingPage() {
     const dispatch = useAppDispatch()
     const router = useRouter()
     const [resend, {isLoading}] = useResendConfirmationLinkMutation()
@@ -62,3 +64,4 @@ export default function Page() {
         </AuthContainer>
     )
 }
+EmailResendingPage.getLayout = getLayoutWithHeader

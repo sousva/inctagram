@@ -1,7 +1,5 @@
 import axios from 'axios'
 import cookie from 'react-cookies'
-import {NextApiResponse} from 'next'
-import {setCookie} from 'nookies'
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL as string
 const domainURL = process.env.NEXT_PUBLIC_DOMAIN_URL as string
@@ -46,54 +44,21 @@ instance.interceptors.response.use(
 )
 
 export const serverAuthAPI = {
-    async login(data: loginDataType, res: NextApiResponse) {
-        // async login(data: loginDataType) {
+    async authMe() {
         try {
-            const response = await instance.post<{accessToken: string}>(`${baseURL}auth/login`, data)
+            const accessToken = await cookie.load('accessToken')
 
-            const cookies = response.headers['set-cookie']?.length ? response.headers['set-cookie'][0] : ''
-            const arr = cookies.split(' ')
-
-            let refreshToken = ''
-
-            arr.forEach(el => {
-                if (el.includes('refresh')) {
-                    refreshToken = el.split('=')[1].slice(0, -1)
-                }
+            const res = await instance.get<authMeDataType>(`${baseURL}auth/me`, {
+                withCredentials: true,
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
             })
 
-            setCookie({res}, 'accessToken', response.data.accessToken, {
-                path: '/',
-                httpOnly: false,
-            })
-            setCookie({res}, 'refreshToken', refreshToken, {
-                path: '/',
-                httpOnly: true,
-                sameSite: 'none',
-                secure: true,
-                // domain: 'inctagram-api.vercel.app',
-            })
-            return response
+            return res.data
         } catch (e) {
-            throw new Error('Cant send login request')
+            throw new Error('Cant make authMe request')
         }
-    },
-    async authMe(accessToken: string) {
-        if (accessToken) {
-            try {
-                const res = await instance.get<authMeDataType>(`${baseURL}auth/me`, {
-                    withCredentials: true,
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                    },
-                })
-
-                return res.data
-            } catch (e) {
-                throw new Error('Cant make authMe request')
-            }
-        }
-        throw new Error(`i couldn't obtain accessToken in authMe request`)
     },
     async refreshTokens() {
         try {
@@ -112,10 +77,6 @@ export const serverAuthAPI = {
 
 /////////////////////////////////////////////////////////////////////////
 
-type loginDataType = {
-    email: string
-    password: string
-}
 type authMeDataType = {
     userId: number
     userName: string
