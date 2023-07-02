@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {FC, useState} from 'react'
 import {Button} from 'common/components/Button/Button'
 import {AvatarFormWrapper} from 'common/components/Avatar/styled'
 import EmptyAvatarIcon from 'common/assets/icons/emptyAvatar.svg'
@@ -11,7 +11,7 @@ import {useDeleteAvatarMutation} from 'redux/api/profileAPI'
 import {SetAppNotificationAC} from 'redux/appSlice'
 import {useAppDispatch} from 'common/hooks/reduxHooks'
 
-export const Avatar = () => {
+export const Avatar: FC<{avatar: string}> = ({avatar}) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const handleModalClose = () => {
@@ -22,7 +22,7 @@ export const Avatar = () => {
     }
     return (
         <AvatarFormWrapper>
-            <UserAvatar />
+            <UserAvatar avatar={avatar} />
             <Button type='button' variant={'outlined'} onClick={handleModalOpen}>
                 Add a Profile Photo
             </Button>
@@ -57,9 +57,9 @@ const Wrapper = styled.span`
     }
 `
 
-export const UserAvatar = () => {
+export const UserAvatar: FC<{avatar: string}> = ({avatar}) => {
     const dispatch = useAppDispatch()
-    const [imgUrl, setImgUrl] = useState(
+    const [_, setImgUrl] = useState(
         'https://storage.yandexcloud.net/users-inctagram/users/248/avatar/b07e8938-b97e-458f-872f-61f23e427079-images-192x192'
     )
 
@@ -83,9 +83,9 @@ export const UserAvatar = () => {
     }
     return (
         <Wrapper>
-            {imgUrl ? (
+            {avatar ? (
                 <div className={'avatar'}>
-                    <Image src={imgUrl} alt={'imgUrl'} width={192} height={192} />
+                    <Image src={avatar} alt={'imgUrl'} width={192} height={192} />
                     <IconButton onClick={handleDeleteAvatar} disabled={isLoading}>
                         <DeleteAvatarIcon />
                     </IconButton>

@@ -43,7 +43,6 @@ const schema = yup.object().shape({
 
 export const GeneralInformationForm: FC<{data: UserProfile}> = ({data}) => {
     const dispatch = useAppDispatch()
-    const defaultDate = new Date()
     const datePickerRef = useRef<DatePicker>(null)
     const {
         register,
@@ -52,7 +51,7 @@ export const GeneralInformationForm: FC<{data: UserProfile}> = ({data}) => {
         formState: {errors},
     } = useForm<IFormInput>({
         resolver: yupResolver(schema),
-        defaultValues: {dateOfBirth: defaultDate},
+        defaultValues: {dateOfBirth: new Date(data.dateOfBirth)},
     })
     const [updateProfile, {isLoading}] = useUpdateUserMutation()
 
@@ -79,7 +78,7 @@ export const GeneralInformationForm: FC<{data: UserProfile}> = ({data}) => {
                 dateOfBirth: result,
                 aboutMe: data.aboutMe,
             },
-            defaultDate
+            data.dateOfBirth
         )
     }
 

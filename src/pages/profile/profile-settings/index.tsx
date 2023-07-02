@@ -17,7 +17,7 @@ export interface UserProfile {
     firstName: string
     lastName: string
     city: string
-    dateOfBirth: string
+    dateOfBirth: Date
     aboutMe: string
     avatars: UserProfileAvatars[]
 }

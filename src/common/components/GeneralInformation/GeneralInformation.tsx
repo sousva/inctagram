@@ -5,9 +5,10 @@ import {Avatar} from 'common/components/Avatar/Avatar'
 import {UserProfile} from '../../../pages/profile/profile-settings'
 
 export const GeneralInformation: FC<{data: UserProfile}> = ({data}) => {
+    const avatar = data.avatars[0].url
     return (
         <GeneralInformationWrapper>
-            <Avatar />
+            <Avatar avatar={avatar} />
             <GeneralInformationForm data={data} />
         </GeneralInformationWrapper>
     )
