@@ -49,6 +49,7 @@ export default function LoginPage() {
             .unwrap()
             .then(async payload => {
                 await cookie.save(accessToken, payload.accessToken, {path: '/'})
+                router.push('/profile')
                 dispatch(
                     SetAppNotificationAC({
                         notifications: {type: 'success', message: 'Greetings, Welcome in out App'},

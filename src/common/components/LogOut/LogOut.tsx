@@ -8,17 +8,19 @@ import {ButtonWrapper, LogOutWrapper} from './LogOut.styled'
 import {useLogOutMutation} from 'redux/api/authAPI'
 import {SetAppNotificationAC} from 'redux/appSlice'
 import {useAppDispatch} from 'common/hooks/reduxHooks'
+import {useRouter} from 'next/navigation'
 
 export const LogOut = () => {
     const dispatch = useAppDispatch()
     const [showModal, setShowModal] = useState(false)
     const [logOut] = useLogOutMutation()
     const email = 'user-Email' //todo
-
+    const router = useRouter()
     const onLogOut = async () => {
         logOut()
             .unwrap()
             .then(() => {
+                router.push('/auth/login')
                 dispatch(SetAppNotificationAC({notifications: {type: 'success', message: 'See you soon!! Bye-bye))'}}))
             })
             .catch(error => {
