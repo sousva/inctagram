@@ -13,7 +13,7 @@ export const PATH = {
     HOME: '/profile',
     CREATE: '/profile/create',
     MY_PROFILE: '/profile/my-profile',
-    PROFILE_SETTINGS: 'profile/profile-settings',
+    PROFILE_SETTINGS: '/profile/profile-settings',
     MESSENGER: '/profile/messenger',
     SEARCH: '/profile/search',
     FAVORITES: '/profile/favorites',
