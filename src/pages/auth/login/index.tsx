@@ -18,9 +18,8 @@ import {PATH} from 'common/constant/PATH'
 import {AuthPageStyled} from 'common/styles/RegistrationPage'
 import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
 import {useLoginMutation} from 'redux/api/authAPI'
-import cookie from 'react-cookies'
-import {accessToken} from 'common/constant/constants'
 import {SetAppNotificationAC} from 'redux/appSlice'
+import {signIn, useSession} from 'next-auth/react'
 
 const schema = yup.object({
     email: yup.string().email().required('Email is required'),
@@ -30,6 +29,7 @@ const schema = yup.object({
 type FormData = yup.InferType<typeof schema>
 
 export default function LoginPage() {
+    const {status} = useSession()
     const dispatch = useAppDispatch()
     const theme = useAppSelector(state => state.app.theme)
     const router = useRouter()
@@ -43,13 +43,13 @@ export default function LoginPage() {
         resolver: yupResolver(schema),
         defaultValues: {email: 'sevoyo7702@soremap.com', password: '123456'},
     })
-
     const onSubmit = async (data: FormData) => {
         login({email: data.email, password: data.password})
             .unwrap()
             .then(async payload => {
-                await cookie.save(accessToken, payload.accessToken, {path: '/'})
-                router.push('/profile')
+                await signIn('credentials', {
+                    accessToken: payload.accessToken,
+                })
                 dispatch(
                     SetAppNotificationAC({
                         notifications: {type: 'success', message: 'Greetings, Welcome in out App'},
@@ -67,16 +67,21 @@ export default function LoginPage() {
     const handleRedirectOnRegistration = () => {
         router.push(PATH.REGISTRATION)
     }
-
+    console.log(status)
+    if (status === 'authenticated') {
+        // router.push(PATH.HOME)
+    }
     return (
         <AuthContainer>
             <AuthPageStyled>
                 <h1>Sign In</h1>
                 <div>
-                    <IconButton>
+                    <IconButton onClick={() => signIn('google')} disabled={isLoading}>
                         <GoogleIcon />
                     </IconButton>
-                    <IconButton>{theme === 'light' ? <GithubBlack /> : <GithubWhite />}</IconButton>
+                    <IconButton onClick={() => signIn('github')} disabled={isLoading}>
+                        {theme === 'light' ? <GithubBlack /> : <GithubWhite />}
+                    </IconButton>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <InputText label={'Email'} type={'email'} {...register('email')} error={errors.email} />

@@ -8,19 +8,19 @@ import {ButtonWrapper, LogOutWrapper} from './LogOut.styled'
 import {useLogOutMutation} from 'redux/api/authAPI'
 import {SetAppNotificationAC} from 'redux/appSlice'
 import {useAppDispatch} from 'common/hooks/reduxHooks'
-import {useRouter} from 'next/navigation'
+import {signOut, useSession} from 'next-auth/react'
 
 export const LogOut = () => {
     const dispatch = useAppDispatch()
+    const {data} = useSession()
     const [showModal, setShowModal] = useState(false)
     const [logOut] = useLogOutMutation()
-    const email = 'user-Email' //todo
-    const router = useRouter()
+
     const onLogOut = async () => {
-        logOut()
+        await signOut()
+        await logOut()
             .unwrap()
             .then(() => {
-                router.push('/auth/login')
                 dispatch(SetAppNotificationAC({notifications: {type: 'success', message: 'See you soon!! Bye-bye))'}}))
             })
             .catch(error => {
@@ -47,7 +47,7 @@ export const LogOut = () => {
                 <LogOutWrapper>
                     <p>
                         Do you really want to log out of your account
-                        <br /> <span>{email}</span>?
+                        <br /> <span>{data?.user.email}</span>?
                     </p>
                     <ButtonWrapper>
                         <Button variant={'outlined'} onClick={onLogOut}>

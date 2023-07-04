@@ -44,10 +44,8 @@ instance.interceptors.response.use(
 )
 
 export const serverAuthAPI = {
-    async authMe() {
+    async authMe(accessToken: string) {
         try {
-            const accessToken = await cookie.load('accessToken')
-
             const res = await instance.get<authMeDataType>(`${baseURL}auth/me`, {
                 withCredentials: true,
                 headers: {
