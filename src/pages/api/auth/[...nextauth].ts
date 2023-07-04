@@ -13,7 +13,7 @@ import nookies from 'nookies'
 
 type NextAuthOptionsCallback = (req: NextApiRequest, res: NextApiResponse) => NextAuthOptions
 
-const nextAuthOptions: NextAuthOptionsCallback = (req, res) => {
+export const nextAuthOptions: NextAuthOptionsCallback = (req, res) => {
     return {
         session: {
             strategy: 'jwt',

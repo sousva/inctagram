@@ -4,6 +4,7 @@ import {NextPage} from 'next'
 import {Providers} from 'redux/Provider'
 import {useLoader} from 'common/hooks/useLoader'
 import '../common/styles/nprogress.css'
+import {SessionProvider} from 'next-auth/react'
 export type NextPageWithLayout<P = {}> = NextPage<P> & {
     getLayout?: (page: ReactElement) => ReactNode
 }
@@ -16,6 +17,9 @@ export default function App({Component, pageProps: {session, ...pageProps}}: App
     useLoader()
     const getLayout = Component.getLayout ?? (page => page)
 
-    // @ts-ignore
-    return <Providers>{getLayout(<Component {...pageProps} />)}</Providers>
+    return (
+        <Providers>
+            <SessionProvider session={session}>{getLayout(<Component {...pageProps} />)}</SessionProvider>
+        </Providers>
+    )
 }

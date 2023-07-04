@@ -49,12 +49,9 @@ export default function LoginPage() {
             .then(async payload => {
                 await signIn('credentials', {
                     accessToken: payload.accessToken,
+                    redirect: true,
+                    callbackUrl: PATH.HOME,
                 })
-                dispatch(
-                    SetAppNotificationAC({
-                        notifications: {type: 'success', message: 'Greetings, Welcome in out App'},
-                    })
-                )
             })
             .catch(() =>
                 dispatch(
@@ -68,9 +65,11 @@ export default function LoginPage() {
         router.push(PATH.REGISTRATION)
     }
     console.log(status)
+
     if (status === 'authenticated') {
-        // router.push(PATH.HOME)
+        router.push(PATH.HOME)
     }
+
     return (
         <AuthContainer>
             <AuthPageStyled>

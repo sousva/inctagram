@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import {Button} from 'common/components/Button/Button'
 
 export const ForgotPasswordStyled = styled.div`
     display: flex;
@@ -33,7 +32,3 @@ export const ForgotPasswordStyled = styled.div`
         margin-top: 30px;
     }
 `
-
-// export const ButtonWrapper = styled(Button)`
-//
-// `
