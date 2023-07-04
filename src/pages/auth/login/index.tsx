@@ -23,6 +23,7 @@ import {PATH} from 'common/constant/PATH'
 import {AuthPageStyled} from 'common/styles/RegistrationPage'
 import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
 import {useLoginMutation} from 'redux/api/authAPI'
+import cookie from 'react-cookies'
 
 const schema = yup.object({
     email: yup.string().email().required('Email is required'),
@@ -49,16 +50,20 @@ const Login = () => {
     console.log(session)
 
     const onSubmit = async (data: FormData) => {
-        await signIn('credentials', {
-            email: data.email,
-            password: data.password,
-            redirect: true,
-            callbackUrl: PATH.HOME,
-        })
-        // login({email: data.email, password: data.password})
-        //     .unwrap()
-        //     .then(payload => cookie.save('accessToken', payload.accessToken, {path: ''}))
-        //     .catch(error => console.error('rejected', error))
+        login({email: data.email, password: data.password})
+            .unwrap()
+            .then(async payload => {
+                // await cookie.save('accessToken', payload.accessToken, {path: ''})
+
+                await signIn('credentials', {
+                    // email: data.email,
+                    // password: data.password,
+                    accessToken: payload.accessToken,
+                    // redirect: true,
+                    // callbackUrl: PATH.HOME,
+                })
+            })
+            .catch(error => console.error('rejected', error))
     }
     const handleRedirectOnRegistration = () => {
         router.push(PATH.REGISTRATION)

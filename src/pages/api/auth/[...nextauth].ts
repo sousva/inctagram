@@ -6,6 +6,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
 import {serverAuthAPI} from 'lib/server-api/server-api'
 import {destroyCookie} from 'nookies'
+import nookies from 'nookies'
 
 //https://github.com/nextauthjs/next-auth/discussions/4428
 //https://stackoverflow.com/questions/67594977/how-to-send-httponly-cookies-client-side-when-using-next-auth-credentials-provid/69418553#69418553
@@ -53,19 +54,24 @@ const nextAuthOptions: NextAuthOptionsCallback = (req, res) => {
             }),
             CredentialsProvider({
                 credentials: {
-                    email: {label: 'email', type: 'email', placeholder: 'email'},
-                    password: {label: 'Password', type: 'password'},
+                    accessToken: {type: 'string'},
+                    // password: {label: 'Password', type: 'password'},
                 },
                 id: 'credentials',
                 name: 'credentials',
                 async authorize(credentials) {
                     try {
-                        const data = {email: credentials!.email, password: credentials!.password}
+                        // const data = {accessToken: credentials!.accessToken}
                         // const token = await axios.get('http://localhost:3000/api/set')
 
-                        const loginData = await serverAuthAPI.login(data, res)
+                        // const loginData = await serverAuthAPI.login(data, res)
 
-                        const accessToken = loginData.data.accessToken
+                        // const cookies = nookies.get({req})
+                        const accessToken = credentials!.accessToken
+                        nookies.set({res}, 'accessToken', accessToken, {
+                            maxAge: 30 * 24 * 60 * 60,
+                            path: '/',
+                        })
 
                         if (accessToken) {
                             const meResponse = await serverAuthAPI.authMe(accessToken)
