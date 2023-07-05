@@ -8,14 +8,17 @@ import {GlobalStyle} from 'common/themes/GlobalStyle'
 import {ThemeProvider} from 'styled-components'
 import {useAppSelector} from 'common/hooks/reduxHooks'
 import StyledComponentsRegistry from 'lib/StyledComponentsRegistry'
+import ProtectedRoute from 'common/components/ProtectedRoutes/ProtectedRoutes'
 
 export function Providers({children}: {children: ReactNode}) {
     return (
-        <StyledComponentsRegistry>
-            <Provider store={store}>
-                <ThemeStyled>{children}</ThemeStyled>
-            </Provider>
-        </StyledComponentsRegistry>
+        <ProtectedRoute>
+            <StyledComponentsRegistry>
+                <Provider store={store}>
+                    <ThemeStyled>{children}</ThemeStyled>
+                </Provider>
+            </StyledComponentsRegistry>
+        </ProtectedRoute>
     )
 }
 
