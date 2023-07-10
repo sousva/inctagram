@@ -38,6 +38,10 @@ export const EditorWrapper = styled.div`
     display: flex;
     justify-content: center;
     position: relative;
-    width: 600px;
     height: 550px;
+`
+
+export const CanvasContainer = styled.div<{width: string; height: string}>`
+    width: 100%;
+    height: 465px;
 `

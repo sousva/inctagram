@@ -3,7 +3,14 @@ import React, {ChangeEvent, useEffect, useRef, useState} from 'react'
 import CreateIcon from 'common/assets/icons/create.svg'
 
 import {useAppDispatch} from 'common/hooks/reduxHooks'
-import {ButtonWrapper, CreatePostWrapper, EditorWrapper, EmptyImageWrapper, ModalContentWrapper} from './styled'
+import {
+    ButtonWrapper,
+    CanvasContainer,
+    CreatePostWrapper,
+    EditorWrapper,
+    EmptyImageWrapper,
+    ModalContentWrapper,
+} from './styled'
 import EmptyIcon from '../../assets/icons/emptyAvatar.svg'
 import {Button} from '../Button/Button'
 import {InputFile} from 'common/components/InputFile/InputFile'
@@ -89,16 +96,12 @@ export const CreatePost = () => {
         setEditor(ref)
     }
 
-    const resize = () => {
-        if (editor) {
-            // editor?.setState({
-            //     width: width, height * 0.5625
-            // })
-        }
-    }
     const [width, setWidth] = useState(485)
-    const [height, setHeight] = useState(464)
-
+    const [height, setHeight] = useState(465)
+    const handleResize = (width: number, height: number) => {
+        setWidth(width)
+        setHeight(height)
+    }
     return (
         <>
             <CreatePostWrapper>
@@ -111,16 +114,16 @@ export const CreatePost = () => {
                 <ModalContentWrapper>
                     {picture.img.length ? (
                         <EditorWrapper>
-                            <AvatarEditor
-                                ref={setEditorRef}
-                                image={picture.img}
-                                width={width}
-                                height={height}
-                                border={[50, 50]}
-                                scale={+picture.zoom}
-                                disableHiDPIScaling={true}
-                            />
-                            {/*<button onClick={resize}>show</button>*/}
+                            <CanvasContainer width={`${width}`} height={`${height}`}>
+                                <AvatarEditor
+                                    ref={setEditorRef}
+                                    image={picture.img}
+                                    width={width}
+                                    height={height}
+                                    scale={+picture.zoom}
+                                    disableHiDPIScaling={true}
+                                />
+                            </CanvasContainer>
                         </EditorWrapper>
                     ) : (
                         <EmptyImageWrapper>
@@ -138,7 +141,13 @@ export const CreatePost = () => {
                             <Button variant={'outlined'}>Open Draft</Button>
                         </ButtonWrapper>
                     ) : (
-                        <EditPhoto value={picture.zoom} onChange={handleZoom} />
+                        <EditPhoto
+                            valueZoom={picture.zoom}
+                            width={width}
+                            height={height}
+                            onChangeResize={handleResize}
+                            onChangeZoom={handleZoom}
+                        />
                     )}
                 </ModalContentWrapper>
             </Modal>

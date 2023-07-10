@@ -1,17 +1,20 @@
 import {Button} from '../../../Button/Button'
 import React, {ChangeEvent} from 'react'
 import {EditorButtons} from '../EditorButtons/EditorButtons'
-import {EditPhotoWrapper, Wrapper} from './styled'
+import {EditPhotoWrapper} from './styled'
 
 type EditPhotoType = {
-    value: string
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void
+    valueZoom: string
+    width: number
+    height: number
+    onChangeResize: (width: number, height: number) => void
+    onChangeZoom: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const EditPhoto: React.FC<EditPhotoType> = props => {
     return (
         <EditPhotoWrapper>
-            <EditorButtons value={props.value} onChange={props.onChange} />
+            <EditorButtons {...props} />
 
             <Button>Next</Button>
         </EditPhotoWrapper>

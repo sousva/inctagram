@@ -13,7 +13,7 @@ export const SelectWrapper = styled.div`
     background-color: ${props => props.theme.palette.dark[500]};
     padding: 10px;
     position: absolute;
-    top: -100px;
+    top: -140px;
 `
 export const ZoomWrapper = styled.div`
     display: ${props => (props.hidden ? 'flex' : 'none')};
