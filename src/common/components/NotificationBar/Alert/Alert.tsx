@@ -4,8 +4,8 @@ import React, {useEffect, useState} from 'react'
 import errorIcon from './../../../assets/icons/errorIcon.png'
 import successIcon from './../../../assets/icons/success.png'
 import {AlertIcon, AlertItem, AlertWrapper, CloseAlertIcon, ProgressBar} from '../styled'
-import {NotificationType, RemoveAppNotificationAC} from 'redux/appSlice'
-import {useAppDispatch} from 'common/hooks/reduxHooks'
+import {NotificationType, RemoveAppNotificationAC} from '_app/store/appSlice'
+import {useAppDispatch} from 'shared/hooks/reduxHooks'
 import Image from 'next/image'
 
 export const Alert = (props: NotificationType) => {

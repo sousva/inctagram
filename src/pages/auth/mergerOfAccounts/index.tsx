@@ -4,7 +4,7 @@ import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
 import {Button} from 'common/components/Button/Button'
 import re from 'common/assets/pictures/congratulation.png'
 import Image from 'next/image'
-import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
+import {getLayoutWithHeader} from '_app/Layouts/LayoutWithHeader'
 import {MergeAccountsPageWrapper} from 'common/styles/MergeAccountsPage'
 
 export default function MergeAccountsPage() {

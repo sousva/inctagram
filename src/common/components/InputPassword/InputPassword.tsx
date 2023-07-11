@@ -8,7 +8,7 @@ import EyeBlack from './../../assets/icons/eyeBlack.svg'
 import EyeOffBlack from './../../assets/icons/eyeOffBlack.svg'
 import EyeOffWhite from './../../assets/icons/eyeOffWhite.svg'
 import {IconButton} from '../IconButton/IconButton'
-import {useAppSelector} from 'common/hooks/reduxHooks'
+import {useAppSelector} from 'shared/hooks/reduxHooks'
 
 type DefaultInputPropsType = ComponentProps<'input'>
 

@@ -1,8 +1,8 @@
 import type {AppProps} from 'next/app'
 import React, {ReactElement, ReactNode} from 'react'
 import {NextPage} from 'next'
-import {Providers} from 'redux/Provider'
-import {useLoader} from 'common/hooks/useLoader'
+import {Providers} from '_app/Provider'
+import {useLoader} from 'shared/hooks/useLoader'
 import '../common/styles/nprogress.css'
 import {SessionProvider} from 'next-auth/react'
 

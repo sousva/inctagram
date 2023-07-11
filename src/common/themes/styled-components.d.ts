@@ -1,7 +1,7 @@
 import 'styled-components'
 import {NextFont} from 'next/dist/compiled/@next/font'
 import {Interpolation} from 'styled-components/dist/types'
-import {ThemeAppType} from 'redux/appSlice'
+import {ThemeAppType} from '_app/store/appSlice'
 interface IPalette {
     100: string
     300: string

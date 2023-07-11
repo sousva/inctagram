@@ -1,5 +1,5 @@
 //check if you are on the client (browser) or server
-import {PATH} from 'common/constant/PATH'
+import {PATH} from 'shared/constants/PATH'
 import {useSession} from 'next-auth/react'
 import {usePathname, useRouter} from 'next/navigation'
 

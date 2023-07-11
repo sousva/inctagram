@@ -3,9 +3,9 @@ import React from 'react'
 import Image from 'next/image'
 import congratulation from 'common/assets/pictures/congratulation.png'
 import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
-import {PATH} from 'common/constant/PATH'
+import {PATH} from 'shared/constants/PATH'
 import {ConfirmationPageWrapper} from 'common/styles/RegistrationConfirmPage'
-import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
+import {getLayoutWithHeader} from '_app/Layouts/LayoutWithHeader'
 
 export default function ConfirmedRegistrationPage() {
     return (

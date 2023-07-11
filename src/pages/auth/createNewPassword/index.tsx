@@ -1,5 +1,5 @@
 import React from 'react'
-import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
+import {getLayoutWithHeader} from '_app/Layouts/LayoutWithHeader'
 
 export default function CreateNewPasswordPage() {
     return <>create new pass page</>

@@ -4,8 +4,8 @@ import React, {useEffect} from 'react'
 import {useSignUpConfirmationMutation} from 'redux/api/authAPI'
 import {useRouter, useSearchParams} from 'next/navigation'
 import {Loader} from 'common/components/Loader/Loader'
-import {PATH} from 'common/constant/PATH'
-import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
+import {PATH} from 'shared/constants/PATH'
+import {getLayoutWithHeader} from '_app/Layouts/LayoutWithHeader'
 
 export default function ConfirmationPage() {
     const router = useRouter()

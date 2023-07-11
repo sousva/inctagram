@@ -9,7 +9,7 @@ import StatisticsIcon from 'common/assets/icons/statistics.svg'
 import CreateIcon from 'common/assets/icons/create.svg'
 import SearchIcon from 'common/assets/icons/search.svg'
 import FavoritesIcon from 'common/assets/icons/favorites.svg'
-import {PATH} from 'common/constant/PATH'
+import {PATH} from 'shared/constants/PATH'
 export const Aside = () => {
     return (
         <AsideWrapper>

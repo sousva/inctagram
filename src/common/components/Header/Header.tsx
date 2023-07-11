@@ -5,7 +5,7 @@ import Link from 'next/link'
 import {Container} from '../Container/Container'
 import {ThemeSwitcher} from '../ThemeSwitcher/ThemeSwitcher'
 import {LogOut} from '../LogOut/LogOut'
-import {PATH} from 'common/constant/PATH'
+import {PATH} from 'shared/constants/PATH'
 
 export const Header = () => {
     const status = 'authenticated' //TODO

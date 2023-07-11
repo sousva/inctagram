@@ -1,6 +1,6 @@
 import React from 'react'
-import {setProfileSettingsTabsAC, TabsSettingsType} from 'redux/appSlice'
-import {useAppDispatch, useAppSelector} from 'common/hooks/reduxHooks'
+import {setProfileSettingsTabsAC, TabsSettingsType} from '_app/store/appSlice'
+import {useAppDispatch, useAppSelector} from 'shared/hooks/reduxHooks'
 import {TabButton} from 'common/components/TabButton/TabButton'
 
 type TabNamesType = {

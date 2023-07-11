@@ -1,13 +1,13 @@
 'use client'
-import {store} from './store'
+import {store} from '_app/store/store'
 import {Provider} from 'react-redux'
 import React, {ReactNode} from 'react'
 import {lightTheme} from 'common/themes/lightTheme'
 import {darkTheme} from 'common/themes/darkTheme'
 import {GlobalStyle} from 'common/themes/GlobalStyle'
 import {ThemeProvider} from 'styled-components'
-import {useAppSelector} from 'common/hooks/reduxHooks'
-import StyledComponentsRegistry from 'lib/StyledComponentsRegistry'
+import {useAppSelector} from 'shared/hooks/reduxHooks'
+import StyledComponentsRegistry from 'shared/lib/StyledComponentsRegistry'
 import ProtectedRoute from 'common/components/ProtectedRoutes/ProtectedRoutes'
 
 export function Providers({children}: {children: ReactNode}) {

@@ -8,8 +8,8 @@ import styled from 'styled-components'
 import {IconButton} from 'common/components/IconButton/IconButton'
 import DeleteAvatarIcon from 'common/assets/icons/deleteAvatar.svg'
 import {useDeleteAvatarMutation} from 'redux/api/profileAPI'
-import {SetAppNotificationAC} from 'redux/appSlice'
-import {useAppDispatch} from 'common/hooks/reduxHooks'
+import {SetAppNotificationAC} from '_app/store/appSlice'
+import {useAppDispatch} from 'shared/hooks/reduxHooks'
 
 export const Avatar: FC<{avatar: string}> = ({avatar}) => {
     const [isModalOpen, setIsModalOpen] = useState(false)

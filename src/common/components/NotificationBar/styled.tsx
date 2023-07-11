@@ -1,5 +1,5 @@
 import styled, {css, keyframes} from 'styled-components'
-import {NotificationType} from 'redux/appSlice'
+import {NotificationType} from '_app/store/appSlice'
 
 const SlideRight = keyframes`
   from {

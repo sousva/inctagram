@@ -6,8 +6,8 @@ import {Button} from '../Button/Button'
 import {Modal} from '../Modal/BaseModal'
 import {ButtonWrapper, LogOutWrapper} from './LogOut.styled'
 import {useLogOutMutation} from 'redux/api/authAPI'
-import {SetAppNotificationAC} from 'redux/appSlice'
-import {useAppDispatch} from 'common/hooks/reduxHooks'
+import {SetAppNotificationAC} from '_app/store/appSlice'
+import {useAppDispatch} from 'shared/hooks/reduxHooks'
 import {signOut, useSession} from 'next-auth/react'
 
 export const LogOut = () => {

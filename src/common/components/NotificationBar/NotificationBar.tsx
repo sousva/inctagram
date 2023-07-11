@@ -2,7 +2,7 @@
 import React from 'react'
 
 import {Alert} from './Alert/Alert'
-import {useAppSelector} from 'common/hooks/reduxHooks'
+import {useAppSelector} from 'shared/hooks/reduxHooks'
 import {NotificationBarWrapper} from 'common/components/NotificationBar/styled'
 
 export const NotificationBar = () => {

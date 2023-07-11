@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import {PATH} from 'common/constant/PATH'
-import {getHomeLayout} from 'common/Layouts/HomeLayout'
+import {PATH} from 'shared/constants/PATH'
+import {getHomeLayout} from '_app/Layouts/HomeLayout'
 
 export default function MyProfilePage() {
     return (

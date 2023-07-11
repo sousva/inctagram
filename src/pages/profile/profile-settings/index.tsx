@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {useAppSelector} from 'common/hooks/reduxHooks'
+import {useAppSelector} from 'shared/hooks/reduxHooks'
 
 import {GeneralInformation} from 'common/components/GeneralInformation/GeneralInformation'
 import {MyPayments} from 'common/components/MyPayments/MyPayments'
@@ -8,7 +8,7 @@ import {ProfileSettingsAccordion} from 'common/components/ProfileSettingsAccordi
 import {Devices} from 'common/components/Devices/Devices'
 import {AccountManagement} from 'common/components/AccountManagement/AccountManagement'
 import {ProfileSettingsWrapper} from 'common/styles/ProfileSettingsPage'
-import {getHomeLayout} from 'common/Layouts/HomeLayout'
+import {getHomeLayout} from '_app/Layouts/HomeLayout'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 
 export interface UserProfile {
