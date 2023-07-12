@@ -9,6 +9,9 @@ import {SessionProvider} from 'next-auth/react'
 export type NextPageWithLayout<P = {}> = NextPage<P> & {
     getLayout?: (page: ReactElement) => ReactNode
 }
+// export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
+//     getLayout?: (page: ReactElement) => ReactElement
+// }
 
 type AppPropsWithLayout = AppProps & {
     Component: NextPageWithLayout

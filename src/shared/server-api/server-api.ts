@@ -2,7 +2,7 @@ import axios from 'axios'
 import cookie from 'react-cookies'
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL as string
-const domainURL = process.env.NEXT_PUBLIC_DOMAIN_URL as string
+// const domainURL = process.env.NEXT_PUBLIC_DOMAIN_URL as string
 
 export const instance = axios.create({
     withCredentials: true,
