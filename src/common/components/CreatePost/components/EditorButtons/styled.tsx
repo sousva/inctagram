@@ -2,8 +2,16 @@ import styled from 'styled-components'
 
 export const EditorButtonsWrapper = styled.div`
     display: flex;
+    justify-content: space-around;
+    width: 100%;
     gap: 50px;
-    position: relative;
+    position: absolute;
+    bottom: 10px;
+
+    .popUpBtn {
+        display: flex;
+        gap: 50px;
+    }
 `
 
 export const SelectWrapper = styled.div`

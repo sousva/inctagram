@@ -16,32 +16,27 @@ export const ModalContentWrapper = styled.div`
     margin: 20px;
 `
 
-export const ButtonWrapper = styled.div`
-    display: inherit;
-    flex-direction: inherit;
-    margin: 0 auto;
-    gap: inherit;
-    max-width: 250px;
-`
-
 export const EmptyImageWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
-    width: 200px;
+    width: 230px;
     height: 250px;
+    margin-bottom: 100px;
     background-color: #171717;
 `
 
 export const EditorWrapper = styled.div`
     display: flex;
     justify-content: center;
+    gap: 25px;
     position: relative;
-    height: 550px;
+    object-fit: contain;
 `
 
-export const CanvasContainer = styled.div<{width: string; height: string}>`
-    width: 100%;
-    height: 465px;
+export const CanvasContainer = styled.div<{width: number; height: number}>`
+    display: flex;
+    justify-content: center;
+    width: calc(${props => props.width}px + 20px);
+    height: calc(${props => props.height}px + 20px);
 `

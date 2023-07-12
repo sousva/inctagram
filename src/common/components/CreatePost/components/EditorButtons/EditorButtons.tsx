@@ -6,11 +6,14 @@ import Crop1x1 from '../../../../assets/icons/crop1x1.svg'
 import Crop4x5 from '../../../../assets/icons/crop4x5.svg'
 import Crop16x9 from '../../../../assets/icons/crop16x9.svg'
 import {EditorButtonsWrapper, SelectWrapper, ZoomWrapper} from './styled'
+import {Button} from '../../../Button/Button'
+import {StepsType} from '../../CreatePost'
 
 type EditorButtonsType = {
     valueZoom: string
     width: number
     height: number
+    onChangeStep: (step: StepsType) => void
     onChangeResize: (width: number, height: number) => void
     onChangeZoom: (e: ChangeEvent<HTMLInputElement>) => void
 }
@@ -41,39 +44,50 @@ export const EditorButtons: React.FC<EditorButtonsType> = props => {
         console.log('aspectRatio', aspectRatio)
         if (aspectRatio === ASPECT_RATIO.OneToOne) {
             const newSize = Math.round(Math.sqrt(props.width * props.height))
-            console.log('newSize', newSize)
             return props.onChangeResize(newSize, newSize)
         }
 
         if (aspectRatio === ASPECT_RATIO.FourToFive || aspectRatio === ASPECT_RATIO.SixteenToNine) {
             const newWidth = Math.round(Math.sqrt(props.width * props.height * aspectRatio))
             const newHeight = Math.round(newWidth / aspectRatio)
-            console.log('newWidth', newWidth)
-            console.log('newHeight', newHeight)
             return props.onChangeResize(newWidth, newHeight)
         }
 
         if (aspectRatio === ASPECT_RATIO.Original) {
-            console.log(aspectRatio)
             return props.onChangeResize(ORIGINAL_SIZE.width, ORIGINAL_SIZE.height)
         }
     }
 
     return (
         <EditorButtonsWrapper>
-            <SelectWrapper hidden={selectHidden}>
-                {ratioData.map(el => (
-                    <div key={el.id} onClick={() => handlerCrop(el.value)}>
-                        <span>{el.title}</span>
-                        <el.icon />
-                    </div>
-                ))}
-            </SelectWrapper>
-            <ZoomWrapper hidden={zoomHidden}>
-                <input type='range' value={props.valueZoom} onChange={props.onChangeZoom} min={1} max={12} step='0.1' />
-            </ZoomWrapper>
-            <RatioIcon onClick={() => setSelectHidden(!selectHidden)} />
-            <ZoomIcon onClick={() => setZoomHidden(!zoomHidden)} />
+            <div>
+                <Button onClick={() => props.onChangeStep('select')}>Prev</Button>
+            </div>
+            <div className='popUpBtn'>
+                <SelectWrapper hidden={selectHidden}>
+                    {ratioData.map(el => (
+                        <div key={el.id} onClick={() => handlerCrop(el.value)}>
+                            <span>{el.title}</span>
+                            <el.icon />
+                        </div>
+                    ))}
+                </SelectWrapper>
+                <ZoomWrapper hidden={zoomHidden}>
+                    <input
+                        type='range'
+                        value={props.valueZoom}
+                        onChange={props.onChangeZoom}
+                        min={1}
+                        max={12}
+                        step='0.1'
+                    />
+                </ZoomWrapper>
+                <RatioIcon onClick={() => setSelectHidden(!selectHidden)} />
+                <ZoomIcon onClick={() => setZoomHidden(!zoomHidden)} />
+            </div>
+            <div>
+                <Button onClick={() => props.onChangeStep('filters')}>Next</Button>
+            </div>
         </EditorButtonsWrapper>
     )
 }
