@@ -19,61 +19,47 @@ export default meta
 type Story = StoryObj<typeof Button>
 
 export const DefaultButton: Story = {
-    render: () => <Button>Text</Button>,
+    args: {
+        children: 'Default',
+    },
     decorators: [withThemeDecorator],
 }
 export const DefaultButtonDisabled: Story = {
     args: {
+        children: 'Default',
         disabled: true,
     },
-    render: args => <Button disabled={args.disabled}>Text</Button>,
     decorators: [withThemeDecorator],
 }
 export const OutlinedButton: Story = {
     args: {
         variant: 'outlined',
         disabled: false,
+        children: 'Outlined Button',
     },
-    render: args => (
-        <Button variant={args.variant} disabled={args.disabled}>
-            Text
-        </Button>
-    ),
     decorators: [withThemeDecorator],
 }
 export const ContainedButton: Story = {
     args: {
         variant: 'contained',
         disabled: false,
+        children: 'Contained Button',
     },
-    render: args => (
-        <Button variant={args.variant} disabled={args.disabled}>
-            Text
-        </Button>
-    ),
     decorators: [withThemeDecorator],
 }
 export const IsIconButton: Story = {
     args: {
         variant: 'isIcon',
         disabled: false,
+        children: 'Button is icon',
     },
-    render: args => (
-        <Button variant={args.variant} disabled={args.disabled}>
-            Text
-        </Button>
-    ),
     decorators: [withThemeDecorator],
 }
 export const TextButton: Story = {
     args: {
         variant: 'text',
         disabled: false,
+        children: 'Text Button',
     },
-    render: args => (
-        <Button variant={args.variant} disabled={args.disabled}>
-            Text
-        </Button>
-    ),
     decorators: [withThemeDecorator],
 }
