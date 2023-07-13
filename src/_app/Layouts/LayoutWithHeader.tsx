@@ -1,7 +1,7 @@
 import React, {PropsWithChildren, ReactElement} from 'react'
 import {NextPage} from 'next'
-import {Header} from 'common/components'
-import {NotificationBar} from 'common/components/NotificationBar/NotificationBar'
+import {NotificationBar} from 'features/NotificationBar/NotificationBar'
+import {Header} from 'widgets/Header/Header'
 
 export const LayoutWithHeader: NextPage<PropsWithChildren> = ({children}) => {
     return (

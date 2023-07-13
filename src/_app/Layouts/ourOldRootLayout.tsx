@@ -1,9 +1,9 @@
 import {Metadata} from 'next'
 import React from 'react'
 import {Providers} from '_app/Provider'
-import {Header} from 'common/components'
-import {NotificationBar} from 'common/components/NotificationBar/NotificationBar'
+import {NotificationBar} from 'features/NotificationBar/NotificationBar'
 import StyledComponentsRegistry from 'shared/lib/StyledComponentsRegistry'
+import {Header} from 'widgets/Header/Header'
 
 export const metadata: Metadata = {
     title: 'Home page title',

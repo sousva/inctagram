@@ -1,6 +1,6 @@
 import React, {PropsWithChildren, ReactElement} from 'react'
-import {Aside} from 'common/components/Aside/Aside'
-import {HomeWrapper} from 'common/styles/HomePage.style'
+import {Aside} from 'widgets/Aside/Aside'
+import {HomeWrapper} from 'shared/styles/HomePage.style'
 import {NextPage} from 'next'
 import {LayoutWithHeader} from '_app/Layouts/LayoutWithHeader'
 

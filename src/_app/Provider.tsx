@@ -2,13 +2,13 @@
 import {store} from '_app/store/store'
 import {Provider} from 'react-redux'
 import React, {ReactNode} from 'react'
-import {lightTheme} from 'common/themes/lightTheme'
-import {darkTheme} from 'common/themes/darkTheme'
-import {GlobalStyle} from 'common/themes/GlobalStyle'
+import {lightTheme} from '_app/themes/lightTheme'
+import {darkTheme} from '_app/themes/darkTheme'
+import {GlobalStyle} from '_app/themes/GlobalStyle'
 import {ThemeProvider} from 'styled-components'
 import {useAppSelector} from 'shared/hooks/reduxHooks'
 import StyledComponentsRegistry from 'shared/lib/StyledComponentsRegistry'
-import ProtectedRoute from 'common/components/ProtectedRoutes/ProtectedRoutes'
+import ProtectedRoute from '_app/ProtectedRoutes/ProtectedRoutes'
 
 export function Providers({children}: {children: ReactNode}) {
     return (
