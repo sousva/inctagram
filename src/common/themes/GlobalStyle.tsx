@@ -8,8 +8,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${props => props.theme.bodyColor};
-    color: ${props => props.theme.textColor};
+    background-color: ${({theme}) => theme.bodyColor};
+    color: ${({theme}) => theme.textColor};
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     height: 100vh;
@@ -34,8 +34,8 @@ export const GlobalStyle = createGlobalStyle`
   select:-webkit-autofill,
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
-    -webkit-text-fill-color: ${props => props.theme.textColor};
-    -webkit-box-shadow: 0 0 0 40rem ${props => props.theme.palette.dark['500']} inset;
+    -webkit-text-fill-color: ${({theme}) => theme.textColor};
+    -webkit-box-shadow: 0 0 0 40rem ${({theme}) => theme.palette.dark['500']} inset;
   }
 
   //https://css-tricks.com/almanac/selectors/a/autofill/
