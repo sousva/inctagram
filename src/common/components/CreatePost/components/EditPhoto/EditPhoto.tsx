@@ -1,6 +1,6 @@
 import {Button} from '../../../Button/Button'
 import React, {ChangeEvent} from 'react'
-import {EditorButtons} from '../EditorButtons/EditorButtons'
+import {EditorPanel} from '../EditorPanel/EditorPanel'
 import {EditPhotoWrapper} from './styled'
 import {StepsType} from '../../CreatePost'
 import {SelectPhoto} from '../SelectPhoto/SelectPhoto'
@@ -22,7 +22,7 @@ export const EditPhoto: React.FC<EditPhotoType> = props => {
             {props.step === 'select' ? (
                 <SelectPhoto handleCreatePost={props.handleCreatePost} />
             ) : props.step === 'resize' ? (
-                <EditorButtons {...props} />
+                <EditorPanel {...props} />
             ) : (
                 'filters'
             )}

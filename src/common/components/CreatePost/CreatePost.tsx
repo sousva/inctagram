@@ -1,28 +1,27 @@
 import {Modal} from 'common/components/Modal/BaseModal'
-import React, {ChangeEvent, useRef, useState} from 'react'
+import React, {ChangeEvent, RefObject, useRef, useState} from 'react'
 import CreateIcon from 'common/assets/icons/create.svg'
 
 import {useAppDispatch} from 'common/hooks/reduxHooks'
 import {CanvasContainer, CreatePostWrapper, EditorWrapper, EmptyImageWrapper, ModalContentWrapper} from './styled'
 import EmptyIcon from '../../assets/icons/emptyAvatar.svg'
 import {Button} from '../Button/Button'
-import {InputFile} from 'common/components/InputFile/InputFile'
 import {useUploadImageMutation} from '../../../redux/api/postsAPI'
 import {SetAppNotificationAC} from '../../../redux/appSlice'
 import AvatarEditor from 'react-avatar-editor'
-import {EditPhoto} from './components/EditPhoto/EditPhoto'
-import {SelectWrapper} from './components/EditorButtons/styled'
-import {EditorButtons} from './components/EditorButtons/EditorButtons'
+import {EditorPanel} from './components/EditorPanel/EditorPanel'
 import {SelectPhoto} from './components/SelectPhoto/SelectPhoto'
 import {PresetFilters} from './components/PresetFilters/PresetFilters'
+import {createFilteredFile} from './components/PresetFilters/createFilteredFile'
+import {EditorButtons} from './components/EditorButtons/EditorButtons'
 
-export type StepsType = 'select' | 'resize' | 'filters'
+export type StepsType = 'Add Photo' | 'Cropping' | 'Filters' | 'Describe'
 
 export const CreatePost = () => {
     const dispatch = useAppDispatch()
     const [post, {isLoading, isError}] = useUploadImageMutation()
-    const [editor, setEditor] = useState<AvatarEditor | null>(null)
-    const [step, setStep] = useState<StepsType>('select')
+    const editorRef = useRef<AvatarEditor>(null)
+    const [step, setStep] = useState<StepsType>('Add Photo')
     const [isOpen, setIsOpen] = useState(false)
     const [width, setWidth] = useState(485)
     const [height, setHeight] = useState(465)
@@ -37,47 +36,45 @@ export const CreatePost = () => {
         setHeight(height)
     }
 
-    const handleSave = () => {
-        // if (editor) {
-        //     const canvas = editor.getImage()
-        //     canvas.toBlob((blob: any) => {
-        //         const formData = new FormData()
-        //
-        //         formData.append('file', blob)
-        //         // @ts-ignore
-        //         post(formData)
-        //             .unwrap()
-        //             .then(() => {
-        //                 console.log('ОТРАБОТАЛ')
-        //                 dispatch(
-        //                     SetAppNotificationAC({
-        //                         notifications: {type: 'success', message: 'Your Avatar was successfully uploaded'},
-        //                     })
-        //                 )
-        //             })
-        //
-        //             .catch(error => {
-        //                 console.log(error)
-        //                 dispatch(
-        //                     SetAppNotificationAC({
-        //                         notifications: {type: 'error', message: error.message},
-        //                     })
-        //                 )
-        //             })
-        //     })
-        // }
+    const handleSave = async () => {
+        if (editorRef.current) {
+            const file = await createFilteredFile(editorRef, filter)
+
+            const formData = new FormData()
+
+            formData.append('file', file)
+
+            post(formData)
+                .unwrap()
+                .then(() => {
+                    console.log('ОТРАБОТАЛ')
+                    dispatch(
+                        SetAppNotificationAC({
+                            notifications: {type: 'success', message: 'Your Avatar was successfully uploaded'},
+                        })
+                    )
+                })
+
+                .catch(error => {
+                    console.log(error)
+                    dispatch(
+                        SetAppNotificationAC({
+                            notifications: {type: 'error', message: error.message},
+                        })
+                    )
+                })
+        }
     }
 
     const handleCreatePost = (e: ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) return
         let url = URL.createObjectURL(e.target.files[0])
-
         setPicture({
             ...picture,
             img: url,
         })
 
-        setStep('resize')
+        setStep('Cropping')
     }
 
     const handleClear = () => {
@@ -99,12 +96,12 @@ export const CreatePost = () => {
         })
     }
 
-    const setEditorRef = (ref: AvatarEditor | null) => {
-        setEditor(ref)
-    }
+    // const setEditorRef = (ref: AvatarEditor | null) => {
+    //     setEditor(ref)
+    // }
 
     const onChangeStep = (step: StepsType) => {
-        if (step === 'select') {
+        if (step === 'Add Photo') {
             handleClear()
         }
 
@@ -132,14 +129,15 @@ export const CreatePost = () => {
                     Create
                 </li>
             </CreatePostWrapper>
-            <Modal title={'Add Photo'} isOpen={isOpen} handleClose={handleClose}>
+            <Modal title={step} isOpen={isOpen} handleClose={handleClose}>
                 <ModalContentWrapper>
+                    {step !== 'Add Photo' && <EditorButtons onChangeStep={onChangeStep} title={step} />}
                     <EditorWrapper>
                         {picture.img.length ? (
                             <>
                                 <CanvasContainer width={width} height={height}>
                                     <AvatarEditor
-                                        ref={setEditorRef}
+                                        ref={editorRef}
                                         image={picture.img}
                                         width={width}
                                         height={height}
@@ -152,7 +150,7 @@ export const CreatePost = () => {
                                         onLoadSuccess={IMG_INFO => imgInfo(IMG_INFO)}
                                     />
                                 </CanvasContainer>
-                                {step === 'filters' && (
+                                {step === 'Filters' && (
                                     <PresetFilters
                                         picture={picture.img}
                                         handleSave={handleSave}
@@ -165,14 +163,13 @@ export const CreatePost = () => {
                                 <EmptyIcon />
                             </EmptyImageWrapper>
                         )}
-                        {step === 'select' ? (
+                        {step === 'Add Photo' ? (
                             <SelectPhoto handleCreatePost={handleCreatePost} />
-                        ) : step === 'resize' ? (
-                            <EditorButtons
+                        ) : step === 'Cropping' ? (
+                            <EditorPanel
                                 valueZoom={picture.zoom}
                                 width={width}
                                 height={height}
-                                onChangeStep={onChangeStep}
                                 onChangeResize={handleResize}
                                 onChangeZoom={handleZoom}
                             />
