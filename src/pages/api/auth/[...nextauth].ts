@@ -1,10 +1,10 @@
 import NextAuth, {NextAuthOptions} from 'next-auth'
 import {NextApiRequest, NextApiResponse} from 'next'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import {PATH} from 'common/constant/PATH'
+import {PATH} from 'shared/constants/PATH'
 import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
-import {serverAuthAPI} from 'lib/server-api/server-api'
+import {serverAuthAPI} from 'shared/server-api/server-api'
 import nookies from 'nookies'
 
 //https://github.com/nextauthjs/next-auth/discussions/4428

@@ -1,15 +1,15 @@
 import React from 'react'
 
-import {useAppSelector} from 'common/hooks/reduxHooks'
+import {useAppSelector} from 'shared/hooks/reduxHooks'
 
 import {GeneralInformation} from 'common/components/GeneralInformation/GeneralInformation'
-import {MyPayments} from 'common/components/MyPayments/MyPayments'
-import {ProfileSettingsAccordion} from 'common/components/ProfileSettingsAccordion/ProfileSettingsAccordion'
-import {Devices} from 'common/components/Devices/Devices'
-import {AccountManagement} from 'common/components/AccountManagement/AccountManagement'
-import {ProfileSettingsWrapper} from 'common/styles/ProfileSettingsPage'
-import {getHomeLayout} from 'common/Layouts/HomeLayout'
+import {MyPayments} from 'shared/components/MyPayments/MyPayments'
+import {ProfileSettingsAccordion} from 'shared/components/ProfileSettingsAccordion/ProfileSettingsAccordion'
+import {Devices} from 'shared/components/Devices/Devices'
+import {ProfileSettingsWrapper} from 'shared/styles/ProfileSettingsPage'
+import {getHomeLayout} from '_app/Layouts/HomeLayout'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
+import {AccountManagement} from 'shared/components/AccountManagement/AccountManagement'
 
 export interface UserProfile {
     id: number
