@@ -1,8 +1,9 @@
 import {ThemeProvider} from 'styled-components'
-import {lightTheme} from '../src/common/themes/lightTheme'
-import {GlobalStyle} from '../src/common/themes/GlobalStyle'
+
 import {Decorator} from '@storybook/react'
-import {darkTheme} from '../src/common/themes/darkTheme'
+import {lightTheme} from '_app/themes/lightTheme'
+import {darkTheme} from '_app/themes/darkTheme'
+import {GlobalStyle} from '_app/themes/GlobalStyle'
 
 const THEMES = {
     light: lightTheme,

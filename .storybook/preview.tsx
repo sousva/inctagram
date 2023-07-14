@@ -2,8 +2,8 @@ import type {Preview} from '@storybook/react'
 
 import {createGlobalStyle, ThemeProvider} from 'styled-components'
 import {withThemeFromJSXProvider} from '@storybook/addon-styling'
-import {lightTheme} from '../src/common/themes/lightTheme'
-import {darkTheme} from '../src/common/themes/darkTheme'
+import {lightTheme} from '_app/themes/lightTheme'
+import {darkTheme} from '_app/themes/darkTheme'
 
 const GlobalStyles = createGlobalStyle`
   body {
