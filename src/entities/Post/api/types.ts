@@ -3,20 +3,20 @@ export type PostsType = {
     pagesCount: number
     page: number
     pageSize: number
-    items: PostsTypeItems[]
+    items: PostCardType[]
 }
-export type PostsTypeItemsImages = {
+export type PostCardImageType = {
     url: string
     width: number
     height: number
     fileSize: number
     uploadId: string
 }
-export type PostsTypeItems = {
+export type PostCardType = {
     id: number
     description: string
     location: string
-    images: PostsTypeItemsImages[]
+    images: PostCardImageType[]
     createdAt: string
     updatedAt: string
 }
