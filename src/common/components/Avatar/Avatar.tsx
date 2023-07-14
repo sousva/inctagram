@@ -1,15 +1,15 @@
 import React, {FC, useState} from 'react'
-import {Button} from 'common/components/Button/Button'
 import {AvatarFormWrapper} from 'common/components/Avatar/styled'
 import EmptyAvatarIcon from 'common/assets/icons/emptyAvatar.svg'
 import {ProfilePhotoModal} from 'common/components/Avatar/ProfilePhotoModal'
 import Image from 'next/image'
 import styled from 'styled-components'
-import {IconButton} from 'common/components/IconButton/IconButton'
+import {IconButton} from 'shared/components/IconButton/IconButton'
 import DeleteAvatarIcon from 'common/assets/icons/deleteAvatar.svg'
 import {useDeleteAvatarMutation} from 'redux/api/profileAPI'
-import {SetAppNotificationAC} from 'redux/appSlice'
-import {useAppDispatch} from 'common/hooks/reduxHooks'
+import {SetAppNotificationAC} from '_app/store/appSlice'
+import {useAppDispatch} from 'shared/hooks/reduxHooks'
+import {Button} from 'shared/components/Button/Button'
 
 export const Avatar: FC<{avatar: string}> = ({avatar}) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
