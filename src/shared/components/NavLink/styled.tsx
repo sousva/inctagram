@@ -11,6 +11,10 @@ export const NavLinkWrapper = styled(Link)`
 
     text-decoration: none;
     color: ${props => props.theme.textColor};
+    //todo make hover on svg
+    &:hover {
+        color: ${props => props.theme.palette.primary['100']};
+    }
 
     &.active {
         color: ${props => props.theme.palette.primary['500']};

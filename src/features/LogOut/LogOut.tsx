@@ -19,9 +19,6 @@ export const LogOut = () => {
         await signOut()
         await logOut()
             .unwrap()
-            .then(() => {
-                dispatch(SetAppNotificationAC({notifications: {type: 'success', message: 'See you soon!! Bye-bye))'}}))
-            })
             .catch(error => {
                 console.log(error)
                 dispatch(

@@ -2,14 +2,14 @@ import styled, {css} from 'styled-components'
 import React, {ReactNode} from 'react'
 
 const Wrapper = styled.span<{$active: boolean}>`
-  width: 23px;
-  height: 23px;
-  
+    width: 23px;
+    height: 23px;
+
     svg {
-      width: 100%;
-      height: 100%;
+        width: 100%;
+        height: 100%;
     }
-  
+
     path {
         ${props => {
             if (props.$active) {
@@ -27,6 +27,7 @@ const Wrapper = styled.span<{$active: boolean}>`
                 `
             }
         }}
+    }
 `
 
 export const NavIconWrapper = (props: {children: ReactNode; active: boolean}) => {
