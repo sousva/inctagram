@@ -14,7 +14,7 @@ const data = {
             location: 'location',
             images: [
                 {
-                    url: 'https://example.com/image.jpg',
+                    url: 'https://loremflickr.com/300/300',
                     width: 300,
                     height: 300,
                     fileSize: 300,

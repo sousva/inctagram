@@ -8,10 +8,13 @@ import {PostLikes} from 'entities/Post/ui/PostLikes/PostLikes'
 import {PostComments} from 'entities/Post/ui/PostComments/PostComments'
 import {PostWrapper} from 'entities/Post/Post.styled'
 
-export const Post = (props: {post: PostCardType}) => {
+type PostType = {
+    post: PostCardType
+}
+export const Post = ({post}: PostType) => {
     return (
         <PostWrapper>
-            <PostHeader />
+            <PostHeader img={post.images[0].url} />
             <PostImage />
             <PostFeatures />
             <PostDesciption />
