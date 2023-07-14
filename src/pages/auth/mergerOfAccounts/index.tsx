@@ -1,11 +1,11 @@
 'use client'
 import React from 'react'
-import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
-import {Button} from 'common/components/Button/Button'
 import re from 'common/assets/pictures/congratulation.png'
 import Image from 'next/image'
-import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
-import {MergeAccountsPageWrapper} from 'common/styles/MergeAccountsPage'
+import {getLayoutWithHeader} from '_app/Layouts/LayoutWithHeader'
+import {MergeAccountsPageWrapper} from 'shared/styles/MergeAccountsPage'
+import {AuthContainer} from 'shared/components/AuthContainer/AuthContainer'
+import {Button} from 'shared/components/Button/Button'
 
 export default function MergeAccountsPage() {
     return (

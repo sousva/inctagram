@@ -2,10 +2,10 @@ import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
 import congratulation from 'common/assets/pictures/congratulation.png'
-import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
-import {PATH} from 'common/constant/PATH'
-import {ConfirmationPageWrapper} from 'common/styles/RegistrationConfirmPage'
-import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
+import {PATH} from 'shared/constants/PATH'
+import {ConfirmationPageWrapper} from 'shared/styles/RegistrationConfirmPage'
+import {getLayoutWithHeader} from '_app/Layouts/LayoutWithHeader'
+import {AuthContainer} from 'shared/components/AuthContainer/AuthContainer'
 
 export default function ConfirmedRegistrationPage() {
     return (

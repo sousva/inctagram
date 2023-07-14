@@ -1,25 +1,24 @@
 'use client'
 
-import {AuthContainer} from 'common/components/AuthContainer/AuthContainer'
-import {InputText} from 'common/components/InputText/InputText'
-import {ThemeSelector} from 'common/constant'
-import {useAppSelector} from 'common/hooks/reduxHooks'
+import {InputText} from 'shared/components/InputText/InputText'
+import {useAppSelector} from 'shared/hooks/reduxHooks'
 import Link from 'next/link'
-import {useState} from 'react'
+import React, {useState} from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import {SubmitHandler, useForm} from 'react-hook-form'
 import {useForgotPasswordMutation} from 'redux/api/authAPI'
-import {PATH} from 'common/constant/PATH'
-import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
-import {ForgotPasswordStyled} from 'common/styles/ForgotPasswordPage'
-import {Button} from 'common/components/Button/Button'
+import {PATH} from 'shared/constants/PATH'
+import {getLayoutWithHeader} from '_app/Layouts/LayoutWithHeader'
+import {ForgotPasswordStyled} from 'shared/styles/ForgotPasswordPage'
+import {Button} from 'shared/components/Button/Button'
+import {AuthContainer} from 'shared/components/AuthContainer/AuthContainer'
 
 type ForgotPasswordFormType = {
     email: string
 }
 
 export default function ForgotPasswordPage() {
-    const theme = useAppSelector(ThemeSelector)
+    const theme = useAppSelector(state => state.app.theme)
     const {register, handleSubmit} = useForm({
         defaultValues: {
             email: '',

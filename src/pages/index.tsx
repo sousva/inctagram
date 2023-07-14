@@ -1,4 +1,4 @@
-import {getLayoutWithHeader} from 'common/Layouts/LayoutWithHeader'
+import {getLayoutWithHeader} from '_app/Layouts/LayoutWithHeader'
 
 const Home = () => {
     return <div> dkfsdf</div>
