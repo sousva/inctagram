@@ -14,15 +14,16 @@ export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P
 }
 
 type AppPropsWithLayout = AppProps & {
-    Component: NextPageWithLayout
+    // Component: NextPageWithLayout //todo fix type
+    Component: any
 }
 
 export default function App({Component, pageProps: {session, ...pageProps}}: AppPropsWithLayout) {
     useLoader()
 
+    // @ts-ignore
     const getLayout = Component.getLayout ?? (page => page)
 
-    // @ts-ignore
     return (
         <SessionProvider session={session}>
             <Providers>{getLayout(<Component {...pageProps} />)}</Providers>
