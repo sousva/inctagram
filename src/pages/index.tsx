@@ -1,4 +1,4 @@
-import {getLayoutWithHeader} from '_app/Layouts/LayoutWithHeader'
+import {getLayoutWithHeader} from '_app/Layouts/unauthorized/Unauthorized'
 
 const Home = () => {
     return <div> dkfsdf</div>
