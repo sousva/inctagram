@@ -1,8 +1,34 @@
 import React from 'react'
-import {getHomeLayout} from '_app/Layouts/HomeLayout'
+import {PostsList} from 'widgets/PostsList/PostsList'
+import {getAuthorizedLayout} from '_app/Layouts/authorized/AuthorizedLayout'
 
-export default function Home() {
-    return <div> Home page</div>
+const data = {
+    totalCount: 10,
+    pagesCount: 2,
+    page: 1,
+    pageSize: 10,
+    items: [
+        {
+            id: 1,
+            description: 'description',
+            location: 'location',
+            images: [
+                {
+                    url: 'https://loremflickr.com/500/500',
+                    width: 300,
+                    height: 300,
+                    fileSize: 300,
+                    uploadId: 'string',
+                },
+            ],
+            createdAt: '2023-07-14T14:50:09.268Z',
+            updatedAt: '2023-07-14T14:50:09.268Z',
+        },
+    ],
 }
 
-Home.getLayout = getHomeLayout
+export default function Home() {
+    return <PostsList posts={data.items} />
+}
+
+Home.getLayout = getAuthorizedLayout

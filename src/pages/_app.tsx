@@ -14,7 +14,7 @@ export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P
 }
 
 type AppPropsWithLayout = AppProps & {
-    // Component: NextPageWithLayout
+    // Component: NextPageWithLayout //todo fix type
     Component: any
 }
 
