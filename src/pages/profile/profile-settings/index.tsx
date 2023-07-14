@@ -7,9 +7,9 @@ import {MyPayments} from 'shared/components/MyPayments/MyPayments'
 import {ProfileSettingsAccordion} from 'shared/components/ProfileSettingsAccordion/ProfileSettingsAccordion'
 import {Devices} from 'shared/components/Devices/Devices'
 import {ProfileSettingsWrapper} from 'shared/styles/ProfileSettingsPage'
-import {getHomeLayout} from '_app/Layouts/HomeLayout'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import {AccountManagement} from 'shared/components/AccountManagement/AccountManagement'
+import {getAuthorizedLayout} from '_app/Layouts/authorized/AuthorizedLayout'
 
 export interface UserProfile {
     id: number
@@ -59,4 +59,4 @@ export default function ProfileSettingsPage({serverData}: InferGetServerSideProp
         </ProfileSettingsWrapper>
     )
 }
-ProfileSettingsPage.getLayout = getHomeLayout
+ProfileSettingsPage.getLayout = getAuthorizedLayout

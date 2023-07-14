@@ -1,6 +1,6 @@
 import React from 'react'
-import {getHomeLayout} from '_app/Layouts/HomeLayout'
 import {PostsList} from 'widgets/PostsList/PostsList'
+import {getAuthorizedLayout} from '_app/Layouts/authorized/AuthorizedLayout'
 
 const data = {
     totalCount: 10,
@@ -14,7 +14,7 @@ const data = {
             location: 'location',
             images: [
                 {
-                    url: 'https://loremflickr.com/300/300',
+                    url: 'https://loremflickr.com/500/500',
                     width: 300,
                     height: 300,
                     fileSize: 300,
@@ -28,11 +28,7 @@ const data = {
 }
 
 export default function Home() {
-    return (
-        <div>
-            <PostsList posts={data.items} />
-        </div>
-    )
+    return <PostsList posts={data.items} />
 }
 
-Home.getLayout = getHomeLayout
+Home.getLayout = getAuthorizedLayout

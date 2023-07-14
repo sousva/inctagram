@@ -11,7 +11,7 @@ import {Loader} from 'shared/components/Loader/Loader'
 import {PATH} from 'shared/constants/PATH'
 import {EmailResendWrapper} from 'shared/styles/EmailResendPage'
 import {RegistrationModalContent} from 'shared/styles/RegistrationPage'
-import {getLayoutWithHeader} from '_app/Layouts/LayoutWithHeader'
+import {getLayoutWithHeader} from '_app/Layouts/unauthorized/Unauthorized'
 import {AuthContainer} from 'shared/components/AuthContainer/AuthContainer'
 import {Button} from 'shared/components/Button/Button'
 

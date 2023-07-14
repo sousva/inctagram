@@ -3,7 +3,7 @@ import {NextPage} from 'next'
 import {NotificationBar} from 'features/NotificationBar/NotificationBar'
 import {Header} from 'widgets/Header/Header'
 
-export const LayoutWithHeader: NextPage<PropsWithChildren> = ({children}) => {
+export const Unauthorized: NextPage<PropsWithChildren> = ({children}) => {
     return (
         <>
             <Header />
@@ -14,5 +14,5 @@ export const LayoutWithHeader: NextPage<PropsWithChildren> = ({children}) => {
 }
 
 export const getLayoutWithHeader = (page: ReactElement) => {
-    return <LayoutWithHeader>{page}</LayoutWithHeader>
+    return <Unauthorized>{page}</Unauthorized>
 }

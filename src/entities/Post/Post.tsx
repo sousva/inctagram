@@ -15,7 +15,7 @@ export const Post = ({post}: PostType) => {
     return (
         <PostWrapper>
             <PostHeader img={post.images[0].url} />
-            <PostImage />
+            <PostImage img={post.images[0].url} />
             <PostFeatures />
             <PostDesciption />
             <PostLikes />
